@@ -1,0 +1,387 @@
+@font-face {
+  font-family: 'iconshock_addons';
+  src: url('addons/font/iconshock_addons.ttf?52883029') format('truetype'),
+       url('addons/font/iconshock_addons.svg?52883029#iconshock_addons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+i {
+  color : inherit;
+}
+[class^="iconshock"]:before, [class*="iconshock"]:before {
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  height:1em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  position: relative;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+[class^="shock-addons-"]:before, [class*=" shock-addons-"]:before {
+  font-family: "iconshock_addons";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  position: relative;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+[class^="iconshock"]:before {
+  font-family: 'iconshock_addons';
+}
+
+
+
+
+
+.ic-group {
+  position: relative;
+  display: inline-table;
+  line-height: 1em;
+}
+
+.ic-group [class^="iconshock-"], .ic-group [class^="iconshock-"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.ic-group .shock-addons-circle-black:first-of-type + [class^="iconshock-"],
+.ic-group .shock-addons-checkbox-empty-black:first-of-type + [class*="iconshock-"],
+.ic-group .shock-addons-checkbox-empty:first-of-type + [class*="iconshock-"],
+.ic-group .shock-addons-cancel:first-of-type + [class*="iconshock-"] {
+    font-size: 0.75em;
+    line-height: 1.45; 
+}
+.ic-group .shock-addons-cancel:first-of-type + [class*="iconshock-"],
+.ic-group .shock-addons-cancel:first-of-type + [class*="iconshock-"]:before {
+  z-index: 1;
+}
+.ic-group .shock-addons-cancel,
+.ic-group .shock-addons-cancel:before {
+  z-index: 2;
+}
+.ic-group .shock-addons-circle:first-of-type + [class^="iconshock-"] {
+  font-size: 0.6em;
+  line-height: 1.8;
+}
+.ic-group .shock-addons-circle-black {
+
+}
+.ic-group .shock-addons-cancel {
+    color:#DA4F4A!Important;
+}
+.ic-group .shock-addons-circle-black:first-of-type + i, .ic-group .shock-addons-checkbox-empty-black:first-of-type + i {
+    color:#fff;
+}
+
+
+/* GENERAL BOOTSTRAP COLORS */
+.ic-primary:before {
+  color:#016ECD;
+}
+.ic-info:before {
+  color:#4AAFCD;
+}
+.ic-success:before {
+  color:#5AB75C;
+}
+.ic-warning:before {
+  color:#FAA632;
+}
+.ic-danger:before {
+  color:#DA4F4A;
+}
+/* GENERAL BOOTSTRAP COLORS */
+
+/* GROUP COLORS */
+.ic-group-danger [class^="shock-addons-"]:before, 
+.ic-group-danger [class*=" shock-addons-"]:before {
+  color:#F3CBC9;
+}
+.ic-group-danger .shock-addons-circle-black:first-of-type + i, 
+.ic-group-danger .shock-addons-checkbox-empty-black:first-of-type + i {
+  color:#DA4F4A;
+}
+.ic-group-primary [class^="shock-addons-"]:before, 
+.ic-group-primary [class*=" shock-addons-"]:before {
+  color:#B3D4EF;
+}
+.ic-group-primary .shock-addons-circle-black:first-of-type + i, 
+.ic-group-primary .shock-addons-checkbox-empty-black:first-of-type + i {
+  color:#016ECD;
+}
+.ic-group-success [class^="shock-addons-"]:before, 
+.ic-group-success [class*=" shock-addons-"]:before {
+  color:#CEE7CD;
+}
+.ic-group-success .shock-addons-circle-black:first-of-type + i, 
+.ic-group-success .shock-addons-checkbox-empty-black:first-of-type + i {
+  color:#5AB75C;
+}
+.ic-group-info [class^="shock-addons-"]:before, 
+.ic-group-info [class*=" shock-addons-"]:before {
+  color:#C9E7EF;
+}
+.ic-group-info .shock-addons-circle-black:first-of-type + i, 
+.ic-group-info .shock-addons-checkbox-empty-black:first-of-type + i {
+  color:#4AAFCD;
+}
+.ic-group-warning [class^="shock-addons-"]:before, 
+.ic-group-warning [class*=" shock-addons-"]:before {
+  color:#FDE3C2;
+}
+.ic-group-warning .shock-addons-circle-black:first-of-type + i, 
+.ic-group-warning .shock-addons-checkbox-empty-black:first-of-type + i {
+  color:#FAA632;
+}
+
+
+
+.ic-group-danger .shock-addons-circle:first-of-type + i, 
+.ic-group-danger .shock-addons-checkbox-empty:first-of-type + i {
+  color:#DA4F4A;
+}
+.ic-group-primary .shock-addons-circle:first-of-type + i, 
+.ic-group-primary .shock-addons-checkbox-empty:first-of-type + i {
+  color:#016ECD;
+}
+.ic-group-success .shock-addons-circle:first-of-type + i, 
+.ic-group-success .shock-addons-checkbox-empty:first-of-type + i {
+  color:#5AB75C;
+}
+.ic-group-info .shock-addons-circle:first-of-type + i, 
+.ic-group-info .shock-addons-checkbox-empty:first-of-type + i {
+  color:#4AAFCD;
+}
+.ic-group-warning .shock-addons-circle:first-of-type + i, 
+.ic-group-warning .shock-addons-checkbox-empty:first-of-type + i {
+  color:#FAA632;
+}
+/* GROUP COLORS */
+
+/* HOVER */
+.ic-hover {
+  cursor: pointer;
+  transition: all .1s linear;
+  -webkit-transition: all .1s linear;
+  -o-transition: all .1s linear;
+  -moz-transition: all .1s linear;
+}
+button.ic-hover {
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+button.ic-hover:hover {
+  outline: none;
+}
+button.ic-hover:focus {
+  outline: none;
+}
+    
+
+/* HOVER */
+.ic-hover:hover .shock-addons-circle-black:before,
+.ic-hover:hover .shock-addons-checkbox-empty-black:before {
+  color:#f1e9d0;
+}
+.ic-hover:hover .shock-addons-circle-black:first-of-type + i,
+.ic-hover:hover .shock-addons-checkbox-empty-black:first-of-type + i {
+  color:#292b2c;
+}
+
+.ic-hover .shock-addons-circle:before,
+.ic-hover .shock-addons-checkbox-empty:before {
+  color:#fff;
+}
+.ic-hover:hover .shock-addons-circle:before,
+.ic-hover:hover .shock-addons-checkbox-empty:before {
+  color:#292b2c;
+}
+
+
+.ic-hover.ic-group-success:hover .shock-addons-circle-black:before, 
+.ic-hover.ic-group-success:hover .shock-addons-checkbox-empty-black:before {
+  color:#5AB75C;
+}
+.ic-hover.ic-group-success:hover .shock-addons-circle-black:first-of-type + i, 
+.ic-hover.ic-group-success:hover .shock-addons-checkbox-empty-black:first-of-type + i {
+  color:#FFF;
+}
+.ic-hover.ic-group-danger:hover .shock-addons-circle-black:before, 
+.ic-hover.ic-group-danger:hover .shock-addons-checkbox-empty-black:before {
+  color:#DA4F4A;
+}
+.ic-hover.ic-group-danger:hover .shock-addons-circle-black:first-of-type + i, 
+.ic-hover.ic-group-danger:hover .shock-addons-checkbox-empty-black:first-of-type + i {
+  color:#FFF;
+}
+.ic-hover.ic-group-primary:hover .shock-addons-circle-black:before, 
+.ic-hover.ic-group-primary:hover .shock-addons-checkbox-empty-black:before {
+  color:#016ECD;
+}
+.ic-hover.ic-group-primary:hover .shock-addons-circle-black:first-of-type + i, 
+.ic-hover.ic-group-primary:hover .shock-addons-checkbox-empty-black:first-of-type + i {
+  color:#FFF;
+}
+.ic-hover.ic-group-info:hover .shock-addons-circle-black:before, 
+.ic-hover.ic-group-info:hover .shock-addons-checkbox-empty-black:before {
+  color:#4AAFCD;
+}
+.ic-hover.ic-group-info:hover .shock-addons-circle-black:first-of-type + i, 
+.ic-hover.ic-group-info:hover .shock-addons-checkbox-empty-black:first-of-type + i {
+  color:#FFF;
+}
+.ic-hover.ic-group-warning:hover .shock-addons-circle-black:before, 
+.ic-hover.ic-group-warning:hover .shock-addons-checkbox-empty-black:before {
+  color:#FAA632;
+}
+.ic-hover.ic-group-warning:hover .shock-addons-circle-black:first-of-type + i, 
+.ic-hover.ic-group-warning:hover .shock-addons-checkbox-empty-black:first-of-type + i {
+  color:#FFF;
+}
+
+
+.ic-hover.ic-group-success:hover .shock-addons-circle:before, 
+.ic-hover.ic-group-success:hover .shock-addons-checkbox-empty:before,
+.ic-hover.ic-group-success:hover .shock-addons-circle:first-of-type + i, 
+.ic-hover.ic-group-success:hover .shock-addons-checkbox-empty:first-of-type + i {
+  color:#5AB75C;
+}
+
+.ic-hover.ic-group-danger:hover .shock-addons-circle:before, 
+.ic-hover.ic-group-danger:hover .shock-addons-checkbox-empty:before,
+.ic-hover.ic-group-danger:hover .shock-addons-circle:first-of-type + i, 
+.ic-hover.ic-group-danger:hover .shock-addons-checkbox-empty:first-of-type + i {
+  color:#DA4F4A;
+}
+
+.ic-hover.ic-group-primary:hover .shock-addons-circle:before, 
+.ic-hover.ic-group-primary:hover .shock-addons-checkbox-empty:before,
+.ic-hover.ic-group-primary:hover .shock-addons-circle:first-of-type + i, 
+.ic-hover.ic-group-primary:hover .shock-addons-checkbox-empty:first-of-type + i {
+  color:#016ECD;
+}
+
+.ic-hover.ic-group-info:hover .shock-addons-circle:before, 
+.ic-hover.ic-group-info:hover .shock-addons-checkbox-empty:before,
+.ic-hover.ic-group-info:hover .shock-addons-circle:first-of-type + i, 
+.ic-hover.ic-group-info:hover .shock-addons-checkbox-empty:first-of-type + i {
+  color:#4AAFCD;
+}
+
+.ic-hover.ic-group-warning:hover .shock-addons-circle:before, 
+.ic-hover.ic-group-warning:hover .shock-addons-checkbox-empty:before,
+.ic-hover.ic-group-warning:hover .shock-addons-circle:first-of-type + i, 
+.ic-hover.ic-group-warning:hover .shock-addons-checkbox-empty:first-of-type + i {
+  color:#FAA632;
+}
+
+.shock-addons-cancel:before { content: '\e800'; } /* '' */
+.shock-addons-checkbox-empty:before { content: '\e801'; } /* '' */
+.shock-addons-checkbox-empty-black:before { content: '\e802'; } /* '' */
+.shock-addons-circle:before { content: '\e803'; } /* '' */
+.shock-addons-circle-black:before { content: '\e804'; } /* '' */
+
+/* SIZES */
+.shock-2x { font-size: 2em; }
+.shock-3x { font-size: 4em; }
+.shock-4x { font-size: 8em; }
+.shock-5x { font-size: 12em; }
+
+.shock-rot-90:before {
+  transform: rotate(90deg);
+  transform-origin: 50% 50%;
+  -moz-transform: rotate(90deg);
+  -moz-transform-origin: 50% 50%;
+  -o-transform: rotate(90deg);
+  -o-transform-origin: 50% 50%;
+  -webkit-transform: rotate(90deg);
+  -webkit-transform-origin: 50% 50%;
+}
+.shock-rot-180:before {
+  transform: rotate(180deg);
+  transform-origin: 50% 50%;
+  -moz-transform: rotate(180deg);
+  -moz-transform-origin: 50% 50%;
+  -o-transform: rotate(180deg);
+  -o-transform-origin: 50% 50%;
+  -webkit-transform: rotate(180deg);
+  -webkit-transform-origin: 50% 50%;
+}
+.shock-rot-270:before {
+  transform: rotate(270deg);
+  transform-origin: 50% 50%;
+  -moz-transform: rotate(270deg);
+  -moz-transform-origin: 50% 50%;
+  -o-transform: rotate(270deg);
+  -o-transform-origin: 50% 50%;
+  -webkit-transform: rotate(270deg);
+  -webkit-transform-origin: 50% 50%;
+}
+
+.shock-inverse:before {
+  transform: rotateY(180deg);
+  transform-origin: 50% 50%;
+  -moz-transform: rotateY(180deg);
+  -moz-transform-origin: 50% 50%;
+  -o-transform: rotateY(180deg);
+  -o-transform-origin: 50% 50%;
+  -webkit-transform: rotateY(180deg);
+  -webkit-transform-origin: 50% 50%;
+}
+/* SIZES */

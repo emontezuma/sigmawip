@@ -1,0 +1,139 @@
+@font-face {
+  font-family: 'materialblack_business';
+  src: url('../font/materialblack_business.eot?95877559');
+  src: url('../font/materialblack_business.eot?95877559#iefix') format('embedded-opentype'),
+       url('../font/materialblack_business.woff2?95877559') format('woff2'),
+       url('../font/materialblack_business.woff?95877559') format('woff'),
+       url('../font/materialblack_business.ttf?95877559') format('truetype'),
+       url('../font/materialblack_business.svg?95877559#materialblack_business') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'materialblack_business';
+    src: url('../font/materialblack_business.svg?95877559#materialblack_business') format('svg');
+  }
+}
+*/
+ 
+ [class^="iconshock-materialblack-business-"]:before, [class*=" iconshock-materialblack-business-"]:before {
+  font-family: "materialblack_business";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+}
+ 
+.iconshock-materialblack-business-acquisition:before { content: '\e800'; } /* '' */
+.iconshock-materialblack-business-acquisition2:before { content: '\e801'; } /* '' */
+.iconshock-materialblack-business-advertising:before { content: '\e802'; } /* '' */
+.iconshock-materialblack-business-alliance:before { content: '\e803'; } /* '' */
+.iconshock-materialblack-business-alliance2:before { content: '\e804'; } /* '' */
+.iconshock-materialblack-business-benckmarking:before { content: '\e805'; } /* '' */
+.iconshock-materialblack-business-best-product:before { content: '\e806'; } /* '' */
+.iconshock-materialblack-business-billboard:before { content: '\e807'; } /* '' */
+.iconshock-materialblack-business-brand:before { content: '\e808'; } /* '' */
+.iconshock-materialblack-business-brochure:before { content: '\e809'; } /* '' */
+.iconshock-materialblack-business-catalogue:before { content: '\e80a'; } /* '' */
+.iconshock-materialblack-business-certificate2:before { content: '\e80b'; } /* '' */
+.iconshock-materialblack-business-champagne:before { content: '\e80c'; } /* '' */
+.iconshock-materialblack-business-checkered-flag:before { content: '\e80d'; } /* '' */
+.iconshock-materialblack-business-company:before { content: '\e80e'; } /* '' */
+.iconshock-materialblack-business-company2:before { content: '\e80f'; } /* '' */
+.iconshock-materialblack-business-competitors:before { content: '\e810'; } /* '' */
+.iconshock-materialblack-business-corporation:before { content: '\e811'; } /* '' */
+.iconshock-materialblack-business-decision-support-system:before { content: '\e812'; } /* '' */
+.iconshock-materialblack-business-defective-product:before { content: '\e813'; } /* '' */
+.iconshock-materialblack-business-demographics:before { content: '\e814'; } /* '' */
+.iconshock-materialblack-business-directive-board:before { content: '\e815'; } /* '' */
+.iconshock-materialblack-business-discontinued-product:before { content: '\e816'; } /* '' */
+.iconshock-materialblack-business-diversity:before { content: '\e817'; } /* '' */
+.iconshock-materialblack-business-excel:before { content: '\e818'; } /* '' */
+.iconshock-materialblack-business-extract-mail:before { content: '\e819'; } /* '' */
+.iconshock-materialblack-business-filter:before { content: '\e81a'; } /* '' */
+.iconshock-materialblack-business-filter-data:before { content: '\e81b'; } /* '' */
+.iconshock-materialblack-business-focus-group:before { content: '\e81c'; } /* '' */
+.iconshock-materialblack-business-franchise:before { content: '\e81d'; } /* '' */
+.iconshock-materialblack-business-front-desk:before { content: '\e81e'; } /* '' */
+.iconshock-materialblack-business-glass-bottle:before { content: '\e81f'; } /* '' */
+.iconshock-materialblack-business-graphic-report:before { content: '\e820'; } /* '' */
+.iconshock-materialblack-business-graphic-report2:before { content: '\e821'; } /* '' */
+.iconshock-materialblack-business-grouped-data:before { content: '\e822'; } /* '' */
+.iconshock-materialblack-business-handshake:before { content: '\e823'; } /* '' */
+.iconshock-materialblack-business-insurance:before { content: '\e824'; } /* '' */
+.iconshock-materialblack-business-investment:before { content: '\e825'; } /* '' */
+.iconshock-materialblack-business-investor:before { content: '\e826'; } /* '' */
+.iconshock-materialblack-business-loss:before { content: '\e827'; } /* '' */
+.iconshock-materialblack-business-market-segmentation:before { content: '\e828'; } /* '' */
+.iconshock-materialblack-business-market-segmentation2:before { content: '\e829'; } /* '' */
+.iconshock-materialblack-business-meeting:before { content: '\e82a'; } /* '' */
+.iconshock-materialblack-business-meeting2:before { content: '\e82b'; } /* '' */
+.iconshock-materialblack-business-meeting3:before { content: '\e82c'; } /* '' */
+.iconshock-materialblack-business-meeting4:before { content: '\e82d'; } /* '' */
+.iconshock-materialblack-business-merger:before { content: '\e82e'; } /* '' */
+.iconshock-materialblack-business-merger2:before { content: '\e82f'; } /* '' */
+.iconshock-materialblack-business-merger3:before { content: '\e830'; } /* '' */
+.iconshock-materialblack-business-negotiation:before { content: '\e831'; } /* '' */
+.iconshock-materialblack-business-new-product:before { content: '\e832'; } /* '' */
+.iconshock-materialblack-business-niche:before { content: '\e833'; } /* '' */
+.iconshock-materialblack-business-offer:before { content: '\e834'; } /* '' */
+.iconshock-materialblack-business-offer2:before { content: '\e835'; } /* '' */
+.iconshock-materialblack-business-oil:before { content: '\e836'; } /* '' */
+.iconshock-materialblack-business-organizational-chart:before { content: '\e837'; } /* '' */
+.iconshock-materialblack-business-parent:before { content: '\e838'; } /* '' */
+.iconshock-materialblack-business-parent2:before { content: '\e839'; } /* '' */
+.iconshock-materialblack-business-parent3:before { content: '\e83a'; } /* '' */
+.iconshock-materialblack-business-partnership:before { content: '\e83b'; } /* '' */
+.iconshock-materialblack-business-personal-card:before { content: '\e83c'; } /* '' */
+.iconshock-materialblack-business-plastic-bottle:before { content: '\e83d'; } /* '' */
+.iconshock-materialblack-business-positioning:before { content: '\e83e'; } /* '' */
+.iconshock-materialblack-business-presentation:before { content: '\e83f'; } /* '' */
+.iconshock-materialblack-business-presentation2:before { content: '\e840'; } /* '' */
+.iconshock-materialblack-business-private-company:before { content: '\e841'; } /* '' */
+.iconshock-materialblack-business-product:before { content: '\e842'; } /* '' */
+.iconshock-materialblack-business-product-combo:before { content: '\e843'; } /* '' */
+.iconshock-materialblack-business-profit:before { content: '\e844'; } /* '' */
+.iconshock-materialblack-business-projection-screen:before { content: '\e845'; } /* '' */
+.iconshock-materialblack-business-projector:before { content: '\e846'; } /* '' */
+.iconshock-materialblack-business-public-company:before { content: '\e847'; } /* '' */
+.iconshock-materialblack-business-public-private-partnership-company:before { content: '\e848'; } /* '' */
+.iconshock-materialblack-business-quality:before { content: '\e849'; } /* '' */
+.iconshock-materialblack-business-recepcionist:before { content: '\e84a'; } /* '' */
+.iconshock-materialblack-business-registered-trademark:before { content: '\e84b'; } /* '' */
+.iconshock-materialblack-business-report:before { content: '\e84c'; } /* '' */
+.iconshock-materialblack-business-report2:before { content: '\e84d'; } /* '' */
+.iconshock-materialblack-business-risk:before { content: '\e84e'; } /* '' */
+.iconshock-materialblack-business-risk-assessment:before { content: '\e84f'; } /* '' */
+.iconshock-materialblack-business-risk2:before { content: '\e850'; } /* '' */
+.iconshock-materialblack-business-risk3:before { content: '\e851'; } /* '' */
+.iconshock-materialblack-business-salesman:before { content: '\e852'; } /* '' */
+.iconshock-materialblack-business-service-electricity:before { content: '\e853'; } /* '' */
+.iconshock-materialblack-business-service-gas:before { content: '\e854'; } /* '' */
+.iconshock-materialblack-business-service-telephone:before { content: '\e855'; } /* '' */
+.iconshock-materialblack-business-service-waste:before { content: '\e856'; } /* '' */
+.iconshock-materialblack-business-service-water:before { content: '\e857'; } /* '' */
+.iconshock-materialblack-business-shopping-basket:before { content: '\e858'; } /* '' */
+.iconshock-materialblack-business-shopping-cart:before { content: '\e859'; } /* '' */
+.iconshock-materialblack-business-sole-propietorship:before { content: '\e85a'; } /* '' */
+.iconshock-materialblack-business-solution:before { content: '\e85b'; } /* '' */
+.iconshock-materialblack-business-spreadsheet:before { content: '\e85c'; } /* '' */
+.iconshock-materialblack-business-stats-area-chart:before { content: '\e85d'; } /* '' */
+.iconshock-materialblack-business-stats-bar-chart:before { content: '\e85e'; } /* '' */
+.iconshock-materialblack-business-stats-column-chart:before { content: '\e85f'; } /* '' */
+.iconshock-materialblack-business-stats-histogram:before { content: '\e860'; } /* '' */
+.iconshock-materialblack-business-stats-line-chart:before { content: '\e861'; } /* '' */
+.iconshock-materialblack-business-stats-pie-chart:before { content: '\e862'; } /* '' */
+.iconshock-materialblack-business-stats-polar-chart:before { content: '\e863'; } /* '' */
+.iconshock-materialblack-business-stock:before { content: '\e864'; } /* '' */
+.iconshock-materialblack-business-stock-market:before { content: '\e865'; } /* '' */
+.iconshock-materialblack-business-subsidiary:before { content: '\e866'; } /* '' */
+.iconshock-materialblack-business-subsidiary2:before { content: '\e867'; } /* '' */
+.iconshock-materialblack-business-subsidiary3:before { content: '\e868'; } /* '' */
+.iconshock-materialblack-business-summary:before { content: '\e869'; } /* '' */
+.iconshock-materialblack-business-target:before { content: '\e86a'; } /* '' */
+.iconshock-materialblack-business-task:before { content: '\e86b'; } /* '' */
+.iconshock-materialblack-business-trophy:before { content: '\e86c'; } /* '' */
+.iconshock-materialblack-business-web-advertising:before { content: '\e86d'; } /* '' */

@@ -1,0 +1,94 @@
+@font-face {
+  font-family: 'materialblack_database';
+  src: url('../font/materialblack_database.eot?86975024');
+  src: url('../font/materialblack_database.eot?86975024#iefix') format('embedded-opentype'),
+       url('../font/materialblack_database.woff2?86975024') format('woff2'),
+       url('../font/materialblack_database.woff?86975024') format('woff'),
+       url('../font/materialblack_database.ttf?86975024') format('truetype'),
+       url('../font/materialblack_database.svg?86975024#materialblack_database') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'materialblack_database';
+    src: url('../font/materialblack_database.svg?86975024#materialblack_database') format('svg');
+  }
+}
+*/
+ 
+ [class^="iconshock-materialblack-database-"]:before, [class*=" iconshock-materialblack-database-"]:before {
+  font-family: "materialblack_database";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+}
+ 
+.iconshock-materialblack-database-access:before { content: '\e800'; } /* '' */
+.iconshock-materialblack-database-access-point:before { content: '\e801'; } /* '' */
+.iconshock-materialblack-database-administrator:before { content: '\e802'; } /* '' */
+.iconshock-materialblack-database-aim:before { content: '\e803'; } /* '' */
+.iconshock-materialblack-database-atom:before { content: '\e804'; } /* '' */
+.iconshock-materialblack-database-attribute:before { content: '\e805'; } /* '' */
+.iconshock-materialblack-database-batch-process:before { content: '\e806'; } /* '' */
+.iconshock-materialblack-database-cloud:before { content: '\e807'; } /* '' */
+.iconshock-materialblack-database-coldfusion:before { content: '\e808'; } /* '' */
+.iconshock-materialblack-database-column:before { content: '\e809'; } /* '' */
+.iconshock-materialblack-database-column2:before { content: '\e80a'; } /* '' */
+.iconshock-materialblack-database-connect:before { content: '\e80b'; } /* '' */
+.iconshock-materialblack-database-connect-to-database:before { content: '\e80c'; } /* '' */
+.iconshock-materialblack-database-data-transfer:before { content: '\e80d'; } /* '' */
+.iconshock-materialblack-database-database:before { content: '\e80e'; } /* '' */
+.iconshock-materialblack-database-disconnect:before { content: '\e80f'; } /* '' */
+.iconshock-materialblack-database-entity-relationship-model:before { content: '\e810'; } /* '' */
+.iconshock-materialblack-database-erase-database:before { content: '\e811'; } /* '' */
+.iconshock-materialblack-database-export-database:before { content: '\e812'; } /* '' */
+.iconshock-materialblack-database-export-database2:before { content: '\e813'; } /* '' */
+.iconshock-materialblack-database-field:before { content: '\e814'; } /* '' */
+.iconshock-materialblack-database-field-binary:before { content: '\e815'; } /* '' */
+.iconshock-materialblack-database-field-boolean:before { content: '\e816'; } /* '' */
+.iconshock-materialblack-database-field-date:before { content: '\e817'; } /* '' */
+.iconshock-materialblack-database-field-image:before { content: '\e818'; } /* '' */
+.iconshock-materialblack-database-field-numeric:before { content: '\e819'; } /* '' */
+.iconshock-materialblack-database-field-text:before { content: '\e81a'; } /* '' */
+.iconshock-materialblack-database-foreign-key:before { content: '\e81b'; } /* '' */
+.iconshock-materialblack-database-import-database:before { content: '\e81c'; } /* '' */
+.iconshock-materialblack-database-import-database2:before { content: '\e81d'; } /* '' */
+.iconshock-materialblack-database-insert-column:before { content: '\e81e'; } /* '' */
+.iconshock-materialblack-database-insert-column2:before { content: '\e81f'; } /* '' */
+.iconshock-materialblack-database-insert-field:before { content: '\e820'; } /* '' */
+.iconshock-materialblack-database-insert-field2:before { content: '\e821'; } /* '' */
+.iconshock-materialblack-database-insert-row:before { content: '\e822'; } /* '' */
+.iconshock-materialblack-database-insert-row2:before { content: '\e823'; } /* '' */
+.iconshock-materialblack-database-insert-table:before { content: '\e824'; } /* '' */
+.iconshock-materialblack-database-key:before { content: '\e825'; } /* '' */
+.iconshock-materialblack-database-merge-cells:before { content: '\e826'; } /* '' */
+.iconshock-materialblack-database-merge-cells2:before { content: '\e827'; } /* '' */
+.iconshock-materialblack-database-merge-column:before { content: '\e828'; } /* '' */
+.iconshock-materialblack-database-merge-column2:before { content: '\e829'; } /* '' */
+.iconshock-materialblack-database-merge-tables:before { content: '\e82a'; } /* '' */
+.iconshock-materialblack-database-merge-tables2:before { content: '\e82b'; } /* '' */
+.iconshock-materialblack-database-microsoft-sql:before { content: '\e82c'; } /* '' */
+.iconshock-materialblack-database-objects:before { content: '\e82d'; } /* '' */
+.iconshock-materialblack-database-primary-key:before { content: '\e82e'; } /* '' */
+.iconshock-materialblack-database-privileges:before { content: '\e82f'; } /* '' */
+.iconshock-materialblack-database-privileges2:before { content: '\e830'; } /* '' */
+.iconshock-materialblack-database-registry:before { content: '\e831'; } /* '' */
+.iconshock-materialblack-database-registry2:before { content: '\e832'; } /* '' */
+.iconshock-materialblack-database-row:before { content: '\e833'; } /* '' */
+.iconshock-materialblack-database-row2:before { content: '\e834'; } /* '' */
+.iconshock-materialblack-database-run:before { content: '\e835'; } /* '' */
+.iconshock-materialblack-database-script:before { content: '\e836'; } /* '' */
+.iconshock-materialblack-database-split-cells:before { content: '\e837'; } /* '' */
+.iconshock-materialblack-database-split-cells2:before { content: '\e838'; } /* '' */
+.iconshock-materialblack-database-split-column:before { content: '\e839'; } /* '' */
+.iconshock-materialblack-database-split-column2:before { content: '\e83a'; } /* '' */
+.iconshock-materialblack-database-subnet2:before { content: '\e83b'; } /* '' */
+.iconshock-materialblack-database-sybase:before { content: '\e83c'; } /* '' */
+.iconshock-materialblack-database-table:before { content: '\e83d'; } /* '' */
+.iconshock-materialblack-database-table-footer:before { content: '\e83e'; } /* '' */
+.iconshock-materialblack-database-table-header:before { content: '\e83f'; } /* '' */
+.iconshock-materialblack-database-views:before { content: '\e840'; } /* '' */

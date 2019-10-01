@@ -1,0 +1,978 @@
+
+<div id="todo" class="mat-typography">
+    <div class="pantallaError" [style.borderColor]="colorBorde" [style.color]="colorLetrasBox" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}" *ngIf="pantalla==1">
+        <div class="cabeceraMensaje" [style.backgroundColor]="colorFondoTarjeta" >{{ errorTitulo }}</div>
+        <div class="mensaje" [innerHTML]="errorMensaje"></div>
+    </div>
+    <div class="catalogos" [style.height.px]="altoPantalla" [style.width.px]="anchoPantalla" *ngIf="pantalla==2">
+        <div class="cabecera" [style.backgroundColor]="colorFondoCabecera" [ngStyle]="{'border': '1px solid' + colorSN}">
+            <button class="indice" [style.backgroundColor]="colorFondoBoton" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" *ngFor="let indice of indices; let i = index" mat-button (click)="procesarPantalla(i+1)">
+                <i [ngClass]="indice.icono"></i>
+                <span class="indiceTexto">{{ indice.nombre }}</span>
+            </button>
+            <button class="indiceDivision" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="nuevoRegistroGral()" *ngIf="botonera1">
+                <i class="iconshock-materialblack-general-add"></i>
+                <span class="indiceTexto">{{ nuevoRegistro }}</span>
+            </button>
+            <button class="indiceMedio" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="descargar()" [matTooltip] = "ayuda01" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera1 && maestroActual!=4">
+                <i class="iconshock-materialblack-communications-inbox"></i>
+            </button>
+            <button class="indiceMedio" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="refrescar()" [matTooltip] = "ayuda14" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera1">
+                <i class="iconshock-materialblack-general-synchronize"></i>
+            </button>
+            <button class="indiceUltimo" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="buscar()" [matTooltip] = "ayuda02" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera1">
+                <i class="iconshock-materialblack-general-zoom"></i>
+            </button>
+            <div class="buscadorCaja" *ngIf="verBuscar && botonera1" [ngStyle]="{'border': '1px solid' + colorBorde}">
+                <mat-form-field class="buscador" [style.color]="colorLetrasBox">
+                    <input #txtBuscar matInput class="buscar" type="text" [(ngModel)]="textoBuscar" (keydown.enter)="filtrar()" (keydown.escape)="escapar()">
+                    <button mat-button *ngIf="textoBuscar" matSuffix mat-icon-button aria-label="Clear" (click)="textoBuscar = ''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <button class="indiceDivisionCorto" [style.color]="(botonera[0] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[0] ? 'inherit' : colorFondoBoton)" mat-button (click)="nuevo()" [matTooltip] = "ayuda03" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[0]">
+                <i class="iconshock-materialblack-text-document"></i>
+            </button>
+            <button class="indiceMedio" [style.color]="(botonera[1] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[1] ? 'inherit' : colorFondoBoton)" mat-button (click)="validarGuardar()" [matTooltip] = "ayuda04" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[1]">
+                <i class="iconshock-materialblack-general-diskette"></i>
+            </button>
+            <button class="indiceMedio" [style.color]="(botonera[2] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[2] ? 'inherit' : colorFondoBoton)" mat-button (click)="cancelar()" [matTooltip] = "ayuda05" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[2]">
+                <i class="iconshock-materialblack-general-reload"></i>
+            </button>
+            <button class="indiceMedio" [style.color]="(botonera[3] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[3] ? 'inherit' : colorFondoBoton)" mat-button (click)="copiar()" [matTooltip] = "ayuda06" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[3]">
+                <i class="iconshock-materialblack-general-copy"></i>
+            </button>
+            <button class="indiceMedio" [style.color]="(botonera[4] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[4] ? 'inherit' : colorFondoBoton)" mat-button (click)="validarInactivar(0, 1)" [matTooltip] = "ayuda07" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual!=6" [disabled]="botonera[4]" >
+                <i class="iconshock-materialblack-mail-block"></i>
+            </button>
+            <button class="indiceMedio" [style.color]="(botonera[5] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[5] ? 'inherit' : colorFondoBoton)" mat-button (click)="validarEliminar()" [matTooltip] = "ayuda08" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[5]">
+                <i class="iconshock-materialblack-general-trash-can"></i>
+            </button>
+            <button class="indiceUltimo" [style.color]="(botonera[6] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[6] ? 'none' : colorFondoBoton)" mat-button (click)="salir()" [matTooltip] = "ayuda09" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera9" [disabled]="botonera[6]">
+                <i class="iconshock-materialblack-general-reload"></i>
+            </button>
+
+            <button class="indiceMedioSeparador" [style.color]="(botonera[7] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[7] ? 'inherit' : colorFondoBoton)" mat-button (click)="buscarRegistro(2)" [matTooltip] = "ayuda10" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[7]">
+                <mat-icon>first_page</mat-icon>
+            </button>
+            <button class="indiceMedio" [style.color]="(botonera[8] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[8] ? 'inherit' : colorFondoBoton)" mat-button (click)="buscarRegistro(4)" [matTooltip] = "ayuda11" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[8]">
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+            <button class="indiceMedio" [style.color]="(botonera[9] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[9] ? 'none' : colorFondoBoton)" mat-button (click)="buscarRegistro(3)" [matTooltip] = "ayuda12" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[9]">
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+            <button [ngClass]="{ indiceMedio: maestroActual==7, indiceUltimo: maestroActual!=7}" [style.color]="(botonera[10] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[10] ? 'none' : colorFondoBoton)" mat-button (click)="buscarRegistro(5)" [matTooltip] = "ayuda13" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[10]">
+                    <mat-icon>last_page</mat-icon>
+            </button>
+            <button class="indiceUltimo" [style.color]="(botonera[11] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[11] ? 'none' : colorFondoBoton)" mat-button (click)="iniClave()" [matTooltip] = "ayuda15" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual==7" [disabled]="botonera[11]">
+                <i class="iconshock-materialblack-general-lock-open"></i>
+            </button>
+        </div>
+        <div class="contenedorScroll" cdkDropListGroup [style.color]="colorLetrasBox" [style.backgroundColor]="colorFondo" [ngStyle]="{'border': '1px solid' + colorSN}" cdkScrollable [style.overflowY]="verBarra">
+            <div cdkDropList [cdkDropListEnterPredicate]="dropListEnterPredicate" (cdkDropListDropped)="dropListDropped($event)"></div>
+            <div class="detalle" @esquema (@esquema.done)="salidaEfecto($event)" *ngIf="verRegistro==1">
+                <div [cdkDropListDisabled]="maestroActual != 1 || nivelActual != 1" cdkDropList *ngFor="let registro of registros; let i = index" 
+                [cdkDropListEnterPredicate]="dropListEnterPredicate" (cdkDropListDropped)="dropListDropped($event)">
+                    <div cdkDrag class="registro" (cdkDragMoved)="dragMoved($event)" [style.borderColor]="colorBorde" [style.borderColor]="(!registro.estatus || registro.estatus == 'activo' ? colorBorde : 'tomato')" [style.boxShadow]="(!registro.estatus || registro.estatus=='activo' ? 'none' : '0px 0px 0.5px 0.5px tomato')">
+                        <button class="botonMaestro" mat-button (click)="editar(registro.id)" [style.borderColor]="colorBorde">
+                            <div class="registroCabecera" [ngStyle]="{'border': '1px solid' + colorFondoCabecera}" [style.borderColor]="colorFondoCabecera" [style.backgroundColor]="colorFondoTarjeta" ><span class="registroCabeceraTexto">{{ registro.nombre }}</span></div>
+                            <div class="secuencia" *ngIf="maestroActual == 1 && nivelActual == 1"><div class="numeroSecuencia">{{ registro.secuencia }}</div></div>
+                            <div class="registroAdicionalCajas" *ngIf="maestroActual == 0 || nivelActual == 1 || maestroActual == 6">
+                                <div class="registroAdicionalCaja" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="nivelActual == 0 && maestroActual != 6">
+                                    <div class="registroValor">{{ registro.capacidad_stock }}</div>    
+                                    <div class="titulo">Capacidad en stock</div> 
+                                </div>
+                                <div class="registroAdicionalCaja" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="nivelActual == 0 && maestroActual != 6">
+                                    <div class="registroValor">{{ registro.capacidad_proceso }}</div>    
+                                    <div class="titulo">Capacidad en proceso</div> 
+                                </div>
+                                <div class="registroAdicionalCaja" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual == 1">
+                                    <div class="registroValor">{{ registro.tiempo_stock }}</div>    
+                                    <div class="titulo">Tiempo en stock</div> 
+                                </div>
+                                <div class="registroAdicionalCaja" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual == 1">
+                                    <div class="registroValor">{{ registro.tiempo_proceso }}</div>    
+                                    <div class="titulo">Tiempo en proceso</div> 
+                                </div>
+                                <div class="registroAdicionalCaja" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual == 1">
+                                    <div class="registroValor">{{ registro.tiempo_setup }}</div>    
+                                    <div class="titulo">Tiempo en setup</div> 
+                                </div>
+                            </div>
+                            <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual == 2">
+                                <div class="registroValor">{{ registro.referencia }}</div>    
+                                <div class="titulo">Referencia (código de barras)</div>    
+                            </div>
+                            
+                            <div class="registroSub">
+                                <div class="registroImagen" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="registro.mostrarImagen == 'S' && verImagen && (maestroActual == 0 && nivelActual == 0 || maestroActual == 1 && nivelActual == 1 || maestroActual == 2 || maestroActual == 6 || maestroActual == 7)"><img class="registroImagenPropia" [src]="registro.imagen" (error)="imagenError(i)"></div>
+                                <div class="registroImagen" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="registro.mostrarImagen == 'N' && verImagen && (maestroActual == 0 && nivelActual == 0 || maestroActual == 1 && nivelActual == 1 || maestroActual == 2 || maestroActual == 6 || maestroActual == 7)"><i [ngClass]="(registro.admin=='S' ? 'iconshock-materialblack-general-administrator' : iconoGeneral)"></i></div>
+                                <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                    <div class="registroAdicionalCajas" *ngIf="(maestroActual + nivelActual) == 1 || maestroActual>=5">
+                                        <div class="registroAdicionalCaja" *ngIf="maestroActual<6">
+                                            <div class="registroValor">{{ registro.id }}</div>    
+                                            <div class="titulo">ID único</div>    
+                                        </div>
+                                        <div class="registroAdicionalCaja" *ngIf="maestroActual<5">
+                                            <div class="registroValor">{{ registro.cuenta }}</div>    
+                                            <div class="titulo">{{ nivelActual == 0 ? 'Procesos asociados' : 'Capacidad en proceso' }}</div>    
+                                        </div>
+                                        <div *ngIf="maestroActual == 6">
+                                            <div class="registroAdicional">
+                                                <div class="registroValor">{{ registro.pnombre }}</div>    
+                                                <div class="titulo">Proceso asociado</div>    
+                                            </div>
+                                            <div class="registroAdicionalCajas" >
+                                                <div class="registroAdicional">
+                                                    <div class="registroValor">{{ (registro.tipo == 'S' ? 'SI' : 'NO') }}</div>    
+                                                    <div class="titulo">Laborable</div>    
+                                                </div>
+                                                <div class="registroAdicional">
+                                                    <div class="registroValorCentro">{{ registro.desde + ' - ' + registro.hasta }}</div>    
+                                                    <div class="tituloCentro">Desde - Hasta</div>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="maestroActual == 5">
+                                            <div class="registroValor">{{ registro.referencia  }}</div>    
+                                            <div class="titulo">Referencia</div>    
+                                        </div>
+                                        <div class="registroAdicionalCaja" *ngIf="maestroActual == 7">
+                                            <div class="registroValor">{{ registro.rolnombre }}</div>    
+                                            <div class="titulo">Rol del usuario</div> 
+                                            <div class="registroValor">{{ registro.fcambio | date:'EEE, dd-MMM-yyyy HH:mm:ss' }}</div>    
+                                            <div class="titulo">Fecha del último cambio</div>    
+                                        </div>
+                                        
+                                    </div>
+                                    <div *ngIf="(maestroActual + nivelActual) != 1 && maestroActual < 5">
+                                        <div class="registroValor">{{ registro.id }}</div>    
+                                        <div class="titulo">ID único</div> 
+                                        <div class="registroValor">{{ registro.fcambio | date:'EEE, dd-MMM-yyyy HH:mm:ss' }}</div>    
+                                        <div class="titulo">Fecha del último cambio</div>    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="(maestroActual + nivelActual) == 1 || maestroActual == 5">
+                                <div class="registroValor">{{ registro.fcambio | date:'EEE, dd-MMM-yyyy HH:mm:ss' }}</div>    
+                                <div class="titulo">Fecha del último cambio</div>    
+                            </div>
+                            <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual != 6">
+                                <div class="registroValor">{{ registro.ucambio }}</div>    
+                                <div class="titulo">Último usuario que editó el registro</div> 
+                            </div>
+                        </button>
+                        <div class="botonera" [style.borderColor]="colorBorde" >
+                            <button class="registroBotones" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="explorar(registro.id, registro.nombre)" *ngIf="nivelActual == 0 && maestroActual < 2">
+                                <span class="indiceBoton"><i class="iconshock-materialblack-general-external-link"></i></span>
+                                <span class="indiceTexto">Explorar</span>
+                            </button>
+                            <button class="registroBotones" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="editar(registro.id)">
+                                <span class="indiceBoton"><i class="iconshock-materialblack-general-pencil"></i></span>
+                                <span class="indiceTexto">Editar</span>
+                            </button>
+                            <button class="registroBotones" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="validarInactivar(registro.id, 1)" *ngIf="registro.estatus=='activo' && (maestroActual!=7 || maestroActual==7 && registro.admin !='S')">
+                                <span class="indiceBoton"><i class="iconshock-materialblack-mail-block"></i></span>
+                                <span class="indiceTexto">Inactivar</span>
+                            </button>
+                            <button class="registroBotones" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="reactivar(registro.id, 1)" *ngIf="registro.estatus=='inactivo' && (maestroActual!=7 || maestroActual==7 && registro.admin !='S')">
+                                <span class="indiceBoton"><i class="iconshock-materialblack-general-check-mark"></i></span>
+                                <span class="indiceTexto">Reactivar</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="plantilla" @esquema (@esquema.done)="salidaEfecto($event)" [style.color]="colorLetrasBox" [style.backgroundColor]="colorFondo" *ngIf="verRegistro==2">
+                <div class="registroCaja">
+                    <div class="alertaCaja" *ngIf="editando" [style.backgroundColor]="colorFondoTarjeta">
+                        <mat-icon class="alertaIcono">warning</mat-icon>
+                        <span class="alertaMensaje" [innerHTML]="faltaMensaje"></span>
+                    </div>
+                    <div class="registroGeneral">
+                        <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="nivelActual == 1">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">0. Ruta de fabricación asociada a esta operación</div>    
+                            <div class="cabeceraDetalle" [style.borderColor]="colorBorde" (click)="editarCabecera(detalleRegistro.asociadoID)">{{ detalleRegistro.asociado }}</div>    
+                        </div>
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==1 && nivelActual == 1 || maestroActual==6 || maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[0] }}</div>    
+                            <span class="ayudaCampo" *ngIf="maestroActual!=6 && maestroActual!=4">Indique el Proceso origen, si no existe, créelo en el catálogo de procesos</span>
+                            <span class="ayudaCampo" *ngIf="maestroActual==6">Indique el Proceso a la cual se le aplicará el horario</span>
+                            <span class="ayudaCampo" *ngIf="maestroActual==4">Indique el Proceso asociado a esta alerta</span>
+                            <mat-form-field class="texto">
+                                <mat-select #lstProceso [(value)]="detalleRegistro.proceso" name="proceso" (selectionChange)=recuperarProceso($event) (selectionChange)=cambiando($event)>
+                                    <mat-option *ngIf="maestroActual==6 || maestroActual==4" [value]="0">CUALQUIER PROCESO</mat-option>
+                                    <mat-option *ngFor="let proceso of procesos; let i = index" [value]="proceso.id">{{ proceso.nombre }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==6">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[3] }}</div>    
+                            <span class="ayudaCampo">Indique el día de la semana en que aplicará el horario</span>
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.dia" name="dia" (selectionChange)=cambiando($event)>
+                                    <mat-option value="0">TODOS LOS DOMINGOS</mat-option>
+                                    <mat-option value="1">TODOS LOS LUNES</mat-option>
+                                    <mat-option value="2">TODOS LOS MARTES</mat-option>
+                                    <mat-option value="3">TODOS LOS MIERCOLES</mat-option>
+                                    <mat-option value="4">TODOS LOS JUEVES</mat-option>
+                                    <mat-option value="5">TODOS LOS VIERNES</mat-option>
+                                    <mat-option value="6">TODOS LOS SABADOS</mat-option>
+                                    <mat-option value="9">Especificar una fecha</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+    
+                        
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==6">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[4] }}</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <input #txtFechaDesde matInput [(ngModel)]="detalleRegistro.fecha" [matDatepicker]="picker1" name="fecha" autocomplete="off" #fecha="ngModel" (input)="cambiando($event)" disabled>
+                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle> 
+                                    <mat-datepicker #picker1 [disabled]="detalleRegistro.dia != '9'" (selectedChange)="cambiando($event)"></mat-datepicker>   
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==6">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[5] }}</div>    
+                            <span class="ayudaCampo">Los horarios laborables tendrán prioridad sobre los no laborables </span>
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.tipo" name="tipo" (selectionChange)=cambiando($event)>
+                                    <mat-option value="S">Laborable</mat-option>
+                                    <mat-option value="N">NO Laborable</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+    
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==6">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[1] }}</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <input matInput type="time" #txtDesde pattern="^([0-1][0-9]|2[0-3]):([0-5][0-9])$" [(ngModel)]="detalleRegistro.desde" maxlength="9" autocomplete="off" name="desde" required #desde="ngModel" (input)="cambiando($event)">
+                                    <mat-hint class="pista" align="start"><strong>En formato HH:MM:SS</strong></mat-hint>                       
+                                </mat-form-field>     
+                                
+                            </div>    
+                        </div>
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==6">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[2] }}</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <input matInput #txtHasta type="time"  pattern="^([0-1][0-9]|2[0-3]):([0-5][0-9])$" [(ngModel)]="detalleRegistro.hasta" maxlength="9" autocomplete="off" name="hasta" required #hasta="ngModel" (input)="cambiando($event)">
+                                    <mat-hint class="pista" align="start"><strong>En formato HH:MM:SS</strong></mat-hint>                                      
+                                </mat-form-field>             
+                                
+                            </div>    
+                        </div>
+
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual!=6">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[1] }}</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <input matInput #txtNombre [(ngModel)]="detalleRegistro.nombre" maxlength="100" autocomplete="off" name="nombre" required #nombre="ngModel" (input)="cambiando($event)">
+                                    <button mat-button *ngIf="detalleRegistro.nombre" matSuffix mat-icon-button aria-label="Clear" (click)="detalleRegistro.nombre = '';cambiando($event)">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                    <mat-hint class="pista" align="end">{{ nombre.value?.length || 0 }} de 100</mat-hint>
+                                    <mat-hint class="pista" align="start"><strong>Campo requerido</strong></mat-hint>
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==5">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[0] }}</div>    
+                            <span class="ayudaCampo">Seleccione el tipo de situación, el tipo SCRAP no permite el retorno del lote al sistema</span>
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.tipo" name="tipo" (selectionChange)=cambiando($event)>
+                                    <mat-option value="0">CALIDAD</mat-option>
+                                    <mat-option value="50">SCRAP/MERMA</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==3">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[20] }}</div>    
+                            <span class="ayudaCampo">Separe cada cuenta de correos con un simbolo de punto y coma (;)</span>
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <textarea cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" #txtCorreos matInput #txtNombre [(ngModel)]="detalleRegistro.correos" maxlength="2000" autocomplete="off" name="correos" required #correos="ngModel" (input)="cambiando($event)"></textarea>
+                                    <button mat-button *ngIf="detalleRegistro.correos" matSuffix mat-icon-button aria-label="Clear" (click)="detalleRegistro.correos = '';cambiando($event)">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                    <mat-hint class="pista" align="end">{{ correos.value?.length || 0 }} de 2000</mat-hint>
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==3">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[21] }}</div> 
+                            <span class="ayudaCampo">Separe cada número de teléfono con un simbolo de punto y coma (;)</span>   
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3"  [(ngModel)]="detalleRegistro.telefonos" maxlength="2000" autocomplete="off" name="telefonos" required #telefonos="ngModel" (input)="cambiando($event)"></textarea>
+                                    <button mat-button *ngIf="detalleRegistro.telefonos" matSuffix mat-icon-button aria-label="Clear" (click)="detalleRegistro.telefonos = '';cambiando($event)">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                    <mat-hint class="pista" align="end">{{ telefonos.value?.length || 0 }} de 2000</mat-hint>
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==3">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[22] }}</div>    
+                            <span class="ayudaCampo">Separe cada elemento de MMCall con un simbolo de punto y coma (;)</span>   
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3"  [(ngModel)]="detalleRegistro.mmcall" maxlength="2000" autocomplete="off" name="mmcall" required #mmcall="ngModel" (input)="cambiando($event)"></textarea>
+                                    <button mat-button *ngIf="detalleRegistro.mmcall" matSuffix mat-icon-button aria-label="Clear" (click)="detalleRegistro.mmcall = '';cambiando($event)">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                    <mat-hint class="pista" align="end">{{ mmcall.value?.length || 0 }} de 2000</mat-hint>
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+
+                         <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[24] }}</div>    
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.tipo" name="tipo" (selectionChange)=cambiando($event) (selectionChange)="detalleRegistro.escalar1='N';detalleRegistro.escalar2='N';detalleRegistro.escalar3='N';">
+                                    <mat-option value="1">Tiempo de stock excedido</mat-option>
+                                    <mat-option value="2">Tiempo de proceso excedido</mat-option>
+                                    <mat-option value="3">Tiempo de entrega excedido (Programación)</mat-option>
+                                    <mat-option value="4">Salto de operación</mat-option>
+                                    <mat-option value="5">Anticipo a stock excedido</mat-option>
+                                    <mat-option value="6">Anticipo a tiempo de proceso excedido</mat-option>
+                                    <mat-option value="7">Anticipo a tiempo de entrega excedido (Programación)</mat-option>
+                                </mat-select>
+                                <mat-hint class="pista" align="start" *ngIf="detalleRegistro.tipo>'4'">Esta alerta no permite escalamientos. Una vez que se genere la alerta en firme esta se eliminará</mat-hint>
+                                <mat-hint class="pista" align="start" *ngIf="detalleRegistro.tipo=='4'">Esta alerta no permite repetición ni escalamientos</mat-hint>
+                            </mat-form-field>
+                        </div> 
+
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">3. Tiempo de anticipación para generar la alerta (en segundos)</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <input matInput #txtAnticipo  [disabled]="detalleRegistro.tipo<='4'" type="number" [(ngModel)]="detalleRegistro.tiempo0" maxlength="8" autocomplete="off" name="tiempo0" #tiempo0="ngModel" (input)="cambiando($event)">
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTituloArriba" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[25] }}</div>    
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[26] }}</div>    
+                            <span class="ayudaCampo">La alarma se genera por acumulación de alertas del mismo evento</span>
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.acumular" (selectionChange)=cambiando($event)> 
+                                    <mat-option value="N">No acumular</mat-option>
+                                    <mat-option value="S">Acumular</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> 
+
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[27] }}</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <input matInput #txtAcumular [disabled]="detalleRegistro.acumular=='N'" type="number" [(ngModel)]="detalleRegistro.acumular_veces" maxlength="6" autocomplete="off" name="acumular_veces" #acumular_veces="ngModel" (input)="cambiando($event)">
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[28] }}</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <input matInput [disabled]="detalleRegistro.acumular=='N'" type="number" [(ngModel)]="detalleRegistro.acumular_tiempo" maxlength="8" autocomplete="off" name="acumular_tiempo"  #acumular_tiempo="ngModel" (input)="cambiando($event)">
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[29] }}</div>    
+                            <span class="ayudaCampo">Si no inicializa la alerta, cada nuevo evento generará una nueva alarma</span>
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.acumular=='N'" [(value)]="detalleRegistro.acumular_inicializar" name="acumular_inicializar" (selectionChange)=cambiando($event)>
+                                    <mat-option value="S">SI</mat-option>
+                                    <mat-option value="N">No</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[30] }}</div>    
+                            <span class="ayudaCampo">En una alerta acumulada no se puede informar de todos los mensajes acumulados</span>
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.acumular=='N'" [(value)]="detalleRegistro.acumular_tipo_mensaje" name="acumular_tipo_mensaje" (selectionChange)=cambiando($event)>
+                                    <mat-option value="T">Mensaje con el total de alarmas acumuladas</mat-option>
+                                    <mat-option value="1">Texto del último mensaje (detonador)</mat-option>
+                                    <mat-option value="P">Mensaje personalizado</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[31] }}</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="textoArea">
+                                    <textarea [disabled]="detalleRegistro.acumular=='N' || detalleRegistro.acumular_tipo_mensaje!='P'" matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" #txtNotas [(ngModel)]="detalleRegistro.acumular_mensaje" maxlength="200" autocomplete="off" name="acumular_mensaje" #acumular_mensaje="ngModel" (input)="cambiando($event)"></textarea>
+                                    <button mat-button *ngIf="detalleRegistro.acumular_mensaje && detalleRegistro.acumular=='S'" matSuffix mat-icon-button aria-label="Clear" (click)="detalleRegistro.acumular_mensaje = '';cambiando($event)">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                    <mat-hint class="pista" align="end">{{ acumular_mensaje.value?.length || 0 }} de 200</mat-hint>
+                                </mat-form-field>                            
+                            </div>    
+                        </div> 
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[32] }}</div>    
+                            <span class="ayudaCampo">Especifique el (o los) canal(es) por dónde se enviará la alarma</span>
+                            <mat-form-field class="texto">
+                                <mat-select multiple [(value)]="seleccionAlerta" name="acumular_tipo_mensaje" (selectionChange)=cambiando($event)>
+                                    <mat-option value="C">Correo</mat-option>
+                                    <mat-option value="M">MMCall</mat-option>
+                                    <mat-option value="L">Llamadas</mat-option>
+                                    <mat-option value="S">Mensajes de texto</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[33] }}</div>    
+                            <mat-form-field class="texto">
+                                <mat-select [(ngModel)]="detalleRegistro.lista" name="lista" (selectionChange)=cambiando($event)>
+                                    <mat-option *ngFor="let lista of listas; let i = index" [value]="lista.id">{{ lista.nombre }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTituloArriba" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[34] }}</div>    
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[35] }}</div>    
+                            <span class="ayudaCampo">Se enviará la alarma al recipiente original</span>
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.tipo=='4'" [(value)]="detalleRegistro.repetir" name="repetir" (selectionChange)=cambiando($event) #repetir>
+                                    <mat-option value="N">No repetir</mat-option>
+                                    <mat-option value="S">Repetir hasta que se resuelva</mat-option>
+                                    <mat-option value="T">Repetir hasta que se escale</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> 
+    
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[36] }}</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <input matInput #txtRepetir [disabled]="detalleRegistro.repetir=='N' || detalleRegistro.tipo=='4'" type="number" [(ngModel)]="detalleRegistro.repetir_tiempo" maxlength="8" autocomplete="off" name="repetir_tiempo"  #repetir_tiempo ="ngModel" (input)="cambiando($event)">
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTituloArriba" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[37] }}</div>    
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[38] }}</div>    
+                            <span class="ayudaCampo">Se enviará la alarma a un nuevo recipiente</span>
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.tipo>='4'" [(value)]="detalleRegistro.escalar1" name="escalar1" (selectionChange)=cambiando($event)>
+                                    <mat-option value="N">No escalar </mat-option>
+                                    <mat-option value="S">Escalar sin notificar</mat-option>
+                                    <mat-option value="T">Escalar notificando a niveles previos</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> 
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[39] }}</div>    
+                            <span class="ayudaCampo">Especifique el (o los) canal(es) por dónde se enviará la alarma</span>
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.escalar1=='N'" multiple [(value)]="seleccionescalar1" name="seleccionescalar1" (selectionChange)=cambiando($event)>
+                                    <mat-option value="C">Correo</mat-option>
+                                    <mat-option value="M">MMCall</mat-option>
+                                    <mat-option value="L">Llamadas</mat-option>
+                                    <mat-option value="S">Mensajes de texto</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[40] }}</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <input #txtRepetir1 matInput [disabled]="detalleRegistro.escalar1=='N'" type="number" [(ngModel)]="detalleRegistro.tiempo1" maxlength="8" autocomplete="off" name="tiempo1"  #tiempo1 ="ngModel" (input)="cambiando($event)">
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[41] }}</div>    
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.escalar1=='N'" [(ngModel)]="detalleRegistro.lista1" name="lista1" (selectionChange)=cambiando($event)>
+                                    <mat-option *ngFor="let lista of listas; let i = index" [value]="lista.id">{{ lista.nombre }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[42] }}</div>    
+                            <span class="ayudaCampo">Se enviará la alarma al recipiente de escalamiento</span>
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.escalar1=='N'" [(value)]="detalleRegistro.repetir1" name="repetir1" (selectionChange)=cambiando($event)>
+                                    <mat-option value="N">No repetir</mat-option>
+                                    <mat-option value="S">Repetir hasta que se resuelva</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> 
+    
+    
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTituloArriba" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[43] }}</div>    
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[44] }}</div>    
+                            <span class="ayudaCampo">Se enviará la alarma a un nuevo recipiente</span>
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.escalar1=='N'" [(value)]="detalleRegistro.escalar2" name="escalar2" (selectionChange)=cambiando($event)>
+                                    <mat-option value="N">No escalar </mat-option>
+                                    <mat-option value="S">Escalar sin notificar</mat-option>
+                                    <mat-option value="T">Escalar notificando a niveles previos</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> 
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[45] }}</div>    
+                            <span class="ayudaCampo">Especifique el (o los) canal(es) por dónde se enviará la alarma</span>
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.escalar2=='N'" multiple [(value)]="seleccionescalar2" name="seleccionescalar2" (selectionChange)=cambiando($event)>
+                                    <mat-option value="C">Correo</mat-option>
+                                    <mat-option value="M">MMCall</mat-option>
+                                    <mat-option value="L">Llamadas</mat-option>
+                                    <mat-option value="S">Mensajes de texto</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[46] }}</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <input matInput #txtRepetir2 [disabled]="detalleRegistro.escalar2=='N'" type="number" [(ngModel)]="detalleRegistro.tiempo2" maxlength="8" autocomplete="off" name="tiempo2"  #tiempo2 ="ngModel" (input)="cambiando($event)">
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[47] }}</div>    
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.escalar2=='N'" [(ngModel)]="detalleRegistro.lista2" name="lista2" (selectionChange)=cambiando($event)>
+                                    <mat-option *ngFor="let lista of listas; let i = index" [value]="lista.id">{{ lista.nombre }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[48] }}</div>    
+                            <span class="ayudaCampo">Se enviará la alarma al recipiente de escalamiento</span>
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.escalar2=='N'" [(value)]="detalleRegistro.repetir2" name="repetir2" (selectionChange)=cambiando($event)>
+                                    <mat-option value="N">No repetir</mat-option>
+                                    <mat-option value="S">Repetir hasta que se resuelva</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> 
+    
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTituloArriba" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[49] }}</div>    
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[50] }}</div>    
+                            <span class="ayudaCampo">Se enviará la alarma a un nuevo recipiente</span>
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.escalar2=='N'" [(value)]="detalleRegistro.escalar3" name="escalar3" (selectionChange)=cambiando($event)>
+                                    <mat-option value="N">No escalar </mat-option>
+                                    <mat-option value="S">Escalar sin notificar</mat-option>
+                                    <mat-option value="T">Escalar notificando a niveles previos</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> 
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[51] }}</div>    
+                            <span class="ayudaCampo">Especifique el (o los) canal(es) por dónde se enviará la alarma</span>
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.escalar3=='N'" multiple [(value)]="seleccionescalar3" name="seleccionescalar3" (selectionChange)=cambiando($event)>
+                                    <mat-option value="C">Correo</mat-option>
+                                    <mat-option value="M">MMCall</mat-option>
+                                    <mat-option value="L">Llamadas</mat-option>
+                                    <mat-option value="S">Mensajes de texto</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[52] }}</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+                                    <input matInput #txtRepetir3 [disabled]="detalleRegistro.escalar3=='N'"type="number" [(ngModel)]="detalleRegistro.tiempo3" maxlength="8" autocomplete="off" name="tiempo3"  #tiempo3 ="ngModel" (input)="cambiando($event)">
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[53] }}</div>    
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.escalar3=='N'"[(ngModel)]="detalleRegistro.lista3" name="lista3" (selectionChange)=cambiando($event)>
+                                    <mat-option *ngFor="let lista of listas; let i = index" [value]="lista.id">{{ lista.nombre }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[54] }}</div>    
+                            <span class="ayudaCampo">Se enviará la alarma al recipiente de escalamiento</span>
+                            <mat-form-field class="texto">
+                                <mat-select [disabled]="detalleRegistro.escalar3=='N'"[(value)]="detalleRegistro.repetir3" name="repetir3" (selectionChange)=cambiando($event)>
+                                    <mat-option value="N">No repetir</mat-option>
+                                    <mat-option value="S">Repetir hasta que se resuelva</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> 
+    
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==4">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[55] }}</div>    
+                            <span class="ayudaCampo">Se enviará un mensaje a todos los involucrados</span>
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.informar_resolucion" name="informar_resolucion" (selectionChange)=cambiando($event)>
+                                    <mat-option value="S">SI</mat-option>
+                                    <mat-option value="N">NO</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> 
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==1 && nivelActual == 1">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[2] }}</div>    
+                            <span class="ayudaCampo">Especifique la secuencia de esta operación dentro de la ruta de faricación</span>
+                            <mat-form-field class="texto">
+                                <mat-select [(ngModel)]="detalleRegistro.secuencia" name="secuencia" (selectionChange)=cambiando($event)>
+                                    <mat-option *ngFor="let secuencia of secuencias; let i = index" [value]="secuencia.id">{{ secuencia.nombre }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==2">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[19] }}</div>    
+                            <span class="ayudaCampo">Indique la ruta de fabricación, si no existe, créelo en el catálogo correspondiente</span>
+                            <mat-form-field class="texto">
+                                <mat-select #lstProceso2 [(ngModel)]="detalleRegistro.ruta" name="ruta" (selectionChange)=cambiando($event)>
+                                    <mat-option *ngFor="let ruta of rutas; let i = index" [value]="ruta.id">{{ ruta.nombre }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==0">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[3] }}</div>    
+                            <span class="ayudaCampo" *ngIf="nivelActual == 0">Especifique el número de lotes que éste proceso puede albergar como stock en un momento dado</span>
+                            <span class="ayudaCampo" *ngIf="nivelActual == 1">Especifique el número de lotes que éste equipo puede procesar de manera simultánea en un momento dado</span>
+                            <div class="registroValorVarios">
+                                <mat-form-field class="textoAlto" *ngIf="nivelActual == 0">
+                                    <input matInput #txtCapacidad_stock type="number" [(ngModel)]="detalleRegistro.capacidad_stock" maxlength="6" autocomplete="off" name="capacidad_stock" #capacidad_stockN="ngModel" (input)="cambiando($event)">
+                                    <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+                                </mat-form-field>                            
+                                <mat-form-field class="textoAlto" *ngIf="nivelActual == 1">
+                                    <input matInput #txtCapacidad_proceso type="number" [(ngModel)]="detalleRegistro.capacidad" maxlength="6" autocomplete="off" name="capacidad" #capacidadN="ngModel" (input)="cambiando($event)">
+                                    <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==0 && nivelActual==0">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">3. Aplica reducción de tiempo de setup</div>    
+                            <span class="ayudaCampo">El proceso suprime el tiempo de setup cuando se procesa en secuencia el mismo número de parte</span>
+                            <div class="registroValorVarios">
+                                <mat-form-field class="texto">
+                                    <mat-select [(value)]="detalleRegistro.reduccion_setup" name="reduccion_setup" (selectionChange)=cambiando($event)>
+                                        <mat-option value="S">SI</mat-option>
+                                        <mat-option value="N">NO</mat-option>
+                                    </mat-select>
+                                </mat-form-field>                           
+                            </div>    
+                        </div>
+
+                        <div class="registroCampoNumeros" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==1 && nivelActual == 1">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[4] }}</div>    
+                            <span class="ayudaCampo">Especifique los tiempos en segundos en que éste proceso necesita para trabajar con un lote</span>
+                            <div class="registroValorVarios">
+                                <mat-form-field class="textoAlto">
+                                    <input matInput #txtTiempo_stock type="number" placeholder="Stock" [(ngModel)]="detalleRegistro.tiempo_stock" maxlength="12" autocomplete="off" name="tiempo_stock" #tiempo_stockN="ngModel" (input)="cambiando($event)" (input)="calculoSeg(1)">
+                                    <span class="gris" [style.backgroundColor]="colorFondoTarjeta" matSuffix>{{ segStock }}</span>
+                                    <mat-hint class="pista" align="end">Campo requerido</mat-hint>
+                                </mat-form-field>                            
+                                <mat-form-field class="textoAlto">
+                                    <input matInput #txtTiempo_proceso type="number" placeholder="Proceso" [(ngModel)]="detalleRegistro.tiempo_proceso" maxlength="12" autocomplete="off" name="tiempo_proceso" #tiempo_procesoN="ngModel" (input)="cambiando($event)" (input)="calculoSeg(2)">
+                                    <span class="gris" [style.backgroundColor]="colorFondoTarjeta" matSuffix>{{ segProceso }}</span>
+                                    <mat-hint class="pista" align="end">Campo requerido</mat-hint>
+                                </mat-form-field> 
+                                <mat-form-field class="textoAlto">
+                                    <input matInput type="number" placeholder="Setup" [(ngModel)]="detalleRegistro.tiempo_setup" maxlength="12" autocomplete="off" name="tiempo_setup" #tiempo_setupN="ngModel" (input)="cambiando($event)" (input)="calculoSeg(3)">
+                                    <span class="gris" [style.backgroundColor]="colorFondoTarjeta" matSuffix>{{ segSetup }}</span>
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual!=6">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[5] }}</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="texto">
+
+                                    <input matInput #txtReferencia [(ngModel)]="detalleRegistro.referencia" maxlength="30" autocomplete="off" name="referencia" #referenciaN="ngModel" (input)="cambiando($event)" [disabled]="detalleRegistro.admin=='S'">
+                                    <button mat-button *ngIf="detalleRegistro.referencia" matSuffix mat-icon-button aria-label="Clear" (click)="detalleRegistro.referencia = '';cambiando($event)">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                    <mat-hint class="pista" align="end">{{referenciaN.value?.length || 0}} de 30</mat-hint>
+                                    <mat-hint class="pista" align="start" *ngIf="maestroActual!=7">Campo opcional</mat-hint>
+                                    <mat-hint class="pista" align="start" *ngIf="maestroActual==7">Campo requerido</mat-hint>
+                                </mat-form-field>                            
+                            </div>    
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==7">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">3. Acceso a TODOS los procesos de la opción de Flujo de material</div>    
+                            <span class="ayudaCampo">El rol administrador tendrá acceso a todas las opciones</span>
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.operacion" name="operacion" (selectionChange)=cambiando($event) [disabled]="detalleRegistro.admin=='S'">
+                                    <mat-option value="S">SI</mat-option>
+                                    <mat-option value="N">NO</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==7">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">4. Acceso personalizado a los procesos de la opción de Flujo de material</div>    
+                            <span class="ayudaCampo">Marque los proceos a los cuales el usuaro tendrá acceso</span>
+                            <mat-form-field class="texto">
+                                <mat-select multiple #lstProcesos [(ngModel)]="seleccionProcesos" name="seleccionProcesos" (selectionChange)=cambiando($event) [disabled]="detalleRegistro.admin=='S'">
+                                    <mat-option disabled class="filter-option">
+                                        <button class="miniBotones" [style.backgroundColor]="colorFondoBoton" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde"
+                                          mat-button                                           
+                                          (click)="selectAll()">
+                                          <i class="iconshock-materialblack-general-check-mark"></i>
+                                          Seleccionar todos
+                                        </button>
+                                        <button class="miniBotones" [style.backgroundColor]="colorFondoBoton" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde"
+                                        mat-button 
+                                        (click)="deselectAll()">
+                                        <i class="iconshock-materialblack-general-reload"></i>
+                                          Desmarcar todos
+                                        </button>
+                                    </mat-option>
+                                    <mat-option *ngFor="let proceso of procesos; let i = index" [value]="proceso.id">{{ proceso.nombre }}</mat-option>
+                                </mat-select>
+                                <mat-hint class="pista" align="start">{{ (seleccionProcesos.length == 0 ? 'Ningún proceso seleccionado' : (seleccionProcesos.length==1 ? 'Un proceso seleccionado' : seleccionProcesos.length + ' procesos seleccionados')) }}</mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==7">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">5. Rol del usuario</div>    
+                            <span class="ayudaCampo">El rol administrador tendrá acceso a todas las opciones</span>
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.rol" name="rol" (selectionChange)=cambiando($event) [disabled]="detalleRegistro.admin=='S'">
+                                    <mat-option value="A">ADMINISTRADOR</mat-option>
+                                    <mat-option value="G">GESTOR DE LA APLICACIÓN</mat-option>
+                                    <mat-option value="C">SUPERVISOR DE CALIDAD</mat-option>
+                                    <mat-option value="O">OPERADOR</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==7">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">6. Permitir opciones de Calidad</div>    
+                            <span class="ayudaCampo">Esta propiedad permitirá ingresar lotes a las situaciones de calidad y/o retornarlas a producción</span>
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.calidad" name="calidad" (selectionChange)=cambiando($event) [disabled]="detalleRegistro.admin=='S'">
+                                    <mat-option value="S">SI</mat-option>
+                                    <mat-option value="N">NO</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==7">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">7. Visualizar la programación de cargas (sólo lectura)</div>    
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.programacion" name="programacion" (selectionChange)=cambiando($event) [disabled]="detalleRegistro.admin=='S'">
+                                    <mat-option value="S">SI</mat-option>
+                                    <mat-option value="N">NO</mat-option>
+                                </mat-select>
+                                <mat-hint class="pista" align="start">Esta restricción sólo aplica para los perfiles de Calidad y Operador</mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==7">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">8. Visualizar los inventarios</div>    
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.inventario" name="inventario" (selectionChange)=cambiando($event) [disabled]="detalleRegistro.admin=='S'">
+                                    <mat-option value="S">SI</mat-option>
+                                    <mat-option value="N">NO</mat-option>
+                                </mat-select>
+                                <mat-hint class="pista" align="start">Esta restricción sólo aplica para los perfiles de Calidad y Operador</mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==7">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">9. Permitir reverso de lote</div>    
+                            <span class="ayudaCampo">El reverso de lote permite retornar un lote a su situación anterior</span>
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.reversos" name="reversos" (selectionChange)=cambiando($event) [disabled]="detalleRegistro.admin=='S'">
+                                    <mat-option value="S">SI</mat-option>
+                                    <mat-option value="N">NO</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==0 && nivelActual==0 || maestroActual==2">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[6] }}</div>    
+                            <span class="ayudaCampo">Las imágenes que se utilicen para el registro serán visibles en toda la aplicación y para todos los usuarios. Las imagenes se almacenarán en el servidor</span>
+                            <div class="registroconImagen">
+                                <div class="registroValorconImagen">
+                                    <mat-form-field class="texto">
+                                        <input matInput #txtImagen [(ngModel)]="detalleRegistro.imagen" maxlength="255" autocomplete="off" name="imagen" #imagenN="ngModel" (input)="cambiando($event)">
+                                        <button mat-button *ngIf="detalleRegistro.imagen" matSuffix mat-icon-button aria-label="Clear" (click)="detalleRegistro.imagen = '';cambiando($event)">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                        <mat-hint class="pista" align="end">{{ imagenN.value?.length || 0 }} de 255</mat-hint>
+                                        <mat-hint class="pista" align="start">{{ mensajeImagen }}</mat-hint>
+                                    </mat-form-field>  
+                                    <input type="file" style="display: none" (change)="onFileSelected($event)" accept=".png;.jpg;.svg;.bmp" #fileInput>
+                                    <button class="indiceImagen" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="fileInput.click()">
+                                        <mat-icon>image</mat-icon>
+                                        Subir imagen
+                                    </button>
+                                </div> 
+                                <div class="registroImagenDetalle" [style.backgroundColor]="colorFondoTarjeta" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="mostrarImagenRegistro=='S'"><img class="registroImagenPropia" [src]="detalleRegistro.imagen" (error)="imagenErrorRegistro()" (onload)="this.mensajeImagen = 'Campo opcional'"></div>
+                                <div class="registroImagenDetalle" [style.backgroundColor]="colorFondoTarjeta" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="mostrarImagenRegistro=='N'"><i [class]="iconoGeneral" [ngStyle]="{'margin': 'auto'}"></i></div>
+                            </div>
+                        </div>
+                        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual!=6">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[7] }}</div>    
+                            <div class="registroValor">
+                                <mat-form-field class="textoArea">
+                                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="3" #txtNotas [(ngModel)]="detalleRegistro.notas" maxlength="300" autocomplete="off" name="notas" #notasN="ngModel" (input)="cambiando($event)"></textarea>
+                                    <button mat-button *ngIf="detalleRegistro.notas" matSuffix mat-icon-button aria-label="Clear" (click)="detalleRegistro.notas = '';cambiando($event)">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                    <mat-hint class="pista" align="end">{{ notasN.value?.length || 0 }} de 300</mat-hint>
+                                    <mat-hint class="pista" align="start">Campo opcional</mat-hint>
+                                </mat-form-field>                            
+                            </div>    
+                        </div> 
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==0 && nivelActual==1">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[18] }}</div>    
+                            <span class="ayudaCampo">Al permitir la programación este equipo estará disponible en el módulo de programación</span>
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.programar" name="programar" (selectionChange)=cambiando($event)>
+                                    <mat-option value="S">Permitir la programación de la producción</mat-option>
+                                    <mat-option value="N">No permitir</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>   
+
+                        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual!=6">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[8] }}</div>    
+                            <span class="ayudaCampo">Al inactivar el registro, éste no estará visible en el resto del sistema</span>
+                            <mat-form-field class="texto">
+                                <mat-select [(value)]="detalleRegistro.estatus" name="estatus" (selectionChange)=cambiando($event) [disabled]="detalleRegistro.admin=='S'">
+                                    <mat-option value="A">ACTIVO</mat-option>
+                                    <mat-option value="I">inactivo</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>                      
+                        <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="detalleRegistro.id > 0 && maestroActual == 1 && nivelActual == 0">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[9] }}</div>    
+                            <span class="ayudaCampo" *ngIf="operaciones.length==0">No se hallaron operaciones asociadas a esta ruta de fabricación</span>
+                            <div class="cabeceraTabla" *ngIf="operaciones.length>0">
+                                <div class="col11" [style.backgroundColor]="colorFondoTarjeta">Sec.</div>
+                                <div class="col12" [style.backgroundColor]="colorFondoTarjeta">Operación</div>
+                                <div class="col13" [style.backgroundColor]="colorFondoTarjeta">Estatus</div>
+                            </div>
+                            <div class="tablaItems" *ngIf="operaciones.length>0" [ngStyle]="{'border': '1px solid' + colorSN}">    
+                                <div class="detalleTabla" *ngFor="let operacion of operaciones; let i = index" [style.borderColor]="colorBorde" (click)="editarDetalleRuta(operacion.id)">
+                                    <div class="col11">{{operacion.secuencia }}</div>
+                                    <div class="col12">{{ operacion.nombre }}</div>
+                                    <div class="col13">{{ (operacion.estatus == 'A' ? 'Activo' : 'Inactivo') }}</div>
+                                </div>    
+                            </div>
+                        </div>
+                        <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="detalleRegistro.id > 0 && maestroActual == 0 && nivelActual == 0">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[10] }}</div>    
+                            <span class="ayudaCampo" *ngIf="operaciones.length==0">No se hallaron rutas de fabricación asociadas a este proceso</span>
+                            <div class="cabeceraTabla" *ngIf="operaciones.length>0">
+                                <div class="col21" [style.backgroundColor]="colorFondoTarjeta">Ruta</div>
+                                <div class="col22" [style.backgroundColor]="colorFondoTarjeta">Estatus</div>
+                            </div>
+                            <div class="tablaItems" *ngIf="operaciones.length>0" [ngStyle]="{'border': '1px solid' + colorSN}">    
+                                <div class="detalleTabla" *ngFor="let operacion of operaciones; let i = index" [style.borderColor]="colorBorde" (click)="editarRuta(operacion.id)">
+                                    <div class="col21">{{ operacion.nombre }}</div>
+                                    <div class="col22">{{ (operacion.estatus == 'A' ? 'Activo' : 'Inactivo') }}</div>
+                                </div>    
+                            </div>
+                        </div>
+                        <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="detalleRegistro.id > 0 && (maestroActual == 0 && nivelActual == 0 || maestroActual == 1 && nivelActual == 0)">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[11] }} </div>    
+                            <span class="ayudaCampo" *ngIf="partes.length==0">No se hallaron números de parte asociados a esta {{ (maestroActual == 0 ? 'proceso' : 'ruta de fabricación') }}</span>
+                            <div class="cabeceraTabla" *ngIf="partes.length>0">
+                                <div class="col01" [style.backgroundColor]="colorFondoTarjeta">Item</div>
+                                <div class="col02" [style.backgroundColor]="colorFondoTarjeta">Número</div>
+                                <div class="col03" [style.backgroundColor]="colorFondoTarjeta">Nombre</div>
+                                <div class="col04" [style.backgroundColor]="colorFondoTarjeta">Estatus</div>
+                            </div>
+                            <div class="tablaItems" *ngIf="partes.length>0" [ngStyle]="{'border': '1px solid' + colorSN}">    
+                                <div class="detalleTabla" *ngFor="let parte of partes; let i = index" [style.borderColor]="colorBorde" (click)="editarItem(parte.id)">
+                                    <div class="col01">{{ i + 1 }}</div>
+                                    <div class="col02">{{ parte.referencia }}</div>
+                                    <div class="col03">{{ parte.nombre }}</div>
+                                    <div class="col04">{{ (parte.estatus == 'A' ? 'Activo' : 'Inactivo') }}</div>
+                                </div>    
+                            </div>
+                        </div>
+                        <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="detalleRegistro.id > 0 && maestroActual == 0 && nivelActual == 0">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[12] }}</div>    
+                            <span class="ayudaCampo" *ngIf="equipos.length==0">No se hallaron equipos/máquinas asociados a este proceso</span>
+                            <div class="cabeceraTabla" *ngIf="equipos.length>0">
+                                <div class="col41" [style.backgroundColor]="colorFondoTarjeta">Nombre</div>
+                                <div class="col42" [style.backgroundColor]="colorFondoTarjeta">Capacidad</div>
+                                <div class="col43" [style.backgroundColor]="colorFondoTarjeta">Estatus</div>
+                            </div>
+                            <div class="tablaItems" *ngIf="equipos.length>0" [ngStyle]="{'border': '1px solid' + colorSN}">    
+                                <div class="detalleTabla" *ngFor="let equipo of equipos; let i = index" [style.borderColor]="colorBorde" (click)="editarEquipo(equipo.id)">
+                                    <div class="col41">{{ equipo.nombre }}</div>
+                                    <div class="col42">{{ equipo.capacidad }}</div>
+                                    <div class="col43">{{ (equipo.estatus == 'A' ? 'Activo' : 'Inactivo') }}</div>
+                                </div>    
+                            </div>
+                        </div>
+                        <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual!=6 && detalleRegistro.id > 0">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[13] }}</div>    
+                            <div class="registroValorDetalle">{{ detalleRegistro.fcambio | date:'EEE, dd-MMM-yyyy HH:mm:ss' }}</div>    
+                        </div>
+                        <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual!=6 && detalleRegistro.id > 0">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[14] }}</div>    
+                            <div class="registroValorDetalle">{{ detalleRegistro.ucambio }}</div>    
+                        </div>
+                        <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual!=6 && detalleRegistro.id > 0">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[15] }}</div>    
+                            <div class="registroValorDetalle">{{ detalleRegistro.fcreacion | date:'EEE, dd-MMM-yyyy HH:mm:ss' }}</div>    
+                        </div>
+                        <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual!=6 && detalleRegistro.id > 0">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[16] }}</div>    
+                            <div class="registroValorDetalle">{{ detalleRegistro.ucreacion }}</div>    
+                        </div>
+                            
+                        <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="detalleRegistro.id > 0">
+                            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[17] }}</div>    
+                            <div class="registroValorDetalle">{{ detalleRegistro.id }}</div>    
+                        </div> 
+                         
+                    </div>
+                </div>
+            </div>
+            <div class="subir" *ngIf="verIrArriba" @arriba>
+                <button class="subirBoton" [style.color]="colorLetrasTitulo" [style.backgroundColor]="colorBarraSuperior" mat-flat-button color (click)="irArriba()" [matTooltip]="irArribaTT" matTooltipClass = "toolTip">
+                    <mat-icon class="subirIcono">first_page</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div> 

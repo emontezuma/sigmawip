@@ -1,0 +1,257 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="todo" ng-app="app" ng-controller="AppCtrl" [style.backgroundColor]="colorFondo">
+  
+  <mat-toolbar id="barraNavegacion" *ngIf="verMenuSuperior" [style.backgroundColor]="colorBarraSuperior">
+    
+    <button mat-flat-button class="botonCircular" [style.backgroundColor]="colorTransparente" [matTooltip] = "ayuda01" matTooltipClass = "toolTip" matTooltipShowDelay = "100" 
+    (click) = "menuIzquierdo()">
+        <mat-icon class="iconoCircular" [style.color]="colorIconoNormal" [@iconoMenu]="direccion">exit_to_app</mat-icon>
+    </button>  
+    <button mat-flat-button [@iconoPin]="pinEfecto" [ngClass]="{botonPin:iconoPin=='place', botonPinPresionado:iconoPin!='place' }" [style.backgroundColor]="colorTransparente" [matTooltip] = "ayuda03" matTooltipClass = "toolTip" matTooltipShowDelay = "100" 
+    (click) = "aplicarSN()" *ngIf="verPin">
+        <mat-icon class="iconoPin" [style.color]="colorIconoNormal">{{ iconoPin }}</mat-icon>
+    </button>  
+
+    <div><img class="logoCompania" [style.backgroundColor]="colorFondoLogo" [src]="logoCompania"></div>
+    <div class="medioBarra" [style.color]="colorLetrasTitulo">{{ ayudaSuperior }}</div>
+    <button mat-flat-button class="botonCircular" [style.color]="colorLetrasTitulo" [style.backgroundColor]="(autenticado  ? 'transparent' : 'rgba(0, 0, 0, 0.15)')"
+    
+    [matTooltip] = "ayuda02" [matMenuTriggerFor]="menuUsuario" matTooltipClass = "toolTip" matTooltipShowDelay = "100" [disabled]="!autenticado">
+        <div [ngClass]="{ iconoUsuario:autenticado, iconoUsuarioIn:!autenticado }" [style.color]="(autenticado  ? colorIconoNormal : colorIconoInhabilitado)"><i class="iconshock-materialblack-communications-sort-by-status"></i></div>
+    </button>  
+    <div class="saludo" [style.color]="colorLetrasTitulo" *ngIf="primerNombre.length > 0">Hola, {{ primerNombre }}</div>
+      <mat-menu #menuUsuario="matMenu">
+        <div class="mUsuario" [style.backgroundColor]="colorFondoMenu" [style.color]="colorLetrasBox">
+          <button mat-menu-item class="menuOpcion" (click)="cambiarClave()">
+            <div class="menuIcono" [style.color]="colorLetrasBox">
+              <i class="iconshock-materialblack-general-key"></i>
+              <span class="menuTitulo">Cambiar contraseña</span>
+            </div>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item class="menuOpcion" (click)="cierreSesion()">
+            <div class="menuIcono" [style.color]="colorLetrasBox">
+              <i class="iconshock-materialblack-general-cross"></i>
+              <span class="menuTitulo">Cerrar sesión</span>
+            </div>
+          </button>
+        </div>
+      </mat-menu>
+  </mat-toolbar>
+
+  <mat-sidenav-container id="contenedor" resizable r-directions="['right']" fullscreen [style.backgroundColor]="colorCuerpo">
+    <mat-sidenav [style.backgroundColor]="colorSN" [opened]="abiertoSN" (opened)="cambioSN()" (closed)="cambioSN()" (onClose)="cambioSN()" id="menuIzquierdo" #barraIzquierda [mode]="modoSN">
+      <div class="contenido" [style.backgroundColor]="colorSN" [style.height.px]="alto_opciones">
+        <mat-accordion class="acordeon" [multi]="true">
+            <mat-expansion-panel class="otroPanel" hideToggle expanded="true" [style.borderColor]="colorBarraSuperior" [style.backgroundColor]="colorPanel" [ngStyle]="{'border': '1px solid' + colorSN}"  >
+                <mat-expansion-panel-header class="acordionCabecera">
+                  <mat-panel-title class="acordion" [style.color]="colorLetrasPanel">
+                    OPERACIONES
+                  </mat-panel-title>
+                  <div class="iconoCabecera" [style.color]="colorLetrasPanel"><i class="iconshock-materialblack-project-management-flow"></i></div>
+                </mat-expansion-panel-header>
+                <button class="itemBoton" mat-stroked-button (click)="accion(10)" [style.borderColor]="colorFondoCabecera" [ngClass]="{seleccionado: seleccion==10}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-communications-sign-in"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">FLUJO DE MATERIAL</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(25)" [ngClass]="{seleccionado: seleccion==25}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-communications-allow-list2"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">INVENTARIO</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(21)" [ngClass]="{seleccionado: seleccion==21}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-general-calendar"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">PROGRAMACIÓN</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(23)" [ngClass]="{seleccionado: seleccion==23}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-general-preview2"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">INSPECCIÓN</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(24)" [ngClass]="{seleccionado: seleccion==24}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-general-cancel"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">RECHAZOS</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(22)"  [ngClass]="{seleccionado: seleccion==22}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-general-bell"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">PRIORIDADES</span>
+                  </div>
+                </button>
+            </mat-expansion-panel>  
+            
+              
+              <mat-expansion-panel class="otroPanel" hideToggle [expanded]="false" [style.backgroundColor]="colorPanel" [ngStyle]="{'border': '1px solid' + colorSN}" [style.borderColor]="colorBarraSuperior">
+                <mat-expansion-panel-header class="acordionCabecera">
+                  <mat-panel-title class="acordion" [style.color]="colorLetrasPanel">
+                    CATALOGOS
+                  </mat-panel-title>
+                  <div class="iconoCabecera" [style.color]="colorLetrasPanel"><i class="iconshock-materialblack-project-management-project"></i></div>
+                </mat-expansion-panel-header>
+                <button class="itemBoton" mat-stroked-button (click)="accion(3)"  [ngClass]="{seleccionado: seleccion==3}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-iphone-business-product-combo"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">Números de parte</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(1)"  [ngClass]="{seleccionado: seleccion==1}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-iphone-business-solution"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">Procesos</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(2)"  [ngClass]="{seleccionado: seleccion==2}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-iphone-business-decision-support-system"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">Rutas de fabricación</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(6)"  [ngClass]="{seleccionado: seleccion==6}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-iphone-business-risk-assessment"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">Situaciones</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(7)" [ngClass]="{seleccionado: seleccion==7}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-general-clock"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">Horarios</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(4)"  [ngClass]="{seleccionado: seleccion==4}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-general-address-book"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">Recipientes</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(5)"  [ngClass]="{seleccionado: seleccion==5}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-iphone-business-risk"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">Alertas</span>
+                  </div>
+                </button>
+              </mat-expansion-panel>
+              <mat-expansion-panel class="otroPanel" hideToggle [expanded]="false" [style.backgroundColor]="colorPanelImportante" [ngStyle]="{'border': '1px solid' + colorSN}" [style.borderColor]="colorBarraSuperior">
+                <mat-expansion-panel-header class="acordionCabecera">
+                  <mat-panel-title class="acordion" [style.color]="colorLetrasPanel">
+                    CONFIGURACIÓN
+                  </mat-panel-title>
+                  <div class="iconoCabecera" [style.color]="colorLetrasPanel"><i class="iconshock-materialblack-general-gear"></i></div>
+                </mat-expansion-panel-header>
+                  <button class="itemBoton" mat-stroked-button (click)="accion(8)">
+                    <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                      <i class="iconshock-materialblack-general-group"></i>
+                      <span class="opcionDetalle" [style.color]="colorLetrasPanel">Gestión de usuarios</span>
+                    </div>
+                  </button>
+                  <button class="itemBoton" mat-stroked-button (click)="accion(40)">
+                    <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                      <i class="iconshock-materialblack-general-toogle-on"></i>
+                      <span class="opcionDetalle" [style.color]="colorLetrasPanel">Parámetros</span>
+                    </div>
+                  </button>
+              </mat-expansion-panel>
+              <mat-expansion-panel class="otroPanel" hideToggle [expanded]="false" [style.backgroundColor]="colorPanel" [ngStyle]="{'border': '1px solid' + colorSN}" [style.borderColor]="colorBarraSuperior">
+                <mat-expansion-panel-header class="acordionCabecera">
+                  <mat-panel-title class="acordion" [style.color]="colorLetrasPanel">
+                    REPORTES
+                  </mat-panel-title>
+                  <div class="iconoCabecera" [style.color]="colorLetrasPanel"><i class="iconshock-materialblack-business-report"></i></div>
+                </mat-expansion-panel-header>
+                <button class="itemBoton" mat-stroked-button (click)="accion(35)" [ngClass]="{seleccionado: seleccion==35}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-business-stats-column-chart"></i>
+                    <span class="opcionDetalleSmall" [style.color]="colorLetrasPanel">Cumplimiento semanal</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(36)" [ngClass]="{seleccionado: seleccion==36}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-business-stats-column-chart"></i>
+                    <span class="opcionDetalleSmall" [style.color]="colorLetrasPanel">Cumplimiento/Operación</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(37)" [ngClass]="{seleccionado: seleccion==37}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-business-stats-column-chart"></i>
+                    <span class="opcionDetalleSmall" [style.color]="colorLetrasPanel">Productividad/Operación</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(31)" [ngClass]="{seleccionado: seleccion==31}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <span class="iconoEspecial"><i class="iconshock-iphone-transportation-tachometer-4"></i></span>
+                    <span class="opcionDetalleEspecial" [style.color]="colorLetrasPanel">Efectividad/Operacion</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(32)" [ngClass]="{seleccionado: seleccion==32}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-project-management-change-control-plan"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">Variación/Operacion</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(33)" [ngClass]="{seleccionado: seleccion==33}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-project-management-change-control-plan"></i>
+                    <span class="opcionDetalleSmall" [style.color]="colorLetrasPanel">Variación/Nro de parte</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(34)" [ngClass]="{seleccionado: seleccion==34}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-iphone-business-risk"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">Alarmas activas</span>
+                  </div>
+                </button>
+                <button class="itemBoton" mat-stroked-button (click)="accion(30)" [ngClass]="{seleccionado: seleccion==30}">
+                  <div class="iconoDetalle" [style.color]="colorLetrasPanel">
+                    <i class="iconshock-materialblack-business-excel"></i>
+                    <span class="opcionDetalle" [style.color]="colorLetrasPanel">Exportar datos</span>
+                  </div>
+                </button>        
+            </mat-expansion-panel>
+          </mat-accordion>
+      </div>
+      <div class="aplicacion" [style.borderColor]="colorBarraSuperior">
+        <img class="logo" [src]="logoAplicacion">
+        <div class="detalle">
+          <div class="marca">
+            {{ version }}
+          </div> 
+          <div class="fabricante">
+            <a href="http://www.mmcallmexico.mx/" target="_blank">Por Cronos integración S.A. de C.V.</a>
+          </div> 
+        </div>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="contenidoPagina" [@efecto]="estado">
+        <router-outlet #o="outlet"></router-outlet>
+      </div>
+      <div *ngIf="verProceso" class="marcoProceso">
+          <div class="barraProceso">
+            <mat-progress-spinner class="proceso" diameter="80"
+              mode="indeterminate">
+            </mat-progress-spinner>
+          </div>
+        </div>
+        
+      </mat-sidenav-content>
+  </mat-sidenav-container>
+  <mat-toolbar id="pie" *ngIf="verPie" [style.color]="colorLetrasPie" [style.backgroundColor]="colorPie">
+  <mat-icon class="iconoInfo" [style.color]="colorIconoNormal">info_outline</mat-icon>
+    <div class="mensajeInferior">{{ ayudaInferior }}</div>
+    <div class="errorCaja" *ngIf="sinConexion"><mat-icon class="iconoError" [matTooltip] = "ayuda04" matTooltipClass = "toolTip" matTooltipShowDelay = "100" >sync_problem</mat-icon></div>
+    <div class="errorCaja" *ngIf="conEscaner"><mat-icon class="escaneando" [matTooltip] = "ayuda05" matTooltipClass = "toolTip" matTooltipShowDelay = "100" >usb</mat-icon>{{ cadenaEscaneadaPrint }}</div>
+    <div class="fecha" [style.borderColor]="colorLetrasPie" *ngIf="!isHandset">
+        <div class="iconoReloj"><i class="iconshock-materialblack-general-clock"></i></div>
+        <span class="reloj">{{ hora | date:'dd MMM yyyy HH:mm:ss' }}</span>
+    </div>
+  </mat-toolbar>
+</div>
+

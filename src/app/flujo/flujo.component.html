@@ -1,0 +1,691 @@
+
+<div id="todo" class="mat-typography">
+        <div class="pantallaError" [style.borderColor]="colorBorde" [style.color]="colorLetrasBox" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}" *ngIf="pantalla==1">
+            <div class="cabeceraMensaje" [style.backgroundColor]="colorFondoTarjeta" >{{ errorTitulo }}</div>
+            <div class="mensaje" [innerHTML]="errorMensaje"></div>
+        </div>
+        <div class="catalogos" [style.height.px]="altoPantalla" [style.width.px]="anchoPantalla" *ngIf="pantalla==2">
+            <div class="cabecera" [style.backgroundColor]="colorFondoCabecera" [ngStyle]="{'border': '1px solid' + colorSN}">
+                <button class="indice" [ngClass]="{seleccionado: seleccion==i && maestroActual==4}" [style.backgroundColor]="colorFondoBoton" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" *ngFor="let indice of indices; let i = index" mat-button (click)="procesarPantalla(i+1)">
+                    <i [ngClass]="indice.icono"></i>
+                    <span class="indiceTexto">{{ indice.nombre }}</span>
+                </button>
+                <button class="indiceDivision" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="nuevoRegistroGral()" *ngIf="botonera1 && maestroActual<2" >
+                    <i class="iconshock-materialblack-general-add"></i>
+                    <span class="indiceTexto">{{ nuevoRegistro }}</span>
+                </button>
+                <button [ngClass]="{ indiceDivisionCorto: maestroActual>=2, indiceMedio: maestroActual < 2}" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="descargar()" [matTooltip] = "ayuda01" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera1">
+                    <i class="iconshock-materialblack-communications-inbox"></i>
+                </button>
+                <button class="indiceMedio" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="refrescar()" [matTooltip] = "ayuda14" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera1">
+                    <i class="iconshock-materialblack-general-synchronize"></i>
+                </button>
+                <button class="indiceMedio" [ngClass]="{filtrado: soloStock}" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="filtro()" [matTooltip] = "(soloStock ? ayuda16 : ayuda15)" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera1 && vision > 0 && maestroActual==4">
+                    <i class="iconshock-iphone-business-filter"></i>
+                </button>
+                <button class="indiceMedio" [ngClass]="{filtrado: soloActivas}" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="filtroCarga()" [matTooltip] = "(soloActivas ? ayuda18 : ayuda17)" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera1 && maestroActual==0 && nivelActual==0">
+                    <i class="iconshock-iphone-business-filter"></i>
+                </button>
+                <button class="indiceUltimo" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="buscar()" [matTooltip] = "ayuda02" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera1">
+                    <i class="iconshock-materialblack-general-zoom"></i>
+                </button>
+                <div class="buscadorCaja" *ngIf="verBuscar && botonera1" [ngStyle]="{'border': '0.5px solid' + colorBorde}">
+                    <mat-form-field class="buscador" [style.color]="colorLetrasBox">
+                        <input #txtBuscar matInput class="buscar" type="text" [(ngModel)]="textoBuscar" (keydown.enter)="filtrar()" (keydown.escape)="escapar()">
+                        <button mat-button *ngIf="textoBuscar" matSuffix mat-icon-button aria-label="Clear" (click)="textoBuscar = ''">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <button class="indiceDivisionCorto" [style.color]="(botonera[0] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[0] ? 'inherit' : colorFondoBoton)" mat-button (click)="nuevo()" [matTooltip] = "ayuda03" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual!=4" [disabled]="botonera[0]">
+                    <i class="iconshock-materialblack-text-document"></i>
+                </button>
+                <button class="indiceMedio" [style.color]="(botonera[1] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[1] ? 'inherit' : colorFondoBoton)" mat-button (click)="validarGuardar()" [matTooltip] = "ayuda04" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual!=4" [disabled]="botonera[1]">
+                    <i class="iconshock-materialblack-general-diskette"></i>
+                </button>
+                <button class="indiceMedio" [style.color]="(botonera[2] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[2] ? 'inherit' : colorFondoBoton)" mat-button (click)="cancelar()" [matTooltip] = "ayuda05" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual!=4" [disabled]="botonera[2]">
+                    <i class="iconshock-materialblack-general-reload"></i>
+                </button>
+                <button class="indiceMedio" [style.color]="(botonera[3] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[3] ? 'inherit' : colorFondoBoton)" mat-button (click)="copiar()" [matTooltip] = "ayuda06" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual!=4" [disabled]="botonera[3]">
+                    <i class="iconshock-materialblack-general-copy"></i>
+                </button>
+                <button class="indiceMedio" [style.color]="(botonera[4] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[4] ? 'inherit' : colorFondoBoton)" mat-button (click)="validarInactivar(0, 1)" [matTooltip] = "ayuda07" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual!=6 && maestroActual!=4" [disabled]="botonera[4]" >
+                    <i class="iconshock-materialblack-mail-block"></i>
+                </button>
+                <button class="indiceMedio" [style.color]="(botonera[5] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[5] ? 'inherit' : colorFondoBoton)" mat-button (click)="validarEliminar()" [matTooltip] = "ayuda08" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual!=4" [disabled]="botonera[5]">
+                    <i class="iconshock-materialblack-general-trash-can"></i>
+                </button>
+                <button class="indiceUltimo" [style.color]="(botonera[6] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[6] ? 'none' : colorFondoBoton)" mat-button (click)="salir()" [matTooltip] = "ayuda09" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera9 && maestroActual!=4" [disabled]="botonera[6]">
+                    <i class="iconshock-materialblack-general-reload"></i>
+                </button>
+
+                <button class="indiceDivisionCorto" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="descargarDet()" [matTooltip] = "ayuda01" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual==4">
+                    <i class="iconshock-materialblack-communications-inbox"></i>
+                </button>
+                <button class="indiceMedio" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="refrescarLote()" [matTooltip] = "ayuda14" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual==4">
+                    <i class="iconshock-materialblack-general-synchronize"></i>
+                </button>
+                <button class="indiceMedio" [style.color]="(botonera[7] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[7] ? 'inherit' : colorFondoBoton)" mat-button (click)="buscarRegistro(2)" [matTooltip] = "ayuda10" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual!=4" [disabled]="botonera[7]">
+                    <mat-icon>first_page</mat-icon>
+                </button>
+                <button class="indiceMedio" [style.color]="(botonera[8] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[8] ? 'inherit' : colorFondoBoton)" mat-button (click)="buscarRegistro(4)" [matTooltip] = "ayuda11" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual!=4" [disabled]="botonera[8]">
+                    <mat-icon>chevron_left</mat-icon>
+                </button>
+                <button class="indiceMedio" [style.color]="(botonera[9] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[9] ? 'none' : colorFondoBoton)" mat-button (click)="buscarRegistro(3)" [matTooltip] = "ayuda12" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual!=4" [disabled]="botonera[9]">
+                    <mat-icon>chevron_right</mat-icon>
+                </button>
+                <button class="indiceUltimo" [style.color]="(botonera[10] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[10] ? 'none' : colorFondoBoton)" mat-button (click)="buscarRegistro(5)" [matTooltip] = "ayuda13" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual!=4" [disabled]="botonera[10]">
+                        <mat-icon>last_page</mat-icon>
+                </button>
+                
+            </div>
+            <div class="contenedorScroll" [style.color]="colorLetrasBox" [style.backgroundColor]="colorFondo" [ngStyle]="{'border': '1px solid' + colorSN}" cdkScrollable [style.overflowY]="verBarra">
+                <div class="detalle" @esquema (@esquema.done)="salidaEfecto($event)" *ngIf="verRegistro==1">
+                    <div @esquema  *ngFor="let registro of registros; let i = index">
+                        <div class="registro" [style.borderColor]="colorBorde" [style.borderColor]="(maestroActual==4 ? (registro.espera > 0 || registro.estado == 'En Espera' ? 'tomato' : 'none') : (!registro.estatus || registro.estatus != 'activo' ? 'tomato' : (registro.pct == 100 ? 'dodgerblue' : colorBorde)))" [style.boxShadow]="(maestroActual==4 ? (registro.espera > 0 || registro.estado == 'En Espera' ? '0px 0px 1px 2px tomato' : 'none') : (!registro.estatus || registro.estatus!='activo' ? '0px 0px 1px 2px tomato' : (registro.pct == 100 ? '0px 0px 1px 2px dodgerblue': 'none' )))" [style.backgroundColor]="colorFondoTarjeta">
+                            <button class="botonMaestro" mat-button (click)="editar(i)">
+                                <div class="registroCabecera" [style.backgroundColor]="colorFondoTarjeta" *ngIf="maestroActual<4"><span class="registroCabeceraTexto">{{ registro.nombre }}</span></div>
+                                <div class="registroCabecera" [style.backgroundColor]="colorFondoTarjeta" *ngIf="maestroActual==4 && vistaDetalle==0"><span class="registroCabeceraTexto">{{ registro.nombre }}</span></div>
+                                <div class="registroSub" *ngIf="maestroActual==4 && vistaDetalle==1">
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValor">{{ registro.numero }}</div>    
+                                        <div class="titulo">Lote</div>    
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValor">{{ registro.producto }}</div>    
+                                        <div class="titulo">Descripión del Número de parte</div>    
+                                    </div>
+                                </div>
+                                <div class="registroSub" *ngIf="maestroActual==4 && vision==1 && vistaDetalle==0">
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorCentro">{{ registro.totall  }}</div>    
+                                        <div class="tituloCentro">Total lotes</div>    
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorCentro">{{ registro.proceso }}</div>    
+                                        <div class="tituloCentro">En proceso</div>    
+                                    </div>
+                                    <div class="registroAdicional" [ngClass]="{ pctBajo: registro.espera > 0 }" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorCentro">{{ registro.espera }}</div>    
+                                        <div class="tituloCentro">En espera</div>    
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorCentro">{{ registro.stock }}</div>    
+                                        <div class="tituloCentro">En stock</div>    
+                                    </div>
+                                </div>
+                                <div class="registroSub" *ngIf="maestroActual==4 && vistaDetalle==1">
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValor">{{ registro.nproceso }}</div>    
+                                        <div class="titulo">Operación actual</div>    
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValor">{{ registro.ruta_secuencia }}</div>    
+                                        <div class="titulo">Secuencia</div>    
+                                    </div>
+                                    
+                                </div>
+                                <div class="registroSub" *ngIf="maestroActual==4 && vistaDetalle==1">
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValor">{{ registro.estado }}</div>    
+                                        <div class="titulo">Estado del lote</div>    
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValor">{{ (registro.prioridad ==100 ? 'N/A' : registro.prioridad) }}</div>    
+                                        <div class="titulo">Prioridad</div>    
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValor">{{ registro.ncarga }}</div>    
+                                        <div class="titulo">No. carga</div>    
+                                    </div>
+                                </div>
+                                <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}" *ngIf="maestroActual>=2 && maestroActual<4">
+                                    <div class="registroValor">{{ registro.causa }}</div>    
+                                    <div class="titulo">{{ titulo_lote }}</div> 
+                                </div>
+                                <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}" *ngIf="maestroActual>=2 && maestroActual<4">
+                                    <div class="registroValor">{{ registro.producto }}</div>    
+                                    <div class="titulo">Descripción del Número de parte</div> 
+                                </div> 
+                                <div class="registroSub" *ngIf="maestroActual==1">
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValor">{{ registro.referencia }}</div>    
+                                        <div class="titulo">Referencia</div>    
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}" *ngIf="maestroActual==0">
+                                        <div class="registroValor">{{ registro.cantidad }}</div>    
+                                        <div class="titulo">Cantidad</div>    
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}" *ngIf="maestroActual==1">
+                                        <div class="registroValorCentro">{{ registro.orden }}</div>    
+                                        <div class="tituloCentro">Prioridad</div>    
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorCentro">{{ registro.fecha | date:'dd-MM-yyyy HH:mm'}}</div>    
+                                        <div class="tituloCentro">{{ titulo_fecha }}</div>    
+                                    </div>
+                                </div>
+                                <div class="registroSub" *ngIf="maestroActual==0 && nivelActual==1">
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValor">{{ registro.referencia }}</div>    
+                                        <div class="titulo">Referencia</div>    
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}" *ngIf="maestroActual==0">
+                                        <div class="registroValorCentro">{{ registro.cantidad }}</div>    
+                                        <div class="tituloCentro">Cantidad (lotes)</div>    
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}" *ngIf="maestroActual==0">
+                                        <div class="registroValorCentro">{{ registro.avance }}</div>    
+                                        <div class="tituloCentro">Van</div>    
+                                    </div>
+                                    <div class="registroAdicional" [ngClass]="{ pctBajo: registro.pct > 0, pctAlcanzado: registro.pct == 100 }" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}" *ngIf="maestroActual==0">
+                                        <div class="registroValorCentro">{{ registro.pct + '%' }}</div>    
+                                        <div class="tituloCentro">Avance</div>    
+                                    </div>
+                                </div>
+                                <div class="registroSub" *ngIf="maestroActual==0 && nivelActual==0">
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValor">{{ registro.equipo }}</div>    
+                                    <div class="titulo">Equipo</div>  
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorCentro">{{ registro.capacidad }}</div>    
+                                        <div class="tituloCentro">Capacidad</div> 
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorCentro">{{ registro.piezas }}</div>    
+                                        <div class="tituloCentro">Plan</div> 
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorCentro">{{ registro.partes }}</div>    
+                                        <div class="tituloCentro">Partes</div> 
+                                    </div>
+                                </div>
+                                <div class="registroSub" *ngIf="maestroActual==0 && nivelActual==0">
+                                    <div class="registroAdicional" [ngClass]="{ pctBajo: registro.pct > 0, pctAlcanzado: registro.pct == 100 }" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorCentro">{{ registro.pct + '%' }}</div>    
+                                        <div class="tituloCentro">Operación</div> 
+                                    </div>
+                                    <div class="registroAdicional" [ngClass]="{ pctBajo: registro.pct > 0, pctAlcanzado: registro.pct == 100 }" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorCentro">{{ registro.pctc + '%' }}</div>    
+                                        <div class="tituloCentro">Ejecución</div> 
+                                    </div>
+                                    <div class="registroAdicional" [ngClass]="{ pctBajo: registro.reprogramaciones > 0}" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorCentro">{{ registro.fecha | date:'dd/MMM/yyyy HH:mm' }}</div>    
+                                        <div class="tituloCentro">{{ (registro.reprogramaciones == 0 ? 'Fecha estimada' : 'Reprogramada (' + registro.sumado + ')') }}</div> 
+                                    </div>
+                                </div>
+                                <div class="registroSub" *ngIf="maestroActual==0 && nivelActual==0">
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValor">{{ (registro.completada == 'Y' ? 'Ejecutada' : registro.completada == 'U' ? 'Equipando' : registro.completada == 'S' ? 'Completa' : 'En curso') }}</div>    
+                                        <div class="titulo">Estatus</div> 
+                                    </div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValor">{{ registro.fcambio | date:'EEE, dd-MMM-yyyy HH:mm:ss' }}</div>    
+                                        <div class="titulo">Fecha del último cambio</div> 
+                                    </div>
+                                </div>
+                                <div class="registroSub">
+                                    <div class="registroImagen"  [ngStyle]="{'border': '0.5px solid' + colorSN}" *ngIf="registro.mostrarImagen == 'S' && verImagen"><img class="registroImagenPropia" [src]="registro.imagen" (error)="imagenError(i)"></div>
+                                    <div class="registroImagen"  [ngStyle]="{'border': '0.5px solid' + colorSN}" *ngIf="registro.mostrarImagen == 'N' && verImagen"><i [class]="iconoGeneral" [ngStyle]="{'margin': 'auto'}"></i></div>
+                                    <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div *ngIf="maestroActual==0 && nivelActual==1">
+                                            <div class="registroValor">{{ registro.id }}</div>    
+                                            <div class="titulo">ID único</div> 
+                                            <div class="registroValor">{{ registro.fcambio | date:'EEE, dd-MMM-yyyy HH:mm:ss' }}</div>    
+                                            <div class="titulo">Fecha del último cambio</div>    
+                                        </div>
+                                        <div *ngIf="maestroActual==1">
+                                            <div class="registroValor">{{ registro.id }}</div>    
+                                            <div class="titulo">ID único</div> 
+                                            <div class="registroValor">{{ registro.fcambio | date:'EEE, dd-MMM-yyyy HH:mm:ss' }}</div>    
+                                            <div class="titulo">Fecha del último cambio</div>    
+                                        </div>
+                                        <div *ngIf="maestroActual>=2 && maestroActual<4">
+                                            <div class="registroValor">{{ registro.referencia }}</div>    
+                                            <div class="titulo">Referencia</div> 
+                                            <div class="registroValor">{{ registro.fecha | date:'EEE, dd-MMM-yyyy HH:mm:ss' }}</div>    
+                                            <div class="titulo">Entrada a inspección</div>    
+                                        </div>
+                                        <div *ngIf="maestroActual==4 && vistaDetalle==1 && (vision==0 || vision==3 || vision==4)" >
+                                            <div class="registroValor">{{ registro.inicia | date:'dd-MMM-yyyy HH:mm' }}</div>    
+                                            <div class="titulo">Fecha de creación del lote</div>    
+                                            <div class="registroValor" *ngIf="vision!=4 || registro.estado != 'Finalizado'">{{ registro.estimada | date:'dd-MMM-yyyy HH:mm' }}</div>
+                                            <div class="registroValor" *ngIf="registro.estado=='Finalizado'">{{ registro.finaliza | date:'dd-MMM-yyyy HH:mm' }}</div>    
+                                            <div class="titulo" *ngIf="vision!=4 || registro.estado != 'Finalizado'">Fecha estimada de termino</div>    
+                                            <div class="titulo" *ngIf="registro.estado=='Finalizado'">Fecha de termino</div>    
+                                        </div>
+                                        <div *ngIf="maestroActual==4 && vistaDetalle==1 && (vision==1 || vision==2)" >
+                                            <div class="registroValor">{{ registro.fecha | date:'dd-MMM-yyyy HH:mm' }}</div>    
+                                            <div class="titulo" *ngIf="vision==1">Fecha de entrada a la operación</div>    
+                                            <div class="titulo" *ngIf="vision==2">Fecha de entrada al equipo</div>    
+                                            <div class="registroValor" *ngIf="registro.hasta">{{ registro.hasta | date:'dd-MMM-yyyy HH:mm' }}</div>    
+                                            <div class="registroValor" *ngIf="!registro.hasta">N/A</div>    
+                                            <div class="titulo">Fecha estimada de salida</div>    
+                                        </div>
+                                        <div *ngIf="maestroActual==4 && vision==1 && vistaDetalle==0" >
+                                            <div class="registroValorCentro">{{ registro.stock + ' de ' + registro.capacidad_stock + ' (' + registro.pctstock + '%)' }}</div>    
+                                            <div class="tituloCentro">Actual en Stock</div>    
+                                            <div class="registroValorCentro">{{ registro.proceso + ' de ' + registro.cap_proceso + ' (' + registro.pctproceso + '%)' }}</div>    
+                                            <div class="tituloCentro">Actual en proceso</div>    
+                                        </div>
+                                        <div *ngIf="maestroActual==4 && vision==3 && vistaDetalle==0" >
+                                            <div class="registroSub">
+                                                <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" >
+                                                    <div class="registroValorCentro">{{ registro.totall }}</div>    
+                                                    <div class="tituloCentro">Total</div>    
+                                                </div>
+                                                <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta">
+                                                    <div class="registroValorCentro">{{ registro.proceso }}</div>    
+                                                    <div class="tituloCentro">En proceso</div>    
+                                                </div>
+                                                <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" >
+                                                    <div class="registroValorCentro">{{ registro.stock }}</div>    
+                                                    <div class="tituloCentro">En stock</div>    
+                                                </div>
+                                            </div>
+                                            <div class="registroSub">
+                                                <div class="registroAdicional" [ngClass]="{ pctBajo: registro.espera > 0 }" [style.backgroundColor]="colorFondoTarjeta">
+                                                    <div class="registroValorCentro">{{ registro.espera }}</div>    
+                                                    <div class="tituloCentro">En espera</div>    
+                                                </div>
+                                                <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta">
+                                                    <div class="registroValorCentro">{{ registro.calidad }}</div>    
+                                                    <div class="tituloCentro">En calidad</div>    
+                                                </div>
+                                                <div class="registroAdicional" [ngClass]="{ pctAlcanzado: registro.asignados > 0 }" [style.backgroundColor]="colorFondoTarjeta">
+                                                    <div class="registroValorCentro">{{ registro.asignados }}</div>    
+                                                    <div class="tituloCentro">Programados</div>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="maestroActual==4 && vision==4 && vistaDetalle==0" >
+                                            <div class="registroValorCentro">{{ registro.totall }}</div>    
+                                            <div class="tituloCentro">Lotes en este estado</div>    
+                                        </div>
+                                        <div *ngIf="maestroActual==4 && vision==2 && vistaDetalle==0" >
+                                            <div class="registroValor">{{ registro.nproceso }}</div>    
+                                            <div class="titulo">Proceso asociado al equipo</div>    
+                                        </div>
+                                        <div *ngIf="maestroActual==4 && vision==2 && vistaDetalle==0" >
+                                            <div class="registroSub">
+                                                <div class="registroAdicional">
+                                                    <div class="registroValorCentro">{{ registro.capacidad }}</div>    
+                                                    <div class="tituloCentro">Capacidad</div>    
+                                                </div>
+                                                <div class="registroAdicional">
+                                                    <div class="registroValorCentro">{{ registro.totall }}</div>    
+                                                    <div class="tituloCentro">En proceso</div>    
+                                                </div>
+                                                <div class="registroAdicional">
+                                                    <div class="registroValorCentro">{{ registro.pctproceso + '%' }}</div>    
+                                                    <div class="tituloCentro">PCT de uso</div>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="registroAdicional" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}" *ngIf="maestroActual==1">
+                                    <div class="registroValor">{{ registro.nproceso }}</div>    
+                                    <div class="titulo">Proceso asociado a la prioridad</div> 
+                                </div> 
+                                                                    
+                            </button>
+                            <div class="botonera" [style.borderColor]="colorBorde" *ngIf="maestroActual<2">
+                                <button class="registroBotones" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="explorar(registro.id, registro.nombre)" *ngIf="maestroActual==0 && nivelActual==0">
+                                    <span class="indiceBoton"><i class="iconshock-materialblack-general-external-link"></i></span>
+                                    <span class="indiceTexto">Explorar</span>
+                                </button>
+                                 <button class="registroBotones" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="editar(i)">
+                                    <span class="indiceBoton"><i class="iconshock-materialblack-general-pencil"></i></span>
+                                    <span class="indiceTexto">Editar</span>
+                                </button>
+                                <button class="registroBotones" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="validarInactivar(registro.id, 1)" *ngIf="registro.estatus=='activo'">
+                                    <span class="indiceBoton"><i class="iconshock-materialblack-mail-block"></i></span>
+                                    <span class="indiceTexto">Inactivar</span>
+                                </button>
+                                <button class="registroBotones" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="reactivar(registro.id, 1)" *ngIf="registro.estatus=='inactivo'">
+                                    <span class="indiceBoton"><i class="iconshock-materialblack-general-check-mark"></i></span>
+                                    <span class="indiceTexto">Reactivar</span>
+                                </button>
+                            </div>
+                            <div class="botonera" [style.borderColor]="colorBorde" *ngIf="maestroActual==2">
+                                <button class="registroBotones" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="liberar(i)">
+                                    <span class="indiceBoton"><i class="iconshock-materialblack-general-check-mark"></i></span>
+                                    <span class="indiceTexto">Retornar</span>
+                                </button>
+                                <button class="registroBotones" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="rechazar(i)">
+                                    <span class="indiceBoton"><i class="iconshock-materialblack-general-cancel"></i></span>
+                                    <span class="indiceTexto">Rechazar</span>
+                                </button>
+                            </div>
+                            <div class="botonera" [style.borderColor]="colorBorde" *ngIf="maestroActual==3">
+                                <button class="registroBotones" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="liberar(i)">
+                                    <span class="indiceBoton"><i class="iconshock-materialblack-general-check-mark"></i></span>
+                                    <span class="indiceTexto">Retornar</span>
+                                </button>
+                                <button class="registroBotones" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="rechazar(i)">
+                                    <span class="indiceBoton"><i class="iconshock-materialblack-general-preview2"></i></span>
+                                    <span class="indiceTexto">A inspección</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                
+                <div class="plantilla" @esquema (@esquema.done)="salidaEfecto($event)" [style.color]="colorLetrasBox" [style.backgroundColor]="colorFondo" *ngIf="verRegistro==2">
+                    <div class="registroCaja">
+                        <div class="alertaCaja" *ngIf="editando" [style.backgroundColor]="colorFondoTarjeta">
+                            <mat-icon class="alertaIcono">warning</mat-icon>
+                            <span class="alertaMensaje" [innerHTML]="faltaMensaje"></span>
+                        </div>
+                        <div class="registroGeneral" *ngIf="maestroActual<4">
+                            <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==0 && nivelActual==1">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">1. Número de carga asociado</div>    
+                                <mat-form-field class="texto">
+                                    <mat-select #lstParte3 [(value)]="detalleRegistro.carga" name="carga" (selectionChange)=cambiando($event)>
+                                        <mat-option *ngFor="let cargui of cargas; let i = index" [value]="cargui.id">{{ cargui.carga }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div> 
+                            <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="(maestroActual==0 && nivelActual==1) || maestroActual==1">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[0] }}</div>    
+                                <span class="ayudaCampo" *ngIf="maestroActual==1">Indique el Número de parte a la cual se le generará la prioridad</span>
+                                <mat-form-field class="texto">
+                                    <mat-select #lstParte [(value)]="detalleRegistro.parte" name="parte" (selectionChange)=cambiando($event)>
+                                        <mat-option *ngFor="let parte of partes; let i = index" [value]="parte.id">{{ parte.nombre }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==0 && nivelActual==0">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[13] }}</div>    
+                                <div class="registroValor">
+                                    <mat-form-field class="texto">
+                                        <input matInput #txtCarga [(ngModel)]="detalleRegistro.carga" maxlength="20" autocomplete="off" name="carga" #carga="ngModel" (input)="cambiando($event)">
+                                        <mat-hint class="pista" align="end">{{ carga.value?.length || 0 }} de 20</mat-hint>
+                                    </mat-form-field>                            
+                                </div>    
+                            </div>
+
+                            <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==0 && nivelActual==0">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[12] }}</div>    
+                                <mat-form-field class="texto">
+                                    <mat-select #lstParte2 [(value)]="detalleRegistro.equipo" name="equipo" (selectionChange)=cambiando($event)>
+                                        <mat-option *ngFor="let proceso of procesos; let i = index" [value]="proceso.id">{{ proceso.nombre }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                           
+                            <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="nivelActual!=1">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[1] }}</div>    
+                                <div class="registroValorVarios">
+                                    <mat-form-field class="textoAlto">
+                                        <input #txtFecha matInput [(ngModel)]="detalleRegistro.fecha" [matDatepicker]="picker1" name="fecha" autocomplete="off" #fecha="ngModel" disabled (input)="cambiando($event)">
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle> 
+                                        <mat-datepicker #picker1 disabled="false" (selectedChange)="cambiando($event)"></mat-datepicker>   
+                                    </mat-form-field>
+                                    <mat-form-field class="textoAlto">
+                                        <input matInput type="time" #txtDesde pattern="^([0-1][0-9]|2[0-3]):([0-5][0-9])$" [(ngModel)]="detalleRegistro.hora" maxlength="5" autocomplete="off" name="hora" required #hora="ngModel" (input)="cambiando($event)">
+                                        <mat-hint class="pista" align="start"><strong>En formato HH:MM</strong></mat-hint>                       
+                                    </mat-form-field>     
+                                    
+                                </div>    
+                            </div>
+
+                            <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==0 && nivelActual==0">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">4. Alerta en caso de incumplimiento</div>    
+                                <span class="ayudaCampo">Al desactivar la alerta el sistema seguirá dando seguimientoa a la carga pero no generará alerta de incumplimiento</span>
+                                <mat-form-field class="texto">
+                                    <mat-select [(value)]="detalleRegistro.alarma" name="alarma" (selectionChange)=cambiando($event)>
+                                        <mat-option value="S">Activar</mat-option>
+                                        <mat-option value="N">No activar</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+    
+                            <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==0 && nivelActual==1">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[3] }}</div>    
+                                <div class="registroValor">
+                                    <mat-form-field class="texto">
+                                        <input matInput #txtCantidad type="number" [(ngModel)]="detalleRegistro.cantidad" maxlength="8" autocomplete="off" name="cantidad" #cantidad="ngModel" (input)="cambiando($event)">
+                                    </mat-form-field>                            
+                                </div>    
+                            </div>
+
+                            <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==1">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">3. Proceso asociado</div>    
+                                <mat-form-field class="texto">
+                                    <mat-select #lstParte4 [(value)]="detalleRegistro.proceso" name="proceso" (selectionChange)=cambiando($event)>
+                                        <mat-option *ngFor="let cabProceso of cabProcesos; let i = index" [value]="cabProceso.id">{{ cabProceso.nombre }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==1">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[3] }}</div>    
+                                <div class="registroValor">
+                                    <mat-form-field class="texto">
+                                        <input matInput #txtPrioridad type="number" [(ngModel)]="detalleRegistro.orden" maxlength="2" autocomplete="off" name="orden" #orden="ngModel" (input)="cambiando($event)">
+                                        <mat-hint class="pista" align="start"><strong>1=Más alta 99=más baja</strong></mat-hint>                                            
+                                    </mat-form-field>       
+                                    
+                                </div>    
+                            </div>
+
+                            <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="nivelActual!=1">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[4] }}</div>    
+                                <div class="registroValor">
+                                    <mat-form-field class="textoArea">
+                                        <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="3" #txtNotas [(ngModel)]="detalleRegistro.notas" maxlength="300" autocomplete="off" name="notas" #notasN="ngModel" (input)="cambiando($event)"></textarea>
+                                        <button mat-button *ngIf="detalleRegistro.notas" matSuffix mat-icon-button aria-label="Clear" (click)="detalleRegistro.notas = '';cambiando($event)">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                        <mat-hint class="pista" align="end">{{ notasN.value?.length || 0 }} de 300</mat-hint>
+                                        <mat-hint class="pista" align="start">Campo opcional</mat-hint>
+                                    </mat-form-field>                            
+                                </div>    
+                            </div>     
+                            <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="maestroActual==0 && nivelActual==0">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">6. Permitir que esta carga sea reprogramada</div>    
+                                <span class="ayudaCampo">Indique si desea que el sistema  reprograme o no la fecha de entrega basado en las fechas de las cargas previas</span>
+                                <mat-form-field class="texto">
+                                    <mat-select [(value)]="detalleRegistro.permitir_reprogramacion" name="permitir_reprogramacion" (selectionChange)=cambiando($event)>
+                                        <mat-option value="S">SI</mat-option>
+                                        <mat-option value="N">No</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[5] }}</div>    
+                                <span class="ayudaCampo">Al inactivar el registro, éste no estará visible en el resto del sistema</span>
+                                <mat-form-field class="texto">
+                                    <mat-select [(value)]="detalleRegistro.estatus" name="estatus" (selectionChange)=cambiando($event)>
+                                        <mat-option value="A">ACTIVO</mat-option>
+                                        <mat-option value="I">inactivo</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="detalleRegistro.id > 0 && maestroActual==0 && nivelActual==0">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[14] }}</div>    
+                                <div class="registroValorDetalle">{{ (detalleRegistro.fecha_anterior | date:'dd-MM-yyyy HH:mm:ss') + ' se movió ' + '(' + detalleRegistro.sumado + ')' }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="detalleRegistro.id > 0 && maestroActual==0 && nivelActual==0">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[15] }}</div>    
+                                <div class="registroValorDetalle">{{ (detalleRegistro.reprogramaciones == 0 ? 'Ninguna' : ''+detalleRegistro.reprogramaciones) }}</div>    
+                            </div>
+                            
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="detalleRegistro.id > 0 && maestroActual==0 && nivelActual==0">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[16] }}</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.fecha_original | date:'dd-MM-yyyy HH:mm:ss' }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="detalleRegistro.id > 0">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[6] }}</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.fcambio | date:'EEE, dd-MMM-yyyy HH:mm:ss' }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="detalleRegistro.id > 0">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[7] }}</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.ucambio }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="detalleRegistro.id > 0">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[8] }}</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.fcreacion | date:'EEE, dd-MMM-yyyy HH:mm:ss' }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="detalleRegistro.id > 0">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[9] }}</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.ucreacion }}</div>    
+                            </div>
+                                
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="detalleRegistro.id > 0">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">{{ titulos[10] }}</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.id }}</div>    
+                            </div> 
+                             
+                        </div>
+
+
+                        
+                        <div class="registroGeneral" *ngIf="maestroActual==4">
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">1. Número de lote</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.numero }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">2. Referencia del Número de parte</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.referencia }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">3. Descripción del Número de parte</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.producto }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">4. Fecha de inicio en el sistema</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.inicia | date:'dd-MM-yyyy HH:mm:ss' }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">5. Fecha estimada de finalización del lote</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.estimada | date:'dd-MM-yyyy HH:mm:ss' }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">6. Fecha real de finalización del lote</div>    
+                                <div class="registroValorDetalle" *ngIf="detalleRegistro.finaliza">{{ detalleRegistro.finaliza | date:'dd-MM-yyyy HH:mm:ss' }}</div>    
+                                <div class="registroValorDetalle" *ngIf="!detalleRegistro.finaliza">N/A</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">7. Prioridad</div>    
+                                <div class="registroValorDetalle">{{ (detalleRegistro.prioridad ==100 ? 'N/A' : detalleRegistro.prioridad) }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">8. Proceso actual</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.nproceso }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">9. Equipo actual</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.nequipo }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">10. Operación actual</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.nruta_detalle }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">11. Secuencia actual</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.ruta_secuencia }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">12. Estado actual</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.estado }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">13. Total de inspecciones de caidad</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.inspecciones }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">14. Causa de la última inspección</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.insp_causa }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">15. Usuario que realizó la última inspección</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.insp_por }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">16. Fecha de la última inspección</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.inspeccion | date: 'dd/MMM/yyyy HH:mm:ss' }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">17. Total de rechazos</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.rechazos }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">18. Causa del último rechazo</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.recha_causa }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">19. Usuario que realizó el último rechazo</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.recha_por }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">20. Fecha del último rechazo</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.rechazo | date: 'dd/MMM/yyyy HH:mm:ss' }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">21. Asignado al # de Carga (programación)</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.carga }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">22. Total de alarmas generadas</div>    
+                                <div class="registroValorDetalle">{{ detalleRegistro.alarmas }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">23. Alarmado por tiempo excedido de stock</div>    
+                                <div class="registroValorDetalle">{{ (detalleRegistro.alarma_tse == 'S' ? 'SI' : 'No') }}</div>    
+                            </div>
+                            <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">24. Alarmado por tiempo excedido de proceso</div>    
+                                <div class="registroValorDetalle">{{ (detalleRegistro.alarma_tpe == 'S' ? 'SI' : 'No') }}</div>    
+                            </div>
+                            <div class="tablaLotes" [style.borderColor]="colorBorde" >
+                                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">25. Histórico del lote (trazabilidad)</div>    
+                                <div class="ayudaCampo" *ngIf="historicos.length==0">Este lote aún no tiene historia en el sistema</div>
+                                <div class="ayudaCampo" *ngIf="historicos.length>0">{{ cadHistorico }}</div>
+                                <div class="cabeceraTabla" [style.backgroundColor]="colorFondoTarjeta" *ngIf="historicos.length>0">
+                                    <div class="col01">Sec</div>
+                                    <div class="col02">Operación</div>
+                                    <div class="col03">Inicio</div>
+                                    <div class="col03">En stock</div>
+                                    <div class="col03">En proceso</div>
+                                    <div class="col02">Equipo</div>
+                                    <div class="col03">Fin estimado</div>
+                                    <div class="col03">Finalizó</div>
+                                    <div class="col04">Duración</div>
+                                </div>
+                                <div class="tablaItems" *ngIf="historicos.length>0" [ngStyle]="{'border': '1px solid' + colorSN}">    
+                                    <div class="detalleTabla" *ngFor="let historico of historicos; let i = index" [style.borderColor]="colorBorde" [ngClass]="{ salto: historico.pasado == 0 && i < actual, actual: i == actual && !historico.fecha_salida, falta: i > actual }">
+                                        <div class="col01">{{ historico.secuencia }}</div>
+                                        <div class="col02">{{ historico.nruta_detalle }}</div>
+                                        <div class="col03">{{ historico.fecha_entrada | date: 'dd/MM/yyyy HH:mm' }}</div>
+                                        <div class="col03" *ngIf="historico.fecha_stock">{{ historico.fecha_stock | date:'dd/MM/yy HH:mm' }}</div>
+                                        <div class="col03" *ngIf="!historico.fecha_stock && historico.pasado>0">N/A</div>
+                                        <div class="col03" *ngIf="historico.fecha_proceso">{{ historico.fecha_proceso | date:'dd/MM/yy HH:mm' }}</div>
+                                        <div class="col03" *ngIf="!historico.fecha_proceso && historico.pasado>0">N/A</div>
+                                        <div class="col02" *ngIf="historico.pasado>0">{{ historico.nequipo }}</div>
+                                        <div class="col03">{{ historico.fecha_estimada | date:'dd/MM/yy HH:mm' }}</div>
+                                        <div class="col03" *ngIf="historico.fecha_salida">{{ historico.fecha_salida | date: 'dd/MM/yy HH:mm'}}</div>
+                                        <div class="col03" *ngIf="i==actual && !historico.fecha_salida">Actual...</div>
+                                        <div class="col04">{{ (historico.tiempoSEC == '00:00:00' ? '-:--:--' : historico.tiempoSEC) }}</div>                                        
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="subir" *ngIf="verIrArriba" @arriba>
+                    <button class="subirBoton" [style.color]="colorLetrasTitulo" [style.backgroundColor]="colorBarraSuperior" mat-flat-button color (click)="irArriba()" [matTooltip]="irArribaTT" matTooltipClass = "toolTip">
+                        <mat-icon class="subirIcono">first_page</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> 

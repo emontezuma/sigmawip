@@ -1,0 +1,389 @@
+
+<div id="todo" class="mat-typography">
+    <div class="pantallaError" [style.borderColor]="colorBorde" [style.color]="colorLetrasBox" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}" *ngIf="pantalla==1">
+        <div class="cabeceraMensaje" [style.backgroundColor]="colorFondoTarjeta" >{{ errorTitulo }}</div>
+        <div class="mensaje" [innerHTML]="errorMensaje"></div>
+    </div>
+    <div class="catalogos" [style.height.px]="altoPantalla" [style.width.px]="anchoPantalla">
+        <div class="cabecera" [style.backgroundColor]="colorFondoCabecera" [ngStyle]="{'border': '1px solid' + colorSN}">
+            <button class="indice" [style.backgroundColor]="colorFondoBoton" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" mat-button (click)="accion(1)" *ngIf="verRegistro==1">
+                <i class="iconshock-materialblack-business-excel"></i>
+                <span class="indiceTexto">Generar reporte</span>
+            </button>
+
+            <span class="ayudaCampoTitulo" *ngIf="verRegistro==2">{{ tituloReporte }}</span>
+            
+            <button class="indiceDivisionCorto" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="exportar()" [matTooltip] = "ayuda01" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="accion1">
+                <i class="iconshock-materialblack-communications-inbox"></i>
+            </button>
+            <button class="indiceMedio" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="filtro()" [matTooltip] = "ayuda03" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="accion3">
+                <i class="iconshock-iphone-business-filter"></i>
+            </button>
+            <button [ngClass]="{indiceMedio: accion1, indiceDivisionCorto: !accion1}" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="refrescar()" [matTooltip] = "ayuda04" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="accion4 && maestroActual<5">
+                <i class="iconshock-materialblack-general-synchronize"></i>
+            </button>
+            <button class="indiceMedio" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="guardarImagen()" [matTooltip] = "ayuda02" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="accion2">
+                <i class="iconshock-materialblack-communications-inbox"></i>
+            </button>
+            <button class="indiceMedio" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="formato()" [matTooltip] = "ayuda05" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="maestroActual>=5">
+                <i class="iconshock-materialblack-general-toogle-on"></i>
+            </button>
+            <button class="indiceMedio" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="exportarImagen()" [matTooltip] = "ayuda06" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="maestroActual>=5">
+                <i class="iconshock-materialblack-communications-recieved-files"></i>
+            </button>
+            <div class="buscadorCaja" *ngIf="verBuscar" [ngStyle]="{'border': '0.5px solid' + colorBorde}">
+                <mat-form-field class="buscador" [style.color]="colorLetrasBox">
+                    <input #txtBuscar matInput class="buscar" type="text" [(ngModel)]="textoBuscar" (keydown.enter)="filtrar()" (keydown.escape)="escapar()">
+                    <button mat-button *ngIf="textoBuscar" matSuffix mat-icon-button aria-label="Clear" (click)="textoBuscar = ''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+
+        </div>
+        <div class="contenedorScroll" [style.color]="colorLetrasBox" [style.backgroundColor]="colorFondo" [ngStyle]="{'border': '1px solid' + colorSN}" cdkScrollable [style.overflowY]="verBarra">
+            <div class="plantilla" @esquema (@esquema.done)="salidaEfecto($event)" [style.color]="colorLetrasBox" [style.backgroundColor]="colorFondo" *ngIf="verRegistro == 1">
+                <div class="registroGeneral">
+                    <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">1. Reporte(s) a generar</div>    
+                        <mat-form-field class="texto">
+                            <mat-select [(ngModel)]="detalleRegistro.reporte" name="reporte">
+                                <mat-option [value]="0">Lotes de producción/trazabilidad</mat-option>
+                                <mat-option [value]="1">Alertas generadas</mat-option>
+                                <mat-option [value]="2">Revisiones de calidad</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">2. Período a reportar</div>    
+                        <mat-form-field class="texto">
+                            <mat-select [(ngModel)]="detalleRegistro.periodo" name="periodo" (selectionChange)=calcularFecha($event) >
+                                <mat-option [value]="0">TODO EL TIEMPO (puede tomar más tiempo)</mat-option>
+                                <mat-option [value]="1">LO QUE VA DEL DÍA</mat-option>
+                                <mat-option [value]="2">LO QUE VA DE SEMANA</mat-option>
+                                <mat-option [value]="3">LO QUE VA DEL MES (MtD)</mat-option>
+                                <mat-option [value]="4">LO QUE VA DEL AÑO (YtD)</mat-option>
+                                <mat-option [value]="5">LA SEMANA ANTERIOR</mat-option>
+                                <mat-option [value]="6">EL MES ANTERIOR</mat-option>
+                                <mat-option [value]="7">EL AÑO ANTERIOR</mat-option>
+                                <mat-option [value]="8">Especificar una fecha</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}">
+                        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">3. Especificar período</div>    
+                        <div class="registroValor">
+                            <mat-form-field class="textoMitad">
+                                <input #txtFechaDesde matInput [(ngModel)]="detalleRegistro.desde" [matDatepicker]="picker1" name="desde" autocomplete="off" #desde1="ngModel" disabled>
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle> 
+                                <mat-datepicker #picker1 [disabled]="detalleRegistro.periodo != '8'"></mat-datepicker>   
+                            </mat-form-field>
+                            <mat-form-field class="textoMitad">
+                                <input #txtFechaDesde matInput [(ngModel)]="detalleRegistro.hasta" [matDatepicker]="picker2" name="hasta" autocomplete="off" #hasta1="ngModel" disabled>
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle> 
+                                <mat-datepicker #picker2 [disabled]="detalleRegistro.periodo != '8'"></mat-datepicker>   
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">4. Especificar Número de parte</div>    
+                        <mat-form-field class="texto">
+                            <mat-select [(ngModel)]="detalleRegistro.parte" name="parte">
+                                <mat-option [value]="0">TODOS LOS NÚMEROS DE PARTE</mat-option>
+                                <mat-option *ngFor="let parte of partes; let i = index" [value]="parte.id">{{ parte.nombre }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">5. Especificar Proceso/Operación</div>    
+                        <mat-form-field class="texto">
+                            <mat-select [(ngModel)]="detalleRegistro.proceso" name="proceso">
+                                <mat-option [value]="0">TODOS LOS PROCESOS</mat-option>
+                                <mat-option *ngFor="let proceso of procesos; let i = index" [value]="proceso.id">{{ proceso.nombre }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">6. Especificar el estado del lote</div>    
+                        <mat-form-field class="texto">
+                            <mat-select [(ngModel)]="detalleRegistro.estado" name="estado" [disabled]="detalleRegistro.reporte!=0">
+                                <mat-option [value]="-1">TODOS LOS ESTADOS</mat-option>
+                                <mat-option [value]="0">EN ESPERA</mat-option>
+                                <mat-option [value]="20">EN STOCK</mat-option>
+                                <mat-option [value]="50">EN PROCESO</mat-option>
+                                <mat-option [value]="80">EN CALIDAD</mat-option>
+                                <mat-option [value]="90">RECHAZADO</mat-option>
+                                <mat-option [value]="99">FINALIZADO</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">7. Incluir trazabilidad del lote (se generará un segundo archivo)</div>    
+                        <mat-form-field class="texto">
+                            <mat-select [(ngModel)]="detalleRegistro.incluir_traza" name="incluir_traza" [disabled]="detalleRegistro.reporte!=0">
+                                <mat-option [value]="0">SI</mat-option>
+                                <mat-option [value]="1">No</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="plantilla" @esquema (@esquema.done)="salidaEfecto($event)" [style.color]="colorLetrasBox" [style.backgroundColor]="colorFondo" *ngIf="verRegistro == 2">
+                <div class="bordeEfi" *ngIf="maestroActual < 5">
+                <div @esquema class="equipoEFI" *ngFor="let registro of registros; let i = index"  [style.maxHeight.px]="(maestroActual==1 ? '230' : (maestroActual==4 ? '180' : '160'))" [style.minHeight.px]="(maestroActual==1 ? '230' : (maestroActual==4 ? '140' : '160'))" [style.backgroundColor]="(i==0 && maestroActual < 4? 'rgba(0, 0, 0, 0.05)' : 'none')" [style.boxShadow]="(maestroActual == 1 ? (+registro.pct <= +config.bajo_hasta ? bajo_color_todo : (+registro.pct <= +config.medio_hasta ? medio_color_todo : alto_color_todo)) : (maestroActual == 4 ? bajo_color_todo : (+registro.pct <= 0 ? bajo_color_todo : alto_color_todo)))" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="area" *ngIf="maestroActual<=3" [style.borderColor]="colorFondoCabecera" [ngStyle]="{'border': '1px solid' + colorSN}" [style.fontSize.px]="(maestroActual==1 ? '21' : '18')" [style.backgroundColor]="colorFondoTarjeta">{{ registro.nombre }}</div>   
+                    <div class="columnaDoble" *ngIf="maestroActual == 1">
+                        <div class="grafico">
+                            <dx-circular-gauge id="gauge" [value]="registro.pct">
+                                <dxo-scale
+                                    [startValue]="0"
+                                    [endValue]="100"
+                                    [tickInterval]="20">
+                                    <dxo-label [visible]="false">
+                                    </dxo-label>
+                                </dxo-scale>
+                                <dxo-value-indicator
+                                    type="triangleNeedle"
+                                    width="8"
+                                    [indentFromCenter]="10"
+                                    color="rgb(51, 51, 51)"
+                                    [offset]="-20">
+                                </dxo-value-indicator>
+                                <dxo-range-container width="15">
+                                    <dxi-range [startValue]="0" [endValue]="config.bajo_hasta" [color]="config.bajo_color"></dxi-range>
+                                    <dxi-range [startValue]="config.bajo_hasta" [endValue]="config.medio_hasta" [color]="config.medio_color"></dxi-range>
+                                    <dxi-range [startValue]="config.medio_hasta" [endValue]="100" [color]="config.alto_color"></dxi-range>
+                                </dxo-range-container>
+                            </dx-circular-gauge>
+                            <div class="valorEFI" *ngIf="maestroActual==1" [style.color]="(+registro.pct<=+config.bajo_hasta ? config.bajo_color : (+registro.pct<=+config.medio_hasta ? config.medio_color : config.alto_color))">{{ registro.pctchar }}</div>
+                        </div>
+                        <div class="registroAdicionalCajasRep" >
+                            <div class="registroAdicional" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}">
+                                <div class="registroValorRep">{{ registro.total }}</div>    
+                                <div class="tituloRep">Total lotes</div>    
+                            </div>
+                            <div class="registroAdicional" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}">
+                                <div class="registroValorRep">{{ registro.buenos }}</div>    
+                                <div class="tituloRep">OK</div>   
+                            </div>
+                            <div class="registroAdicional" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}">
+                                <div class="registroValorRep">{{ registro.malos }}</div>    
+                                <div class="tituloRep">Demorados</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columnaDoble2" *ngIf="maestroActual == 2 || maestroActual == 3">
+                        <div class="valorEFIGrande" [style.color]="(registro.pct<=100 ? config.alto_color : config.bajo_color)">{{ registro.pctchar }}</div>
+                        <div class="registroAdicionalCajasRep2" >
+                            <div class="registroAdicional" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}">
+                                <div class="registroValorRep">{{ registro.total }}</div>    
+                                <div class="tituloRep">Total lotes</div>    
+                            </div>
+                            <div class="registroAdicional" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}">
+                                <div class="registroValorRep">{{ registro.buenos }}</div>    
+                                <div class="tituloRep">OK</div>   
+                            </div>
+                            <div class="registroAdicional" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}">
+                                <div class="registroValorRep">{{ registro.malos }}</div>    
+                                <div class="tituloRep">Demorados</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columnaDoble" *ngIf="maestroActual == 4">
+                        <div class="registroAdicionalCajasRep3" >
+                            <div class="columnaDoble3">
+                                <div class="col01" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}">
+                                    <div class="registroValor">{{ registro.nombre_alerta }}</div>    
+                                    <div class="titulo">Nombre de la alarma</div>    
+                                </div>
+                            </div>
+                            <div class="columnaDoble3">
+                                <div [ngClass]="{col01: registro.tipo == 7 || registro.tipo == 3, col02:registro.tipo != 7 && registro.tipo != 3}" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}">
+                                    <div class="registroValor">{{ registro.numero }}</div>    
+                                    <div class="titulo">{{ (registro.tipo == 7 || registro.tipo == 3 ? 'Carga/programación' : 'Número de lote') }}</div>    
+                                </div>
+                                <div class="col03" *ngIf="registro.tipo != 7 && registro.tipo != 3" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}">
+                                    <div class="registroValorNormal">{{ registro.nombre }}</div>    
+                                    <div class="titulo">Número de parte</div>   
+                                </div>
+                            </div>
+                            <div class="columnaDoble3">
+                                <div class="col04" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}">
+                                    <div class="registroValor">{{ registro.inicio | date:'dd-MMM-yyyy HH:mm:ss' }}</div>    
+                                    <div class="titulo">Fecha de activación</div>
+                                </div>
+                                <div class="col05" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}">
+                                    <div class="registroValorBajo">{{ registro.transcurrido }}</div>    
+                                    <div class="tituloBajo">Transcurrido</div>
+                                </div>
+                            </div>
+                            <button class="registroBotones" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="cancelarAlarma(i)">
+                                <span class="indiceBoton"><i class="iconshock-materialblack-general-trash-can"></i></span>
+                                <span class="indiceTexto">Cancelar</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="columnaDoble" *ngIf="maestroActual >= 5">
+                    <div class="grafico" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}">
+                        <dx-chart
+                            id="graficoFallas"
+                            [dataSource]="registros"
+                            palette="soft"
+                            resolveLabelOverlapping="shift">
+                            <dxo-margin
+                                [right]="100">
+                            </dxo-margin>
+                            <dxo-size [height]="altoGrafica" [width]="anchoGrafica"></dxo-size>
+                            <dxo-animation [enabled]= "true"></dxo-animation>
+                            <dxo-common-pane-settings [backgroundColor]="color_fondo_barras"></dxo-common-pane-settings>
+                            <dxo-title [text]="titulo">
+                                <dxo-subtitle [text]="sub_titulo">
+                                    <dxo-font
+                                    [size]="sub_titulo_fuente"
+                                    [color]="color_letras"
+                                    weight="450">
+                                </dxo-font>
+                                </dxo-subtitle>
+                                <dxo-font
+                                    [size]="titulo_fuente"
+                                    [color]="color_letras"
+                                    weight="550">
+                                </dxo-font>
+                            </dxo-title>
+                            <dxi-series *ngIf="verTodos" axis="buenos" type="bar" valueField="total" name="Total" color="dodgerblue">
+                                <dxo-label [visible]="true" backgroundColor="#43464B">
+                                    <dxo-font [size]="etiqueta_fuente" color="white" weight="450"></dxo-font>
+                                    <dxo-border color="#202020" visible="true" width="1"></dxo-border>
+                                </dxo-label>
+                            </dxi-series>
+                            <dxi-series *ngIf="verBuenos && maestroActual!=7" axis="buenos" type="bar" valueField="buenos" name="OK" color="limegreen">
+                                <dxo-label [visible]="true" backgroundColor="#43464B">
+                                    <dxo-font [size]="etiqueta_fuente" color="white" weight="450"></dxo-font>
+                                    <dxo-border color="#202020" visible="true" width="1"></dxo-border>
+                                </dxo-label>
+                            </dxi-series>
+                            <dxi-series *ngIf="verMalos && maestroActual!=7" axis="buenos" type="bar" valueField="malos" name="Demorados" color="orangered">
+                                <dxo-label [visible]="true" backgroundColor="#43464B">
+                                    <dxo-font [size]="etiqueta_fuente" color="white" weight="450"></dxo-font>
+                                    <dxo-border color="#202020" visible="true" width="1"></dxo-border>
+                                </dxo-label>
+                            </dxi-series>
+                            <dxi-series *ngIf="verMalos && maestroActual==7" axis="malos" type="spline" valueField="malos" name="Productividad" color="limegreen">
+                                <dxo-label [visible]="true" backgroundColor="#43464B">
+                                    <dxo-font [size]="etiqueta_fuente" color="orangered" weight="450"></dxo-font>
+                                    <dxo-border color="#202020" visible="true" width="2"></dxo-border>
+                                </dxo-label>
+                            </dxi-series>
+                            <dxi-value-axis name="buenos" position="left" valueType="numeric">
+                            </dxi-value-axis>
+                            <dxi-value-axis *ngIf="verMalos && maestroActual==7" name="malos" position="right" valueType="numeric">
+                                <dxi-constant-line *ngIf="estimado_productividad>0 && maestroActual==7" extendAxis="true" [width]="2" [value]="estimado_productividad" color="orangered">
+                                    <dxo-label [text]="textoEstimado"></dxo-label>
+                                </dxi-constant-line>
+                                <dxi-constant-line *ngIf="maestroActual==7" [value]="100" extendAxis="true" color="skyblue" [width]="2">
+                                    <dxo-label text="Esperado 100%"></dxo-label>
+                                </dxi-constant-line>
+                                <dxo-title [text]="texto_y">
+                                    <dxo-font [size]="etiqueta_fuente" [color]="color_letras" weight="450"></dxo-font>
+                                </dxo-title>
+                                <dxo-label [visible]="true" backgroundColor="#50BDF9">
+                                    <dxo-font [size]="etiqueta_fuente" [color]="color_letras" weight="450"></dxo-font>
+                                    <dxo-format [type]="fixedPoint" [precision]="0"></dxo-format>
+                                </dxo-label>
+                            </dxi-value-axis>
+                            <dxo-common-series-settings
+                                argumentField="liga"
+                                type="bar"
+                                [barPadding]="0.1">
+                                <dxo-label
+                                    [visible]="true"
+                                    backgroundColor="rgba(0, 0, 0, 0.7)">
+                                    <dxo-font
+                                        [size]="etiqueta_fuente"
+                                        [color]="color_letras"
+                                        weight="450">
+                                    </dxo-font>
+                                    <dxo-border
+                                        color="#202020" visible="true" width="1" >
+                                    </dxo-border>
+                                </dxo-label>
+                            </dxo-common-series-settings>
+                            <dxo-common-axis-settings>
+                                <dxo-grid [width]="1" color="#909090"></dxo-grid>
+                            </dxo-common-axis-settings>
+                            <dxo-legend
+                                [visible]="mostrar_tabla=='S'"
+                                [backgroundColor]="color_leyenda"
+                                verticalAlignment="top"
+                                horizontalAlignment="left">
+                                <dxo-title text="Estatus del lote">
+                                    <dxo-font
+                                        [size]="etiqueta_leyenda"
+                                        [color]="color_letras"
+                                        weight="350">
+                                    </dxo-font>
+                                    </dxo-title>
+                                <dxo-font
+                                    [size]="etiqueta_leyenda"
+                                    [color]="color_letras"
+                                    weight="350">
+                                </dxo-font>
+                                <dxo-border
+                                    [color]="color_letras" visible="true" width="1" >
+                                </dxo-border>
+                                <dxo-margin left="30" right="30"></dxo-margin>
+                            </dxo-legend>
+                            <dxo-argument-axis >
+                                <dxo-label overlappingBehavior="none">
+                                    <dxo-font
+                                        [size]="etiqueta_leyenda"
+                                        [color]="color_letras"
+                                        weight="350">
+                                    </dxo-font>
+                                </dxo-label>
+                                <dxo-title [text]="texto_x">
+                                    <dxo-font
+                                        [size]="texto_x_fuente"
+                                        [color]="color_letras"
+                                        weight="350">
+                                    </dxo-font>
+                                </dxo-title>
+                            </dxo-argument-axis>
+                            <dxi-value-axis valueType="numeric">
+                                <dxo-label>
+                                    <dxo-font
+                                        [size]="etiqueta_fuente"
+                                        [color]="color_letras"
+                                        weight="400">
+                                    </dxo-font>
+                                </dxo-label>
+                                <dxo-title [text]="texto_y">
+                                    <dxo-font
+                                        [size]="texto_y_fuente"
+                                        [color]="color_letras"
+                                        weight="450">
+                                    </dxo-font>
+                                </dxo-title>
+                            </dxi-value-axis>
+                    
+                            <dxo-export [enabled]="true" [printingEnabled]="false"></dxo-export>
+                            
+                            <dxo-zoom-and-pan argumentAxis="both"></dxo-zoom-and-pan>
+                            <dxo-scroll-bar  [visible]="true"></dxo-scroll-bar>
+                        </dx-chart>
+                    </div>        
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="subir" *ngIf="verIrArriba" @arriba>
+        <button class="subirBoton" [style.color]="colorLetrasTitulo" [style.backgroundColor]="colorBarraSuperior" mat-flat-button color (click)="irArriba()" [matTooltip]="irArribaTT" matTooltipClass = "toolTip">
+            <mat-icon class="subirIcono">first_page</mat-icon>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,968 @@
+#todo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pantallaError
+{
+    padding: 5px;
+    flex: 1;
+    align-self: center;
+    justify-self: center;
+    word-break: break-all;
+    font-size: 17px;
+    font-weight: 450;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-width: 0.5px;
+    border-style: solid;
+    padding: 2px;
+    max-width: 60%;
+    margin-top: 10%;
+    animation: entrarArriba 0.5s ease-in-out 0s;    
+}
+
+.cabeceraMensaje
+{
+    height: 30px;
+    font-size: 18px;
+    font-weight: 550;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+.icono
+{
+
+    font-size: 96px !important;
+    margin-left: -80px;
+}
+
+.iconoCaja
+{
+    margin-top: 2px;
+    padding: 4px;
+    width: 90px !important;
+    min-width: 90px !important;
+}
+
+.imagen
+{
+    font-size: 64px !important;
+    margin-left: -65px;
+}
+
+
+.mensaje
+{
+    padding: 4px;
+}
+
+.catalogos
+{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    overflow: hidden;
+}
+
+.cabecera
+{
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 22px;
+    min-height: 50px !important;
+    border-width: 0.5px;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start !important;
+    align-content: center;
+}
+
+.detalle
+{
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    flex: 1;
+    align-content: flex-start;
+    align-items: stretch;
+    
+}
+
+.contenedorScroll
+{
+    overflow-y: auto;
+    padding: 10px;
+    margin-top: 5px !important;
+    font-size: 22px;
+    border-width: 0.5px;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    flex: 1;
+    align-content: flex-start;
+    align-items: stretch;
+}
+
+
+.registroBotones, .registroBotonesCol
+{
+    border-width: 0.5px;
+    border-style: solid;
+    border-radius: 0px !important;
+    max-height: 35px !important;
+    height: 35px !important;
+    display: flex;
+    flex-direction: row;    
+}
+
+.registroBotonesCol
+{
+    max-height: 25px !important;
+    height: 25px !important;
+}
+
+.registroBotones:hover:enabled
+{
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2) !important;
+}
+
+.registroCabecera
+{
+    max-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.registroCabeceraTexto
+{
+    font-size: 17px;
+    font-weight: 550;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.registro
+{
+    align-self: stretch;
+    padding: 5px;
+    margin: 6px;
+    min-width: 320px !important;
+    max-width: 320px !important;
+    border-width: 0.5px;
+    border-style: solid;
+    border-radius: 0px !important;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    flex: 1;
+    font-size: 17px;
+   
+    position: relative;
+    
+}
+
+.secuencia
+{
+    align-self: flex-start;
+    position: absolute;
+    margin-top: -31px;
+    margin-left: 3px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    height: 20px !important;
+    min-width: 22px !important;
+}
+
+.numeroSecuencia
+{
+    margin-top: -8px !important;
+    font-size: 15px !important;
+    font-weight: 550;
+    
+}
+
+.registro:hover
+{
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2) !important;
+
+}
+
+@keyframes entrarArriba {
+    0%
+    {
+        -webkit-transform: translateY(10);
+        transform: translateY(10px);
+        opacity: 0.3;
+    }
+}
+
+@keyframes entrarIzquierda {
+    0%
+    {
+        transform: scaleX(0.3);
+        opacity: 0.3;
+    }
+}
+
+.indiceTexto
+{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 16px !important;
+    margin-left: 2px;
+    margin-top: -4px !important;
+}
+
+.indiceBoton
+{
+    margin-left: -7px !important;
+}
+
+.registroSub
+{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+}
+
+.registroAdicional
+{
+    align-self: stretch;
+    text-align: left;
+    padding: 2px;
+    padding-left: 5px;
+    line-height: 18px;
+    flex: 3;
+}
+
+.registroValor, .registroValorCentro
+{
+    width: 100%;
+    font-weight: 550;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.registroValorCentro
+{
+    text-align: center !important;
+}
+
+.registroValorDetalle
+{
+    width: 100%;
+    font-weight: 450;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+}
+
+
+.registroValorVarios
+{
+    width: 100%;
+    font-weight: 550;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.titulo
+{
+    font-size: 12px;
+    text-align: left;
+}
+
+.tituloCentro
+{
+    font-size: 12px;
+    text-align: center;
+}
+
+.botonera
+{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    justify-content: space-between;
+
+}
+
+.registroBotones
+{
+    flex: 1;
+    font-size: 17px !important;
+    margin-right: 3px;
+    max-width: 155px !important;
+    height: 40px !important;
+    max-height: 40px !important;
+}
+
+.registroIcono
+{
+    font-size: 16px !important;
+    width: 16px;
+    margin-left: -10px;
+    margin-top: 5px;
+    
+}
+
+.indice, .indiceUltimo, .indiceDivision, .indiceMedio, .indiceMedioSeparador, 
+.indiceDivisionCorto, .indiceImagen
+{
+    border-width: 0.5px;
+    border-style: solid;
+    border-radius: 0px !important;
+    max-height: 43px !important;
+    height: 43px !important;
+    display: flex;
+    flex-direction: row;
+    font-size: 17px !important;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 3px !important;
+}
+
+.miniBotones
+{
+    font-size: 14px !important;
+    max-height: 40px !important;
+    height: 40px !important;
+    border-width: 0.5px;
+    border-style: solid;
+    border-radius: 0px !important;
+    cursor: pointer;
+    margin: 5px;
+    
+}
+
+.indiceUltimo
+{
+    min-width: 40px !important;
+    width: 40px !important;
+}
+
+.indiceImagen
+{
+    font-size: 17px !important;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    min-width: 50px !important;
+}
+
+.indiceMedio
+{
+    min-width: 40px !important;
+    width: 40px !important;
+    margin-right: 3px !important;
+}
+
+.indiceMedioSeparador
+{
+    min-width: 40px !important;
+    width: 40px !important;
+    margin-right: 3px !important;
+    margin-left: 10px !important;
+}
+
+.indiceDivision
+{
+    margin-left: auto;
+    
+    margin-right: 3px !important;
+}
+
+.indiceDivisionCorto
+{
+    margin-left: auto;
+    min-width: 40px !important;
+    width: 40px !important;
+    margin-right: 3px !important;
+}
+
+.indiceImagen:hover:enabled, .indiceUltimo:hover:enabled, .indice:hover:enabled, 
+.indiceDivision:hover:enabled, .indiceMedio:hover:enabled, .indiceMedioSeparador:hover:enabled, 
+.indiceDivisionCorto:hover:enabled, .miniBotones:hover:enabled
+{
+    box-shadow: 0 0px 2px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.indiceImagen:hover:disabled, .indiceUltimo:hover:disabled, .indice:hover:disabled, 
+.indiceDivision:hover:disabled, .indiceMedio:hover:disabled, 
+.indiceDivisionCorto:hover:disabled
+{
+    cursor: url("/assets/icons/cur_cancelar.png"), not-allowed;
+    
+}
+
+.botonMaestro
+{
+    flex: 1;
+    padding: 0px;
+    margin: 0px;
+
+}
+
+
+.registroImagenPropia
+{
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto !important;
+    padding: 5px !important;
+}
+
+.plantilla
+{
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-self: flex-start;
+    flex-wrap: wrap;
+    flex: 1;
+    font-size: 17px;
+}
+
+.buscadorCaja
+{
+    margin-top: -10px !important;
+    margin-left: 10px !important;
+
+}
+
+.buscador
+{
+    margin-top: -10px !important;
+    font-size: 16px !important;
+    min-height: 30px;
+    height: 30px;
+    width: 140px !important;
+}
+
+::ng-deep .mat-form-field-underline {
+    background-color: green !important;
+}
+
+.buscadorCaja
+{
+    animation: entrarIzquierda 0.2s ease-in-out 0s;    
+}
+
+.subir {
+    flex: 1;
+    text-align: right;
+    align-items: right;
+    align-content: center;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 10px !important;
+    margin-right: 25px !important;
+  }
+
+.subirBoton {
+    margin-right: 10px;
+    margin-top: -20px;
+    border-radius: 48px;
+    width: 48px !important;
+    min-width: 48px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+}
+
+.subirIcono {
+    font-size: 36px;
+    align-content: center;
+    margin-top: -16px !important;
+    margin-left: 2px !important;
+    transform: rotate(90deg);
+}
+
+.registroGeneral
+{
+    font-size: 19px;
+    align-self: stretch;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1;
+    
+}
+
+.registroTitulo
+{
+    font-size: 15px;
+    text-align: left;
+    padding: 2px;
+    font-weight: 550;
+}
+
+.registroTituloArriba
+{
+    font-size: 15px;
+    text-align: left;
+    padding: 2px;
+    font-weight: 550;
+    margin-bottom: 2px;
+}
+
+.registroTituloDos
+{
+    font-size: 15px;
+    text-align: left;
+    padding: 2px;
+    font-weight: 550;
+    margin-top: 10px;
+}
+
+.registroCampo, .registroCampoNumeros 
+{
+    text-align: left;
+    padding: 2px;
+    padding-left: 5px;
+    line-height: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 400px !important;
+    margin: 5px !important;
+}
+
+.registroCampoNumeros 
+{
+    min-width: 400px !important;
+}
+
+.pista {
+    font-size: 14px  !important;
+    margin-top: 3px;
+}
+
+.gris
+{
+    color: rgba(51, 51, 51, 0.7) !important;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 2px !important;
+}
+
+::ng-deep .mat-form-field-underline {
+    background-color: rgb(51, 51, 51) !important;
+}
+
+::ng-deep .mat-form-field-ripple {
+    background-color: rgb(51, 51, 51) !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    color: rgb(51, 51, 51) !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: rgb(51, 51, 51) !important;
+}
+
+.texto
+{
+    min-height: 80px;
+    width: 100%;
+    margin-top: -10px;
+    font-size: 16px !important;
+}
+
+.textoAlto
+{
+    flex: 1;
+    min-height: 70px;
+    font-size: 16px !important;
+    height: 70px !important;
+    margin-top: 5px;
+    margin-right: 2px;
+    min-width: 100px;
+}
+
+.textoArea
+{
+    min-height: 80px;
+    width: 100%;
+    margin-top: -10px;
+}
+
+.textoArea
+{
+    min-height: 80px;
+    height: 110px;
+    width: 100%;
+    margin-top: -10px;
+}
+
+.alertaMensaje
+{
+    font-weight: 550;
+    font-size: 17px;
+    margin-top: 2px;
+}
+
+
+.ayudaCampo
+{
+    font-size: 15px;
+    margin-top: 2px;
+}
+
+.alertaCaja
+{
+    padding: 2px;
+    padding-left: 5px;
+    flex: 1;
+    margin-left: 10px;
+    margin-right: 5px;
+    align-items: flex-start;
+    display: flex;
+}
+
+.registroCaja
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.alertaIcono
+{
+    font-size: 21px;
+}
+
+.registroconImagen
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.registroValorconImagen
+{
+    width: 100%;
+    font-weight: 550;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex: 3;
+    margin-right: 5px;
+}
+
+.registroImagen, .registroImagenDetalle
+{
+    flex: 1;
+    font-size: 64px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    width: 64px !important;
+    max-height: 76px;
+    padding: 5px !important;
+}
+
+.registroImagenDetalle
+{
+    height: 120px !important;
+    width: 120px !important;
+    margin: 5px !important;
+}
+
+.registroInfo
+{
+    text-align: left;
+    padding: 2px;
+    padding-left: 5px;
+    line-height: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 400px !important;
+    margin: 5px !important;
+}
+
+.cajaBotones
+{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    width: 100%;
+}
+
+.cajaEstatus
+  {
+    text-align: left;
+    padding: 2px;
+    padding-left: 5px;
+    line-height: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 400px !important;
+    margin: 5px !important;
+  }
+
+  .cajaEstatusLarga
+  {
+    text-align: left;
+    padding: 2px;
+    padding-left: 5px;
+    line-height: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 400px !important;
+    margin: 5px !important;
+  }
+
+  .estatus
+  {
+    margin-left: 5px;
+    margin-top: 5px;
+    font-size: 16px !important;
+  }
+
+.registroAdicionalCajas
+{
+    display: flex;
+    flex-direction: row;
+    align-self: stretch;
+    text-align: center;
+    line-height: 18px;
+    
+}
+
+.registroAdicionalCaja
+{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+
+.tablaItems
+{
+    padding: 2px;
+    max-height: 200px !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.cabeceraTabla
+{
+    width: 100%;
+    font-weight: 550;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    text-align: center;
+    align-items: left;
+}
+
+.col01
+{
+    flex: 1;
+    padding: 3px;
+    margin: 1px;
+    text-align: right;
+}
+
+.col02
+{
+    flex: 3;
+    padding: 3px;
+    margin: 1px;
+    text-align: left;
+}
+
+.col03
+{
+    flex: 7;
+    padding: 3px;
+    margin: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.col04
+{
+    flex: 2;
+    padding: 3px;
+    margin: 1px;
+    text-align: left;
+}
+
+.col11
+{
+    flex: 1;
+    padding: 3px;
+    margin: 1px;
+    text-align: right;
+}
+
+.col12
+{
+    flex: 6;
+    padding: 3px;
+    margin: 1px;
+    text-align: left;
+}
+
+.col13
+{
+    flex: 2;
+    padding: 3px;
+    margin: 1px;
+    text-align: left;
+}
+
+.col21
+{
+    flex: 4;
+    padding: 3px;
+    margin: 1px;
+    text-align: left;
+}
+
+.col22
+{
+    flex: 1;
+    padding: 3px;
+    margin: 1px;
+    text-align: left;
+}
+
+.detalleTabla
+{
+    width: 100%;
+    font-weight: 450;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 2px;
+    text-align: center;
+    align-items: left;
+    max-height: 25px !important; 
+    border-bottom-style: solid;
+    border-bottom-width: 0.5px;
+}
+
+.detalleTabla:nth-child(2n+1)
+{
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.detalleTabla:hover
+{
+    background-color: rgba(255, 255, 255, 0.25);
+    border-style: solid;
+    border-width: 0.5px;
+    margin-left: -0.5px;
+    margin-top: -0.5px;
+    cursor: pointer;
+}
+
+.cabeceraDetalle:hover
+{
+    background-color: rgba(255, 255, 255, 0.25);
+    border-style: solid;
+    border-width: 0.5px;
+    cursor: pointer;
+}
+
+.cabeceraDetalle
+{
+    width: 100%;
+    font-weight: 450;
+    font-size: 16px;
+    margin-top: 2px;
+    margin-top: 2px;
+    padding: 2px;
+    border-bottom-style: solid;
+    border-bottom-width: 0.5px;
+}
+
+.cdk-drag-preview 
+{
+    background-color: rgb(231, 231, 231) !important;
+    color: rgb(51, 51, 51) !important;
+}
+  
+  .cdk-drag-placeholder {
+    opacity: 0.25;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  
+  .detalle .cdk-drop-list-dragging .registro:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .col41
+{
+    flex: 5;
+    padding: 3px;
+    margin: 1px;
+    text-align: left;
+}
+
+.col42
+{
+    flex: 2;
+    padding: 3px;
+    margin: 1px;
+    text-align: right;
+}
+
+.col43
+{
+    flex: 2;
+    padding: 3px;
+    margin: 1px;
+    text-align: left;
+}

@@ -1,0 +1,390 @@
+
+<div id="todo" class="mat-typography">
+    <div class="pantallaError" [style.borderColor]="colorBorde" [style.color]="colorLetrasBox" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}" *ngIf="pantalla==1">
+        <div class="cabeceraMensaje" [style.backgroundColor]="colorFondoTarjeta" >{{ errorTitulo }}</div>
+        <div class="mensaje" [innerHTML]="errorMensaje"></div>
+    </div>
+    <div class="catalogos" [style.height.px]="altoPantalla" [style.width.px]="anchoPantalla" *ngIf="pantalla==2">
+        <div class="cabecera" [style.backgroundColor]="colorFondoCabecera" [ngStyle]="{'border': '1px solid' + colorSN}">
+            <span class="ayudaCampoTitulo" *ngIf="procesoSeleccionado.id==0">Identifique el proceso a trabajar</span>
+            <button class="indice" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="solicitarIdentificacion()" *ngIf="procesoSeleccionado.id!=0">
+                <i class="iconshock-iphone-business-target"></i>
+                <span class="indiceTexto">Identificar proceso (^F6)</span>
+            </button>
+            <button class="indice" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="resumen()" *ngIf="verRegistro == 3">
+                <i class="iconshock-iphone-business-target"></i>
+                <span class="indiceTexto">Vista resumen (^F2)</span>
+            </button>
+            <button class="indiceDivision" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="descargar()" [matTooltip] = "ayuda01" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="vista==99">
+                <i class="iconshock-materialblack-communications-inbox"></i>
+            </button>
+            <button class="indiceDivision" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="refrescar()" [matTooltip] = "ayuda01" matTooltipClass = "toolTip" matTooltipShowDelay = "100">
+                <i class="iconshock-materialblack-general-synchronize"></i>
+            </button>
+            <button class="indiceUltimo" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="buscar()" [matTooltip] = "ayuda02" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="permiteBuscar">
+                <i class="iconshock-materialblack-general-zoom"></i>
+            </button>
+            <div class="buscadorCaja" *ngIf="verBuscar" [ngStyle]="{'border': '0.5px solid' + colorBorde}">
+                <mat-form-field class="buscador" [style.color]="colorLetrasBox">
+                    <input #txtBuscar matInput class="buscar" type="text" [(ngModel)]="textoBuscar" (keydown.enter)="filtrar()" (keydown.escape)="escapar()">
+                    <button mat-button *ngIf="textoBuscar" matSuffix mat-icon-button aria-label="Clear" (click)="textoBuscar = ''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <button class="indiceDivisionCorto" [style.color]="(botonera[0] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[0] ? 'inherit' : colorFondoBoton)" mat-button (click)="nuevo()" [matTooltip] = "ayuda03" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[0]">
+                <i class="iconshock-materialblack-text-document"></i>
+            </button>
+            <button class="indiceMedio" [style.color]="(botonera[1] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[1] ? 'inherit' : colorFondoBoton)" mat-button (click)="validarGuardar()" [matTooltip] = "ayuda04" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[1]">
+                <i class="iconshock-materialblack-general-diskette"></i>
+            </button>
+        </div>
+
+        <div class="contenedorScroll" [style.color]="colorLetrasBox" [style.backgroundColor]="colorFondo" [ngStyle]="{'border': '1px solid' + colorSN}" cdkScrollable [style.overflowY]="verBarra">
+            <div class="identificar" @esquema (@esquema.done)="salidaEfecto($event)" *ngIf="verRegistro == 1">
+                <div class="listaBotones">
+                    <button class="indiceProcesoSeleccionado" mat-button (click)="detalleProceso(90)" [style.borderColor]="( procesoSeleccionado.lotesPorAlarmar + procesoSeleccionado.lotesAlarmados == 0 ? colorBorde : 'tomato' )" [style.boxShadow]="( procesoSeleccionado.lotesPorAlarmar + procesoSeleccionado.lotesAlarmados == 0 ? 'none' : '0px 0px 1px 2px tomato')">
+                        <div class="miBoton">
+                            <div class="registroCabeceraSeleccionado" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoTarjeta" ><span class="registroCabeceraTexto">{{ procesoSeleccionado.nombre }}</span></div>
+                            <div class="registroAdicionalCajasTpo">
+                                <div class="registroAdicionalCajaPegado" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.lotes | number }}</div>    
+                                    <div class="titulo">Lotes</div> 
+                                </div>
+                                <div class="registroAdicionalCajaSig" [ngClass]="{ detalleTabla1: procesoSeleccionado.lotesPorAlarmar > 0 }" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.lotesPorAlarmar | number }}</div>    
+                                    <div class="titulo">Por alarmar</div> 
+                                </div>
+                                <div class="registroAdicionalCajaSig" [ngClass]="{ detalleTabla2Caja: procesoSeleccionado.lotesAlarmados > 0 }" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.lotesAlarmados | number }}</div>    
+                                    <div class="titulo">Vencidos</div> 
+                                </div>
+                                <div class="registroAdicionalCajaSeleccionadoUltimo" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.items | number }}</div>    
+                                    <div class="titulo">Nros de parte</div> 
+                                </div>
+                            </div>
+                            <div class="registroAdicionalCajas">
+                                <div class="registroImagenSeleccionado" *ngIf="procesoSeleccionado.mostrarImagen == 'S' && verImagen"><img class="registroImagenPropiaSeleccionado" [ngStyle]="{'margin-top': '20x'}" [src]="procesoSeleccionado.imagen" (error)="imagenErrorDetalle()"></div>
+                                <div class="registroImagenSeleccionado" *ngIf="procesoSeleccionado.mostrarImagen == 'N' && verImagen"><i [class]="iconoGeneral" [ngStyle]="{'margin-top': '20px'}"></i></div>
+                                <div class="cajas">
+                                    <div class="registroAdicionalCajaSeleccionado" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorSeleccionado">{{ procesoSeleccionado.capacidad_stock }}</div>    
+                                        <div class="titulo">Capacidad en stock</div> 
+                                    </div>
+                                    <div class="registroAdicionalCajaSeleccionado" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorSeleccionado">{{ procesoSeleccionado.capacidad_stock_pct }}</div>    
+                                        <div class="titulo">Uso del stock</div> 
+                                    </div>      
+                                    <div class="registroAdicionalCajaSeleccionado" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorSeleccionado">{{ procesoSeleccionado.capacidad_proceso }}</div>    
+                                        <div class="titulo">Capacidad en proceso</div> 
+                                    </div>
+                                    <div class="registroAdicionalCajaSeleccionado" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorSeleccionado">{{ procesoSeleccionado.capacidad_proceso_pct }}</div>    
+                                        <div class="titulo">Uso del proceso</div> 
+                                    </div>  
+                                </div>
+                            </div>  
+                            
+                        </div>                  
+                    </button>
+
+                    <button class="indiceProcesoSeleccionado" mat-button (click)="detalleProceso(50)" [style.borderColor]="( procesoSeleccionado.lotesEPPorAlarmar + procesoSeleccionado.lotesEPAlarmados == 0 ? colorBorde : 'tomato' )" [style.boxShadow]="( procesoSeleccionado.lotesEPPorAlarmar + procesoSeleccionado.lotesEPAlarmados == 0 ? 'none' : '0px 0px 1px 2px tomato')">
+                        <div class="miBoton">
+                            <div class="registroCabeceraSeleccionado" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoTarjeta" ><span class="registroCabeceraTexto">MATERIAL EN PROCESO</span></div>
+                            <div class="registroAdicionalCajas">
+                                <div class="registroAdicionalCajaPegado" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.lotesEP | number }}</div>    
+                                    <div class="titulo">Lotes</div> 
+                                </div>
+                                <div class="registroAdicionalCajaSig" [ngClass]="{ detalleTabla1: procesoSeleccionado.lotesEPPorAlarmar > 0 }" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.lotesEPPorAlarmar | number }}</div>    
+                                    <div class="titulo">Por alarmar</div> 
+                                </div>
+                                <div class="registroAdicionalCajaSig" [ngClass]="{ detalleTabla2Caja: procesoSeleccionado.lotesEPAlarmados > 0 }" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.lotesEPAlarmados | number }}</div>    
+                                    <div class="titulo">Vencidos</div> 
+                                </div>
+                                <div class="registroAdicionalCajaSeleccionadoUltimo" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.itemsEP | number }}</div>    
+                                    <div class="titulo">Nros de parte</div> 
+                                </div>
+                            </div>  
+
+                            <div class="tablaLotes" [style.borderColor]="colorBorde" >
+                                <div class="ayudaCampo" *ngIf="enProceso.length==0">No hay lotes en proceso</div>
+                                <div class="cabeceraTabla" [style.backgroundColor]="colorFondoTarjeta" *ngIf="enProceso.length>0">
+                                    <div class="col01">Lote</div>
+                                    <div class="col02">Número de Parte</div>
+                                    <div class="col03">Desde</div>
+                                    <div class="col04">Restan</div>
+                                </div>
+                                <div class="tablaItems" *ngIf="enProceso.length>0" [ngStyle]="{'border': '1px solid' + colorSN}">    
+                                        <div class="detalleTabla" [ngClass]="{ detalleTabla1: enProcesoDet.alarmado == '1', detalleTabla2: enProcesoDet.alarmado == '2', detalleTabla4: enProcesoDet.prioridad != 100 && enProcesoDet.inspecciones > 0, detalleTabla3: enProcesoDet.prioridad != 100 }" *ngFor="let enProcesoDet of enProceso; let i = index" [style.borderColor]="colorBorde" >
+                                    
+                                        <div class="col01">{{enProcesoDet.numero }}</div>
+                                        <div class="col02">{{ enProcesoDet.parte }}</div>
+                                        <div class="col03">{{ enProcesoDet.fecha | date:'dd/MM/yy HH:mm:ss' }}</div>
+                                        <div class="col04">{{ enProcesoDet.tiempo }}</div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>                  
+                    </button>
+
+                    <button class="indiceProcesoSeleccionado" mat-button (click)="detalleProceso(20)" [style.borderColor]="( procesoSeleccionado.lotesESPorAlarmar + procesoSeleccionado.lotesESAlarmados == 0 ? colorBorde : 'tomato' )" [style.boxShadow]="( procesoSeleccionado.lotesESPorAlarmar + procesoSeleccionado.lotesESAlarmados == 0 ? 'none' : '0px 0px 1px 2px tomato')">
+                        <div class="miBoton">
+                            <div class="registroCabeceraSeleccionado" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoTarjeta" ><span class="registroCabeceraTexto">MATERIAL EN STOCK</span></div>
+                            <div class="registroAdicionalCajas">
+                                <div class="registroAdicionalCajaPegado" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.lotesES | number }}</div>    
+                                    <div class="titulo">Lotes</div> 
+                                </div>
+                                <div class="registroAdicionalCajaSig" [ngClass]="{ detalleTabla1: procesoSeleccionado.lotesESPorAlarmar > 0 }" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.lotesESPorAlarmar | number }}</div>    
+                                    <div class="titulo">Por alarmar</div> 
+                                </div>
+                                <div class="registroAdicionalCajaSig" [ngClass]="{ detalleTabla2Caja: procesoSeleccionado.lotesESAlarmados > 0 }" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.lotesESAlarmados | number }}</div>    
+                                    <div class="titulo">Vencidos</div> 
+                                </div>
+                                <div class="registroAdicionalCajaSeleccionadoUltimo" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.itemsES | number }}</div>    
+                                    <div class="titulo">Nros de parte</div> 
+                                </div>
+                            </div>  
+
+                            <div class="tablaLotes" [style.borderColor]="colorBorde" >
+                                <div class="ayudaCampo" *ngIf="enStock.length==0">No hay lotes en stock</div>
+                                <div class="cabeceraTabla" [style.backgroundColor]="colorFondoTarjeta" *ngIf="enStock.length>0">
+                                    <div class="col01">Lote</div>
+                                    <div class="col02">Número de Parte</div>
+                                    <div class="col03">Desde</div>
+                                    <div class="col04">Restan</div>
+                                </div>
+                                <div class="tablaItems" *ngIf="enStock.length>0" [ngStyle]="{'border': '1px solid' + colorSN}">    
+                                    <div class="detalleTabla" [ngClass]="{ detalleTabla1: enStockDet.alarmado == '1', detalleTabla2: enStockDet.alarmado == '2', detalleTabla4: enStockDet.prioridad != 100 && enStockDet.inspecciones > 0, detalleTabla3: enStockDet.prioridad != 100 }" *ngFor="let enStockDet of enStock; let i = index" [style.borderColor]="colorBorde" >
+                                        <div class="col01">{{enStockDet.numero }}</div>
+                                        <div class="col02">{{ enStockDet.parte }}</div>
+                                        <div class="col03">{{ enStockDet.fecha | date:'dd/MM/yy HH:mm:ss' }}</div>
+                                        <div class="col04">{{ enStockDet.tiempo }}</div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>                  
+                    </button>
+
+                    <button class="indiceProcesoSeleccionado" [style.borderColor]="colorBorde" mat-button (click)="detalleProceso(0)">
+                        <div class="miBoton">
+                            <div class="registroCabeceraSeleccionado" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.borderColor]="colorBorde"  [style.backgroundColor]="colorFondoTarjeta" ><span class="registroCabeceraTexto">MATERIAL EN ESPERA</span></div>
+                            <div class="registroAdicionalCajas">
+                                <div class="registroAdicionalCajaSeleccionado" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.lotesEE | number }}</div>    
+                                    <div class="titulo">Lotes</div> 
+                                </div>
+                                <div class="registroAdicionalCajaSeleccionadoDerecha" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorSeleccionado">{{ procesoSeleccionado.itemsEE | number }}</div>    
+                                    <div class="titulo">Nros de parte</div> 
+                                </div>
+                            </div>  
+
+                            <div class="tablaLotes" [style.borderColor]="colorBorde" >
+                                <div class="ayudaCampo" *ngIf="enEspera.length==0">No hay lotes en espera</div>
+                                <div class="cabeceraTabla" [style.backgroundColor]="colorFondoTarjeta" *ngIf="enEspera.length>0">
+                                    <div class="col01">Lote</div>
+                                    <div class="col02">Número de Parte</div>
+                                    <div class="col03">Desde</div>
+                                    <div class="col04">Tiempo</div>
+                                </div>
+                                <div class="tablaItems" *ngIf="enEspera.length>0" [ngStyle]="{'border': '1px solid' + colorSN}">    
+                                    <div class="detalleTabla" [ngClass]="{ detalleTabla4: enEsperaDet.prioridad != 100 && enEsperaDet.inspecciones > 0, detalleTabla3: enEsperaDet.prioridad != 100 }" *ngFor="let enEsperaDet of enEspera; let i = index" [style.borderColor]="colorBorde">
+
+                                        <div class="col01">{{ enEsperaDet.numero }}</div>
+                                        <div class="col02">{{ enEsperaDet.parte }}</div>
+                                        <div class="col03">{{ enEsperaDet.fecha | date:'dd/MM/yy HH:mm:ss' }}</div>
+                                        <div class="col04">{{ enEsperaDet.tiempo }}</div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>                  
+                    </button>
+                </div>
+            </div>
+
+            <div class="detalle" @esquema (@esquema.done)="salidaEfecto($event)" *ngIf="verRegistro == 3">
+                <div class="listaBotones">
+                    <button class="indiceProcesoLote" [style.borderColor]="colorBorde" mat-button *ngFor="let detalle of detalles; let i = index" (click)="nada(proceso)" [style.borderColor]="( detalle.alarmado != '0' ? 'tomato' : (detalle.prioridad ==100 ? colorBorde : (detalle.inspecciones>0 ? 'lightseagreen' : 'dodgerblue')))" [style.boxShadow]="( detalle.alarmado != '0' ? '0px 0px 2px 2px tomato' : (detalle.prioridad ==100 ? none : (detalle.inspecciones >0 ? '0px 0px 2px 2px lightseagreen' : '0px 0px 2px 2px dodgerblue')))">
+                        <div class="miBoton">
+                            <div class="registroCabecera" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoTarjeta" >
+                                <span class="registroCabeceraTexto">LOTE: {{ detalle.numero }}</span>
+                            </div>
+                            <div class="registroAdicionalCajas">
+                                <div class="registroImagenParte" *ngIf="detalle.mostrarImagen == 'S'"><img class="registroImagenPropia" [src]="detalle.imagen" (error)="imagenErrorParte(i)"></div>
+                                <div class="registroImagenParte" *ngIf="detalle.mostrarImagen == 'N'"><i [class]="iconoParte"></i></div>
+                                <div class="material">
+                                    <div class="doble">
+                                        <div class="registroAdicionalCaja" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                            <div class="registroValor">{{ detalle.referencia }}</div>    
+                                            <div class="titulo">Número de parte</div> 
+                                        </div>
+                                        <div class="registroAdicionalCaja" [ngClass]="{ prioridad2: detalle.prioridad != 100 && detalle.inspecciones>0, prioridad: detalle.prioridad != 100 && detalle.inspecciones==0}" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                            <div class="registroValor">{{ (detalle.prioridad == 100 ? 'N/A' : detalle.prioridad) }}</div>    
+                                            <div class="titulo">Prioridad</div> 
+                                        </div>
+                                    </div>
+                                    <div class="registroAdicionalCajaDos" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValor">{{ detalle.nombre }}</div>    
+                                        <div class="titulo">Descripción del artículo</div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cajaAdicional">
+                                <div class="doble">
+                                    <div class="registroAdicionalParteI" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroParte">{{ detalle.fecha | date:'dd-MM-yyyy HH:mm:ss' }}</div>    
+                                        <div class="tituloParte">Fecha de entrada</div> 
+                                    </div>
+                                    <div class="registroAdicionalParte" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroParte">{{ detalle.estado }}</div>    
+                                        <div class="tituloParte">Estado del lote</div> 
+                                    </div>
+                                </div>
+                                <div class="doble">
+                                    <div class="registroAdicionalParteI" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroParte">{{ ( detalle.estado == 'En Espera' || !detalle.hasta ? 'INDETERMINADO' : detalle.hasta | date:'dd-MM-yyyy HH:mm:ss' ) }}</div>    
+                                        <div class="tituloParte">Fecha estimada de salida</div> 
+                                    </div>
+                                    <div class="registroAdicionalParte" [ngClass]="{ detalleTabla2: detalle.alarmado == '2', detalleTabla1: detalle.alarmado == '1' }" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroParte">{{ detalle.tiempo }}</div>    
+                                        <div class="tituloParte">{{ detalle.titulo }} </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                  
+                    </button>
+                </div>
+            </div>
+
+            <div class="identificar" @esquema (@esquema.done)="salidaEfecto($event)" *ngIf="verRegistro == 2">
+                <div class="listaBotones">
+                    <button class="indiceProceso" [style.borderColor]="(proceso.espera > 0 ? 'tomato' : colorBorde)" [style.boxShadow]="(proceso.espera > 0 ? '0px 0px 1px 2px tomato' : 'none')" mat-button *ngFor="let proceso of procesos; let i = index" (click)="identificar(proceso)">
+                        <div class="miBoton">
+                            <div class="registroCabecera" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.borderColor]="colorFondoCabecera" [style.backgroundColor]="colorFondoTarjeta"><span class="registroCabeceraTexto">{{ proceso.nombre }}</span></div>
+                            <div class="registroAdicionalCajas">
+                                <div class="registroAdicionalCaja" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorCentro">{{ proceso.totall  }}</div>    
+                                    <div class="tituloCentro">Total lotes</div>    
+                                </div>
+                                <div class="registroAdicionalCaja" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorCentro">{{ proceso.proceso }}</div>    
+                                    <div class="tituloCentro">En proceso</div>    
+                                </div>
+                                <div class="registroAdicionalCaja" [ngClass]="{ pctBajo: proceso.espera > 0 }" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorCentro">{{ proceso.espera }}</div>    
+                                    <div class="tituloCentro">En espera</div>    
+                                </div>
+                                <div class="registroAdicionalCaja" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                    <div class="registroValorCentro">{{ proceso.stock }}</div>    
+                                    <div class="tituloCentro">En stock</div>    
+                                </div>
+                            </div>
+                            <div class="registroAdicionalCajas">
+                                <div class="registroImagen" *ngIf="proceso.mostrarImagen == 'S'"><img class="registroImagenPropia" [ngStyle]="{'margin-top': '-5px'}" [src]="proceso.imagen" (error)="imagenError(i)"></div>
+                                <div class="registroImagen" *ngIf="proceso.mostrarImagen == 'N'"><i [class]="iconoGeneral"></i></div>
+                                <div class="dobleCaja">
+                                    <div class="registroAdicionalCaja" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorCentro">{{ proceso.stock + ' de ' + proceso.capacidad_stock + ' (' + proceso.pctstock + '%)' }}</div>    
+                                        <div class="tituloCentro">Actual en Stock</div>    
+                                    </div>
+                                    <div class="registroAdicionalCaja" [style.backgroundColor]="colorFondoTarjeta" [ngStyle]="{'border': '0.5px solid' + colorSN}">
+                                        <div class="registroValorCentro">{{ proceso.proceso + ' de ' + proceso.cap_proceso + ' (' + proceso.pctproceso + '%)' }}</div>    
+                                        <div class="tituloCentro">Actual en proceso</div>    
+                                    </div>
+                                </div>
+                            </div>      
+                        </div>                  
+                    </button>
+                </div>
+            </div>
+            <div class="plantilla" @esquema (@esquema.done)="salidaEfecto($event)" [style.color]="colorLetrasBox" [style.backgroundColor]="colorFondo" *ngIf="verRegistro==2">
+                <div class="registroCaja">
+                </div>
+            </div>
+            <div class="subir" *ngIf="verIrArriba" @arriba>
+                <button class="subirBoton" [style.color]="colorLetrasTitulo" [style.backgroundColor]="colorBarraSuperior" mat-flat-button color (click)="irArriba()" [matTooltip]="irArribaTT" matTooltipClass = "toolTip">
+                    <mat-icon class="subirIcono">first_page</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="marcoProceso" *ngIf="verEspera">
+        
+        <div class="barraProceso" [style.borderColor]="colorBorde"*ngIf="conLote==1">
+            <div class="indiceProcesoLote2">
+                <div class="registroAdicionalCaja" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.backgroundColor]="colorFondoTarjeta" [style.borderColor]="colorBorde">
+                    <span class="registroValorEscaneoTit">{{ detLote.titulo }}</span>
+                </div>
+                <div class="registroAdicionalCajasDet">
+                    <div class="registroImagenParteDet" *ngIf="detLote.mostrarImagen == 'S'" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.borderColor]="colorBorde"><img class="registroImagenPropia" [src]="detLote.imagen" (error)="imagenErrorLote()"></div>
+                    <div class="registroImagenParteDet" *ngIf="detLote.mostrarImagen == 'N'" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.borderColor]="colorBorde"><i [class]="iconoParte" [ngStyle]="{'margin': 'auto'}"></i></div>
+                    <div class="dobleDatos" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.backgroundColor]="colorFondoTarjeta" [style.borderColor]="colorBorde">
+                        <div class="registroAdicionalCaja">
+                            <div class="registroValorEscaneo">{{ detLote.producto }}</div>    
+                            <div class="tituloEscaneo">Descripción del artículo</div> 
+                        </div>
+                        <div class="materialDet">
+                            <div class="registroAdicionalCajaDet2" >
+                                <div class="registroValorEscaneo">{{ detLote.numero }}</div>    
+                                <div class="tituloEscaneo">Número de lote</div> 
+                            </div>
+                            <div class="registroAdicionalCaja">
+                                <div class="registroValorEscaneo">{{ detLote.refproducto }}</div>    
+                                <div class="tituloEscaneo">Referencia</div> 
+                            </div>
+                        </div>
+                        <div class="materialDet">
+                            <div class="registroAdicionalCajaDet2" >
+                                <div class="registroValorEscaneo">{{ detLote.fecha | date:'dd/MM/yyyy HH:mm' }}</div>    
+                                <div class="tituloEscaneo">Fecha de entrada</div> 
+                            </div>
+                            <div class="registroAdicionalCaja">
+                                <div class="registroValorEscaneo">{{ detLote.estadoLote }}</div>    
+                                <div class="tituloEscaneo">Estado del lote</div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dobleDet">
+                    <div class="registroCabeceraPie" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.backgroundColor]="colorFondoTarjeta" [style.borderColor]="colorBorde">
+                        <span class="registroCabeceraTextoPie">{{ detLote.subTitulo }}</span>
+                    </div>
+                    <div class="registroCabeceraAlarmado" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.borderColor]="colorBorde">
+                            <i class="iconshock-materialblack-general-clock"></i>
+                        <span class="registroCabeceraTextoPie2">{{ detLote.tiempo }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="barraProceso2" [style.borderColor]="colorBorde" [style.boxShadow]="'0px 0px 1px 2px tomato'" *ngIf="conLote==2">
+            <div class="registroAdicionalCaja" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.backgroundColor]="colorFondoTarjeta" [style.borderColor]="colorBorde">
+                <span class="registroValorEscaneoTit">{{ detLote.titulo }}</span>
+            </div>
+            <div class="registroAdicionalCajaDet" [ngStyle]="{'border': '0.5px solid' + colorSN}" *ngIf="detLote.producto">
+                <div class="registroValorEscaneo">{{ detLote.producto }}</div>    
+                <div class="tituloEscaneo">{{ detLote.literal }}</div> 
+            </div>
+            <div class="dobleDet">
+                <div class="registroCabeceraPie" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.backgroundColor]="colorFondoTarjeta" [style.borderColor]="colorBorde">
+                    <span class="registroCabeceraTextoPie">{{ detLote.subTitulo }}</span>
+                </div>
+                <div class="registroCabeceraAlarmado" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.borderColor]="colorBorde">
+                    <i class="iconshock-materialblack-general-clock"></i>
+                    <span class="registroCabeceraTextoPie2">{{ detLote.tiempo }}</span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div> 

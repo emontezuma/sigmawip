@@ -1,0 +1,217 @@
+@font-face {
+  font-family: 'materialblack_video_production';
+  src: url('../font/materialblack_video_production.eot?74128886');
+  src: url('../font/materialblack_video_production.eot?74128886#iefix') format('embedded-opentype'),
+       url('../font/materialblack_video_production.woff2?74128886') format('woff2'),
+       url('../font/materialblack_video_production.woff?74128886') format('woff'),
+       url('../font/materialblack_video_production.ttf?74128886') format('truetype'),
+       url('../font/materialblack_video_production.svg?74128886#materialblack_video_production') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'materialblack_video_production';
+    src: url('../font/materialblack_video_production.svg?74128886#materialblack_video_production') format('svg');
+  }
+}
+*/
+ 
+ [class^="iconshock-materialblack-video-production-"]:before, [class*=" iconshock-materialblack-video-production-"]:before {
+  font-family: "materialblack_video_production";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+}
+ 
+.iconshock-materialblack-video-production-3d:before { content: '\e800'; } /* '' */
+.iconshock-materialblack-video-production-3d-glasses:before { content: '\e801'; } /* '' */
+.iconshock-materialblack-video-production-alpha:before { content: '\e802'; } /* '' */
+.iconshock-materialblack-video-production-analog-media:before { content: '\e803'; } /* '' */
+.iconshock-materialblack-video-production-animation-track:before { content: '\e804'; } /* '' */
+.iconshock-materialblack-video-production-aspect-ratio:before { content: '\e805'; } /* '' */
+.iconshock-materialblack-video-production-aspect-ratio-4-3:before { content: '\e806'; } /* '' */
+.iconshock-materialblack-video-production-aspect-ratio-16-9:before { content: '\e807'; } /* '' */
+.iconshock-materialblack-video-production-aspect-ratio-21-9:before { content: '\e808'; } /* '' */
+.iconshock-materialblack-video-production-aspect-ratio-wide:before { content: '\e809'; } /* '' */
+.iconshock-materialblack-video-production-audio-filter-band:before { content: '\e80a'; } /* '' */
+.iconshock-materialblack-video-production-audio-filter-band-out:before { content: '\e80b'; } /* '' */
+.iconshock-materialblack-video-production-audio-filter-high-pass:before { content: '\e80c'; } /* '' */
+.iconshock-materialblack-video-production-audio-filter-low-pass:before { content: '\e80d'; } /* '' */
+.iconshock-materialblack-video-production-audio-level:before { content: '\e80e'; } /* '' */
+.iconshock-materialblack-video-production-audio-level-low:before { content: '\e80f'; } /* '' */
+.iconshock-materialblack-video-production-audio-level-medium:before { content: '\e810'; } /* '' */
+.iconshock-materialblack-video-production-audio-wave:before { content: '\e811'; } /* '' */
+.iconshock-materialblack-video-production-batch-convert:before { content: '\e812'; } /* '' */
+.iconshock-materialblack-video-production-battery-level0:before { content: '\e813'; } /* '' */
+.iconshock-materialblack-video-production-battery-level1:before { content: '\e814'; } /* '' */
+.iconshock-materialblack-video-production-battery-level2:before { content: '\e815'; } /* '' */
+.iconshock-materialblack-video-production-battery-level3:before { content: '\e816'; } /* '' */
+.iconshock-materialblack-video-production-battery-level4:before { content: '\e817'; } /* '' */
+.iconshock-materialblack-video-production-battery-level5:before { content: '\e818'; } /* '' */
+.iconshock-materialblack-video-production-betacam:before { content: '\e819'; } /* '' */
+.iconshock-materialblack-video-production-black-and-white:before { content: '\e81a'; } /* '' */
+.iconshock-materialblack-video-production-blur:before { content: '\e81b'; } /* '' */
+.iconshock-materialblack-video-production-brightness:before { content: '\e81c'; } /* '' */
+.iconshock-materialblack-video-production-broadcast-countdown:before { content: '\e81d'; } /* '' */
+.iconshock-materialblack-video-production-camcoder:before { content: '\e81e'; } /* '' */
+.iconshock-materialblack-video-production-camcoder2:before { content: '\e81f'; } /* '' */
+.iconshock-materialblack-video-production-camera-monitor:before { content: '\e820'; } /* '' */
+.iconshock-materialblack-video-production-chroma-key:before { content: '\e821'; } /* '' */
+.iconshock-materialblack-video-production-chrominance:before { content: '\e822'; } /* '' */
+.iconshock-materialblack-video-production-clapperboard:before { content: '\e823'; } /* '' */
+.iconshock-materialblack-video-production-clip-mode:before { content: '\e824'; } /* '' */
+.iconshock-materialblack-video-production-closed-caption:before { content: '\e825'; } /* '' */
+.iconshock-materialblack-video-production-codec:before { content: '\e826'; } /* '' */
+.iconshock-materialblack-video-production-color-balance:before { content: '\e827'; } /* '' */
+.iconshock-materialblack-video-production-color-balance2:before { content: '\e828'; } /* '' */
+.iconshock-materialblack-video-production-color-correction:before { content: '\e829'; } /* '' */
+.iconshock-materialblack-video-production-component-video:before { content: '\e82a'; } /* '' */
+.iconshock-materialblack-video-production-composite-video:before { content: '\e82b'; } /* '' */
+.iconshock-materialblack-video-production-contrast:before { content: '\e82c'; } /* '' */
+.iconshock-materialblack-video-production-converter:before { content: '\e82d'; } /* '' */
+.iconshock-materialblack-video-production-credits:before { content: '\e82e'; } /* '' */
+.iconshock-materialblack-video-production-curves:before { content: '\e82f'; } /* '' */
+.iconshock-materialblack-video-production-cut-film:before { content: '\e830'; } /* '' */
+.iconshock-materialblack-video-production-deinterlance:before { content: '\e831'; } /* '' */
+.iconshock-materialblack-video-production-digital-projector:before { content: '\e832'; } /* '' */
+.iconshock-materialblack-video-production-directional-blur:before { content: '\e833'; } /* '' */
+.iconshock-materialblack-video-production-divx:before { content: '\e834'; } /* '' */
+.iconshock-materialblack-video-production-duplicate-clip:before { content: '\e835'; } /* '' */
+.iconshock-materialblack-video-production-dv-recording:before { content: '\e836'; } /* '' */
+.iconshock-materialblack-video-production-dvd-burn-disk:before { content: '\e837'; } /* '' */
+.iconshock-materialblack-video-production-effects:before { content: '\e838'; } /* '' */
+.iconshock-materialblack-video-production-equalizer:before { content: '\e839'; } /* '' */
+.iconshock-materialblack-video-production-fade-in:before { content: '\e83a'; } /* '' */
+.iconshock-materialblack-video-production-fade-out:before { content: '\e83b'; } /* '' */
+.iconshock-materialblack-video-production-fast-foward:before { content: '\e83c'; } /* '' */
+.iconshock-materialblack-video-production-file-format-asf:before { content: '\e83d'; } /* '' */
+.iconshock-materialblack-video-production-file-format-avi:before { content: '\e83e'; } /* '' */
+.iconshock-materialblack-video-production-file-format-flv:before { content: '\e83f'; } /* '' */
+.iconshock-materialblack-video-production-file-format-flv2:before { content: '\e840'; } /* '' */
+.iconshock-materialblack-video-production-file-format-mov:before { content: '\e841'; } /* '' */
+.iconshock-materialblack-video-production-file-format-mp4:before { content: '\e842'; } /* '' */
+.iconshock-materialblack-video-production-file-format-mpeg:before { content: '\e843'; } /* '' */
+.iconshock-materialblack-video-production-file-format-mpeg1:before { content: '\e844'; } /* '' */
+.iconshock-materialblack-video-production-file-format-mpeg2:before { content: '\e845'; } /* '' */
+.iconshock-materialblack-video-production-file-format-mpeg3:before { content: '\e846'; } /* '' */
+.iconshock-materialblack-video-production-file-format-mpeg4:before { content: '\e847'; } /* '' */
+.iconshock-materialblack-video-production-file-format-ogg:before { content: '\e848'; } /* '' */
+.iconshock-materialblack-video-production-file-format-pdf:before { content: '\e849'; } /* '' */
+.iconshock-materialblack-video-production-file-format-ram:before { content: '\e84a'; } /* '' */
+.iconshock-materialblack-video-production-file-format-svcd:before { content: '\e84b'; } /* '' */
+.iconshock-materialblack-video-production-file-format-swf:before { content: '\e84c'; } /* '' */
+.iconshock-materialblack-video-production-file-format-vcd:before { content: '\e84d'; } /* '' */
+.iconshock-materialblack-video-production-file-format-wmv:before { content: '\e84e'; } /* '' */
+.iconshock-materialblack-video-production-file-type-video2:before { content: '\e84f'; } /* '' */
+.iconshock-materialblack-video-production-film-8mm:before { content: '\e850'; } /* '' */
+.iconshock-materialblack-video-production-film-16mm:before { content: '\e851'; } /* '' */
+.iconshock-materialblack-video-production-film-35mm:before { content: '\e852'; } /* '' */
+.iconshock-materialblack-video-production-film-camera-16mm:before { content: '\e853'; } /* '' */
+.iconshock-materialblack-video-production-film-camera-35mm:before { content: '\e854'; } /* '' */
+.iconshock-materialblack-video-production-film-camera-35mm2:before { content: '\e855'; } /* '' */
+.iconshock-materialblack-video-production-film-projector:before { content: '\e856'; } /* '' */
+.iconshock-materialblack-video-production-film-projector2:before { content: '\e857'; } /* '' */
+.iconshock-materialblack-video-production-first:before { content: '\e858'; } /* '' */
+.iconshock-materialblack-video-production-focus-correction:before { content: '\e859'; } /* '' */
+.iconshock-materialblack-video-production-frame-rate:before { content: '\e85a'; } /* '' */
+.iconshock-materialblack-video-production-gamma-correction:before { content: '\e85b'; } /* '' */
+.iconshock-materialblack-video-production-handled-mic:before { content: '\e85c'; } /* '' */
+.iconshock-materialblack-video-production-high-definition:before { content: '\e85d'; } /* '' */
+.iconshock-materialblack-video-production-image-sequence:before { content: '\e85e'; } /* '' */
+.iconshock-materialblack-video-production-in-point:before { content: '\e85f'; } /* '' */
+.iconshock-materialblack-video-production-info-of-media:before { content: '\e860'; } /* '' */
+.iconshock-materialblack-video-production-insert-media-files-to-timeline:before { content: '\e861'; } /* '' */
+.iconshock-materialblack-video-production-interpolate:before { content: '\e862'; } /* '' */
+.iconshock-materialblack-video-production-invert:before { content: '\e863'; } /* '' */
+.iconshock-materialblack-video-production-invert2:before { content: '\e864'; } /* '' */
+.iconshock-materialblack-video-production-k-lite-codec:before { content: '\e865'; } /* '' */
+.iconshock-materialblack-video-production-language:before { content: '\e866'; } /* '' */
+.iconshock-materialblack-video-production-last:before { content: '\e867'; } /* '' */
+.iconshock-materialblack-video-production-lavalier-mic:before { content: '\e868'; } /* '' */
+.iconshock-materialblack-video-production-layers:before { content: '\e869'; } /* '' */
+.iconshock-materialblack-video-production-light:before { content: '\e86a'; } /* '' */
+.iconshock-materialblack-video-production-loop:before { content: '\e86b'; } /* '' */
+.iconshock-materialblack-video-production-marker:before { content: '\e86c'; } /* '' */
+.iconshock-materialblack-video-production-mask:before { content: '\e86d'; } /* '' */
+.iconshock-materialblack-video-production-mini-dv:before { content: '\e86e'; } /* '' */
+.iconshock-materialblack-video-production-mix-tracks:before { content: '\e86f'; } /* '' */
+.iconshock-materialblack-video-production-mobile-device:before { content: '\e870'; } /* '' */
+.iconshock-materialblack-video-production-mosaic:before { content: '\e871'; } /* '' */
+.iconshock-materialblack-video-production-movie-manager:before { content: '\e872'; } /* '' */
+.iconshock-materialblack-video-production-multi-trim-video:before { content: '\e873'; } /* '' */
+.iconshock-materialblack-video-production-music-eigth-note:before { content: '\e874'; } /* '' */
+.iconshock-materialblack-video-production-next:before { content: '\e875'; } /* '' */
+.iconshock-materialblack-video-production-next-track:before { content: '\e876'; } /* '' */
+.iconshock-materialblack-video-production-noise:before { content: '\e877'; } /* '' */
+.iconshock-materialblack-video-production-noise2:before { content: '\e878'; } /* '' */
+.iconshock-materialblack-video-production-ntsc:before { content: '\e879'; } /* '' */
+.iconshock-materialblack-video-production-ogg:before { content: '\e87a'; } /* '' */
+.iconshock-materialblack-video-production-ogg-vorbis:before { content: '\e87b'; } /* '' */
+.iconshock-materialblack-video-production-on-camera-mic:before { content: '\e87c'; } /* '' */
+.iconshock-materialblack-video-production-out-point:before { content: '\e87d'; } /* '' */
+.iconshock-materialblack-video-production-overlay-track:before { content: '\e87e'; } /* '' */
+.iconshock-materialblack-video-production-overlay-track-manager:before { content: '\e87f'; } /* '' */
+.iconshock-materialblack-video-production-overlay-track2:before { content: '\e880'; } /* '' */
+.iconshock-materialblack-video-production-pal:before { content: '\e881'; } /* '' */
+.iconshock-materialblack-video-production-pan2:before { content: '\e882'; } /* '' */
+.iconshock-materialblack-video-production-pause:before { content: '\e883'; } /* '' */
+.iconshock-materialblack-video-production-play:before { content: '\e884'; } /* '' */
+.iconshock-materialblack-video-production-play-pause:before { content: '\e885'; } /* '' */
+.iconshock-materialblack-video-production-play-sounds:before { content: '\e886'; } /* '' */
+.iconshock-materialblack-video-production-play-transition:before { content: '\e887'; } /* '' */
+.iconshock-materialblack-video-production-play-video:before { content: '\e888'; } /* '' */
+.iconshock-materialblack-video-production-playback-speed2:before { content: '\e889'; } /* '' */
+.iconshock-materialblack-video-production-podcast:before { content: '\e88a'; } /* '' */
+.iconshock-materialblack-video-production-post-processing:before { content: '\e88b'; } /* '' */
+.iconshock-materialblack-video-production-posterize:before { content: '\e88c'; } /* '' */
+.iconshock-materialblack-video-production-previous:before { content: '\e88d'; } /* '' */
+.iconshock-materialblack-video-production-project-duration:before { content: '\e88e'; } /* '' */
+.iconshock-materialblack-video-production-pull-down:before { content: '\e88f'; } /* '' */
+.iconshock-materialblack-video-production-radial-blur:before { content: '\e890'; } /* '' */
+.iconshock-materialblack-video-production-range-clip:before { content: '\e891'; } /* '' */
+.iconshock-materialblack-video-production-rate:before { content: '\e892'; } /* '' */
+.iconshock-materialblack-video-production-record:before { content: '\e893'; } /* '' */
+.iconshock-materialblack-video-production-resolution:before { content: '\e894'; } /* '' */
+.iconshock-materialblack-video-production-reverse-video:before { content: '\e895'; } /* '' */
+.iconshock-materialblack-video-production-rewind:before { content: '\e896'; } /* '' */
+.iconshock-materialblack-video-production-rotate-90-ccw:before { content: '\e897'; } /* '' */
+.iconshock-materialblack-video-production-rotate-90-cw:before { content: '\e898'; } /* '' */
+.iconshock-materialblack-video-production-scene:before { content: '\e899'; } /* '' */
+.iconshock-materialblack-video-production-script:before { content: '\e89a'; } /* '' */
+.iconshock-materialblack-video-production-share-video:before { content: '\e89b'; } /* '' */
+.iconshock-materialblack-video-production-shotgun-mic:before { content: '\e89c'; } /* '' */
+.iconshock-materialblack-video-production-snapshot:before { content: '\e89d'; } /* '' */
+.iconshock-materialblack-video-production-solarize:before { content: '\e89e'; } /* '' */
+.iconshock-materialblack-video-production-sort-clips:before { content: '\e89f'; } /* '' */
+.iconshock-materialblack-video-production-sound-track:before { content: '\e8a0'; } /* '' */
+.iconshock-materialblack-video-production-split:before { content: '\e8a1'; } /* '' */
+.iconshock-materialblack-video-production-split-audio:before { content: '\e8a2'; } /* '' */
+.iconshock-materialblack-video-production-split-scene:before { content: '\e8a3'; } /* '' */
+.iconshock-materialblack-video-production-stage:before { content: '\e8a4'; } /* '' */
+.iconshock-materialblack-video-production-stop:before { content: '\e8a5'; } /* '' */
+.iconshock-materialblack-video-production-stop-motion:before { content: '\e8a6'; } /* '' */
+.iconshock-materialblack-video-production-storyboard:before { content: '\e8a7'; } /* '' */
+.iconshock-materialblack-video-production-subtitles:before { content: '\e8a8'; } /* '' */
+.iconshock-materialblack-video-production-surround:before { content: '\e8a9'; } /* '' */
+.iconshock-materialblack-video-production-telecine:before { content: '\e8aa'; } /* '' */
+.iconshock-materialblack-video-production-tilt:before { content: '\e8ab'; } /* '' */
+.iconshock-materialblack-video-production-timeline:before { content: '\e8ac'; } /* '' */
+.iconshock-materialblack-video-production-title:before { content: '\e8ad'; } /* '' */
+.iconshock-materialblack-video-production-transcode:before { content: '\e8ae'; } /* '' */
+.iconshock-materialblack-video-production-transfer:before { content: '\e8af'; } /* '' */
+.iconshock-materialblack-video-production-transition:before { content: '\e8b0'; } /* '' */
+.iconshock-materialblack-video-production-vcr:before { content: '\e8b1'; } /* '' */
+.iconshock-materialblack-video-production-video-clip:before { content: '\e8b2'; } /* '' */
+.iconshock-materialblack-video-production-video-effects2:before { content: '\e8b3'; } /* '' */
+.iconshock-materialblack-video-production-video-frame:before { content: '\e8b4'; } /* '' */
+.iconshock-materialblack-video-production-video-library:before { content: '\e8b5'; } /* '' */
+.iconshock-materialblack-video-production-video-library2:before { content: '\e8b6'; } /* '' */
+.iconshock-materialblack-video-production-video-track:before { content: '\e8b7'; } /* '' */
+.iconshock-materialblack-video-production-vlm-control:before { content: '\e8b8'; } /* '' */
+.iconshock-materialblack-video-production-voice-over:before { content: '\e8b9'; } /* '' */
+.iconshock-materialblack-video-production-youtube:before { content: '\e8ba'; } /* '' */
+.iconshock-materialblack-video-production-youtube2:before { content: '\e8bb'; } /* '' */

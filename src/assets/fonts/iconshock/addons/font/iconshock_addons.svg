@@ -1,0 +1,42 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<metadata>
+Created by FontForge 20150804 at Fri Aug 18 17:23:20 2017
+ By cloudconvert
+Iconshock
+</metadata>
+<defs>
+<font id="iconshock_addons" horiz-adv-x="1000" >
+  <font-face 
+    font-family="iconshock_addons"
+    font-weight="400"
+    font-stretch="normal"
+    units-per-em="1000"
+    panose-1="2 0 5 3 0 0 0 0 0 0"
+    ascent="844"
+    descent="-156"
+    bbox="150 -1 850 700"
+    underline-thickness="0"
+    underline-position="10"
+    unicode-range="U+E800-E804"
+  />
+<missing-glyph 
+ />
+    <glyph glyph-name=".notdef" 
+ />
+    <glyph glyph-name="cancel" unicode="&#xe800;" horiz-adv-x="999" 
+d="M673 543l20 -20l-363 -363l-20 20zM850 350q0 -95 -48 -176q-46 -80 -126 -126q-81 -48 -176 -48t-177 48q-79 46 -125 126q-48 81 -48 176t48 177q46 79 125 125q82 48 177 48t176 -48q80 -46 126 -125q48 -82 48 -177zM826 352q0 88 -44 163q-44 73 -117 117
+q-75 44 -163.5 44t-164.5 -44q-73 -44 -115 -117q-44 -75 -44 -162.5t44 -163.5q43 -74 116 -117q76 -44 163.5 -44t162.5 44q74 43 118 116q44 76 44 164z" />
+    <glyph glyph-name="checkbox_empty" unicode="&#xe801;" 
+d="M786 700h-572q-22 0 -37 -10q-12 -8 -19 -22q-5 -10 -7 -22l-1 -10v-572q0 -22 10 -37q8 -12 23 -19q9 -5 21 -7l10 -1h572q22 0 37 10q12 8 19 23q5 9 7 21l1 10v572q0 22 -10 37q-8 12 -22 19q-10 5 -22 7zM818 64q-2 -31 -32 -31h-572q-13 0 -21 6q-10 8 -10 25v572
+q0 13 6 21q8 11 25 11h572q32 -2 32 -32v-572z" />
+    <glyph glyph-name="checkbox_empty_black" unicode="&#xe802;" 
+d="M850 636v-572l-1 -10q-2 -12 -7 -21q-7 -15 -19 -23q-15 -10 -37 -10h-572l-10 1q-12 2 -21 7q-15 7 -23 19q-10 15 -10 37v572l1 10q2 12 7 22q7 14 19 22q15 10 37 10h572l10 -1q12 -2 22 -7q14 -7 22 -19q10 -15 10 -37z" />
+    <glyph glyph-name="circle" unicode="&#xe803;" 
+d="M499 629q77 0 141 -37.5t101.5 -101.5t37.5 -140.5t-37.5 -141t-101.5 -102t-140.5 -37.5t-141 37.5t-102 102t-37.5 141t37.5 140.5t102 101.5t140.5 37.5zM499 700q-95 0 -177 -48q-78 -46 -125 -126q-47 -81 -47 -176.5t47 -177.5q47 -78 125 -125q82 -47 177.5 -47
+t176.5 47q80 47 126 125q48 82 48 177.5t-48 176.5q-46 80 -126 126q-81 48 -177 48v0z" />
+    <glyph glyph-name="circle_black" unicode="&#xe804;" 
+d="M501 700q-71 0 -136 -28q-63 -28 -111.5 -77t-75.5 -113q-28 -65 -28 -136t28 -135q27 -62 75.5 -110.5t111.5 -74.5q65 -27 136 -27t135 27q62 26 110.5 74.5t74.5 110.5q28 64 28 135t-28 136q-26 64 -74.5 113t-110.5 77q-64 28 -135 28z" />
+  </font>
+</defs></svg>

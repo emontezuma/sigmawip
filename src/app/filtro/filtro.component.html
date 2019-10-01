@@ -1,0 +1,144 @@
+<div class="contenido" class="mat-typography">
+        <div class="cabecera" [style.backgroundColor]="colorBarraSuperior" [style.color]="colorLetrasTitulo" mat-dialog-title>
+            <i class="iconshock-iphone-business-filter"></i>
+            <span class="tituloDialogo">Aplicar un filtro</span>
+        </div>
+        <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}">        
+            <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" [style.marginTop.px]="10">
+                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">1. Nombre de la consulta</div>    
+                <div class="cajaEstatusDoble" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <mat-form-field class="textoMid">
+                        <mat-select [(ngModel)]="detalleRegistro.consulta" name="consulta" (selectionChange)="cConsulta($event)">
+                            <mat-option [value]="0">[Nueva consulta]</mat-option>
+                            <mat-option *ngFor="let consulta of consultas; let i = index" [value]="consulta.id">{{ consulta.nombre }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button class="boton" [style.color]="(!eliminar ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(!eliminar ? 'inherit' : colorFondoBoton)" mat-button (click)="eliminarConsulta()" [matTooltip] = "ayuda01" matTooltipClass = "toolTip" matTooltipShowDelay = "100" [disabled]="!eliminar">
+                        <i class="iconshock-materialblack-general-trash-can"></i>
+                    </button>
+                </div>
+                <div *ngIf="detalleRegistro.consulta==0">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">Nombre de la consulta</div>    
+                    <mat-form-field class="texto">
+                        <input matInput #txtNombre [(ngModel)]="detalleRegistro.nombre" maxlength="50" autocomplete="off" name="nombre" required #nombre="ngModel">
+                        <button mat-button *ngIf="detalleRegistro.nombre" matSuffix mat-icon-button aria-label="Clear" (click)="detalleRegistro.nombre = ''">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                        <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+                        <mat-hint class="pista" align="end">{{ nombre.value?.length || 0 }} de 50</mat-hint>
+                    </mat-form-field>                            
+                </div>
+            </div>
+            <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">2. Período a reportar</div>    
+                <mat-form-field class="texto">
+                    <mat-select [(ngModel)]="detalleRegistro.periodo" name="periodo" (selectionChange)=calcularFecha($event) >
+                        <mat-option [value]="0">TODO EL TIEMPO (puede tomar más tiempo)</mat-option>
+                        <mat-option [value]="1">LO QUE VA DEL DÍA</mat-option>
+                        <mat-option [value]="2">LO QUE VA DE SEMANA</mat-option>
+                        <mat-option [value]="3">LO QUE VA DEL MES (MtD)</mat-option>
+                        <mat-option [value]="4">LO QUE VA DEL AÑO (YtD)</mat-option>
+                        <mat-option [value]="5">LA SEMANA ANTERIOR</mat-option>
+                        <mat-option [value]="6">EL MES ANTERIOR</mat-option>
+                        <mat-option [value]="7">EL AÑO ANTERIOR</mat-option>
+                        <mat-option [value]="8">Especificar una fecha</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">Especificar período</div>    
+                <div class="registroValor">
+                    <mat-form-field class="textoMitad">
+                        <input #txtFechaDesde matInput [(ngModel)]="detalleRegistro.desde" [matDatepicker]="picker1" name="desde" autocomplete="off" #desde1="ngModel" disabled>
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle> 
+                        <mat-datepicker #picker1 [disabled]="detalleRegistro.periodo != '8'" (selectedChange)="errorFecha=false;"></mat-datepicker>   
+                        <mat-hint class="pista" align="start" *ngIf="errorFecha">Incongruencia en período</mat-hint>
+                    </mat-form-field>
+                    
+                    <mat-form-field class="textoMitad">
+                        <input #txtFechaDesde matInput [(ngModel)]="detalleRegistro.hasta" [matDatepicker]="picker2" name="hasta" autocomplete="off" #hasta1="ngModel" disabled>
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle> 
+                        <mat-datepicker #picker2 [disabled]="detalleRegistro.periodo != '8'" (selectedChange)="errorFecha=false;"></mat-datepicker>   
+                    </mat-form-field>
+                </div>
+            </div>
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">4. Especificar el Número de parte</div>    
+                    <div class="prueba">
+                        <mat-radio-group [(ngModel)]="selPartes">
+                            <mat-radio-button class="tipoFecha" value="1">Todos los números de parte</mat-radio-button>
+                            <mat-radio-button class="tipoFechaDer" value="2">Desde de la lista</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <mat-form-field class="textoSel">
+                        <mat-select [(ngModel)]="selPartesT" (selectionChange)="seleccion(1, $event)" [disabled]="selPartes==1">
+                            <mat-option value="S">Accion masiva en la lista</mat-option>
+                            <mat-option value="1">Seleccionar todos los elementos de la lista</mat-option>
+                            <mat-option value="0">Deseleccionar todos los elementos de la lista</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div class="lista">
+                        <mat-selection-list #listaPartes [(ngModel)]="detalleRegistro.parte" name="parte" [disabled]="selPartes==1">
+                            <mat-list-option *ngFor="let parte of partes; let i = index" [value]="parte.id" [selected]="parte.seleccionado>0" checkboxPosition="before">
+                                <div class="cajaLista">
+                                    <i class="iconshock-iphone-business-product-combo"></i>
+                                    <div class="textoLista">{{parte.nombre}}</div>
+                                </div>
+                            </mat-list-option>
+                        </mat-selection-list>
+                    </div>
+                </div>
+                
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">5. Especificar el Proceso</div>    
+                    <div class="prueba">
+                        <mat-radio-group [(ngModel)]="selOperaciones">
+                            <mat-radio-button class="tipoFecha" value="1">Todos los procesos</mat-radio-button>
+                            <mat-radio-button class="tipoFechaDer" value="2">Desde de la lista</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <mat-form-field class="textoSel">
+                        <mat-select [(ngModel)]="selOperacionesT" (selectionChange)="seleccion(2, $event)" [disabled]="selOperaciones==1">
+                            <mat-option value="S">Accion masiva en la lista</mat-option>
+                            <mat-option value="1">Seleccionar todos los elementos de la lista</mat-option>
+                            <mat-option value="0">Deseleccionar todos los elementos de la lista</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div class="lista">
+                        <mat-selection-list #listaProcesos [(ngModel)]="detalleRegistro.proceso" name="proceso" [disabled]="selOperaciones==1">
+                            <mat-list-option *ngFor="let proceso of procesos; let i = index" [value]="proceso.id" [selected]="proceso.seleccionado>0" checkboxPosition="before">
+                                <div class="cajaLista">
+                                    <i class="iconshock-iphone-business-solution"></i>
+                                    <div class="textoLista">{{proceso.nombre}}</div>
+                                </div>
+                            </mat-list-option>
+                        </mat-selection-list>
+                    </div>
+                </div>
+    
+
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">6. Visualizar elementos sin información</div>    
+                    <mat-form-field class="texto">
+                        <mat-select [(ngModel)]="detalleRegistro.visualizar" name="visualizar">
+                            <mat-option value="S">Si</mat-option>
+                            <mat-option value="N">No</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+    
+        <div class="pie" mat-dialog-actions>
+            <button type="submit" class="indice" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="validar(1)">
+                <i class="iconshock-iphone-business-filter"></i>
+                <span class="indiceTexto">Aplicar filro</span>
+            </button>
+            <button type="submit" class="indice" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="validar(2)">
+                <i class="iconshock-materialblack-general-check-mark"></i>
+                <span class="indiceTexto">Quitar filtro</span>
+            </button>
+            <button type="submit" class="indice" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="validar(3)">
+                <i class="iconshock-materialblack-general-reload"></i>
+                <span class="indiceTexto">Cancelar</span>
+            </button>
+        </div>
+    </div>
+    

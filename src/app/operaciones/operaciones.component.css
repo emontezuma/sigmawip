@@ -1,0 +1,1052 @@
+#todo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.catalogos
+{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    overflow: hidden;
+}
+
+.cabecera
+{
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 22px;
+    min-height: 50px !important;
+    border-width: 0.5px;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start !important;
+    align-content: center;
+}
+
+.detalle
+{
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    flex: 1;
+    align-content: flex-start;
+    align-items: stretch;
+    
+}
+
+.identificar
+{
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    flex: 1;
+    align-content: flex-start;
+    align-items: stretch;
+    
+}
+
+.contenedorScroll
+{
+    overflow-y: auto;
+    padding: 10px;
+    margin-top: 5px !important;
+    font-size: 22px;
+    border-width: 0.5px;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    flex: 1;
+    align-content: flex-start;
+    align-items: stretch;
+}
+
+.indice, .indiceUltimo, .indiceDivision, .indiceMedio, .indiceMedioSeparador, 
+.indiceDivisionCorto, .indiceImagen
+{
+    border-width: 0.5px;
+    border-style: solid;
+    border-radius: 0px !important;
+    max-height: 43px !important;
+    height: 43px !important;
+    display: flex;
+    flex-direction: row;
+    font-size: 17px !important;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 3px !important;
+}
+
+.indiceUltimo
+{
+    min-width: 40px !important;
+    width: 40px !important;
+}
+
+.indiceProceso, .indiceProcesoSeleccionado, .indiceProcesoLote, .indiceProcesoLote2
+{
+    align-self: stretch;
+    padding: 0px;
+    margin: 6px;
+    min-width: 300px !important;
+    max-width: 300px !important;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 0px !important;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    flex: 1;
+    font-size: 17px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    max-height: 180px !important;
+    height: 180px !important;
+}
+
+.indiceProcesoSeleccionado
+{
+    min-width: 330px !important;
+    max-width: 330px !important;
+    height: 272px !important;
+    max-height: 272px !important;
+}
+
+.indiceProcesoLote
+{
+    height: 224px !important;
+    max-height: 224px !important;
+}
+
+.pctBajo
+{
+    background-color: orangered !important;
+    color: rgb(255, 255, 255) !important;
+    margin: 1px;
+}
+
+.indiceProcesoLote2
+{
+    height: 224px !important;
+    max-height: 224px !important;
+    width: 450px !important;
+    max-width: 450px !important;
+    min-width: 450px !important;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 0px !important;
+    border-color: transparent;
+    
+}
+
+.miBoton
+{
+    flex: 1;
+    width: 100% !important;
+}
+
+
+.indiceImagen
+{
+    font-size: 17px !important;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    min-width: 50px !important;
+}
+
+.indiceMedio
+{
+    min-width: 40px !important;
+    width: 40px !important;
+    margin-right: 3px !important;
+}
+
+.indiceMedioSeparador
+{
+    min-width: 40px !important;
+    width: 40px !important;
+    margin-right: 3px !important;
+    margin-left: 10px !important;
+}
+
+.indiceDivision
+{
+    margin-left: auto;
+    margin-right: 3px !important;
+    min-width: 40px !important;
+    width: 40px !important;
+    
+}
+
+.indiceDivisionCorto
+{
+    margin-left: auto;
+    min-width: 40px !important;
+    width: 40px !important;
+    margin-right: 3px !important;
+}
+
+.indiceImagen:hover:enabled, .indiceUltimo:hover:enabled, .indice:hover:enabled, 
+.indiceDivision:hover:enabled, .indiceMedio:hover:enabled, .indiceMedioSeparador:hover:enabled, 
+.indiceDivisionCorto:hover:enabled, .indiceProceso:hover:enabled, .indiceProcesoSeleccionado:hover:enabled, 
+.indiceProcesoLote:hover:enabled, .indiceProcesoLote2:hover:enabled
+{
+    box-shadow: 0 0px 2px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.indiceImagen:hover:disabled, .indiceUltimo:hover:disabled, .indice:hover:disabled, 
+.indiceDivision:hover:disabled, .indiceMedio:hover:disabled, 
+.indiceDivisionCorto:hover:disabled, .indiceProceso:hover:disabled, .indiceProcesoSeleccionado:hover:disabled, 
+.indiceProcesoLote:hover:disabled , indiceProcesoLote2:hover:disabled 
+{
+    cursor: url("/assets/icons/cur_cancelar.png"), not-allowed;
+    
+}
+
+.registroCaja
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.registroGeneral
+{
+    font-size: 19px;
+    align-self: stretch;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1;
+    
+}
+
+.registroTitulo
+{
+    font-size: 15px;
+    text-align: left;
+    padding: 2px;
+    font-weight: 550;
+}
+
+.ayudaCampo
+{
+    font-size: 15px;
+    margin-top: 2px;
+}
+
+.cajaEstatus
+{
+    text-align: left;
+    padding: 2px;
+    padding-left: 5px;
+    line-height: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 300px !important;
+    max-width: 500px !important;
+    margin: 5px !important;
+}
+
+.texto
+{
+    min-height: 80px;
+    width: 100%;
+    margin-top: -10px;
+    font-size: 16px !important;
+}
+
+::ng-deep .mat-form-field-underline {
+    background-color: rgb(51, 51, 51) !important;
+}
+
+::ng-deep .mat-form-field-ripple {
+    background-color: rgb(51, 51, 51) !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    color: rgb(51, 51, 51) !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: rgb(51, 51, 51) !important;
+}
+
+
+.registroImagenPropia, .registroImagenPropiaSeleccionado
+{
+    padding: 5px !important;
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto !important;
+    
+}
+
+.registroImagen, .registroImagenSeleccionado, .registroImagenParte, .registroImagenParteDet
+{
+    font-size: 64px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    width: 64px !important;
+    height: 64px !important;
+    margin: 2px !important;
+    margin: auto !important;
+}
+
+
+.registroImagenParte
+{
+    width: 100px !important;
+    height: 100px !important;
+}
+
+.registroImagenParteDet
+{
+    width: 130px !important;
+    min-height: 140px !important;
+    margin: 0px !important;
+    margin-top: 2px;
+}
+
+.registroImagenSeleccionado
+{
+    font-size: 160px;
+    width: 176px !important;
+    height: 176px !important;
+    margin-left: 2px !important;
+    margin-top: 0px !important;
+}
+
+.paquete
+{
+    display: flex;
+    flex-direction: row !important;
+}
+
+.textoPaquete
+{
+}
+
+.listaBotones
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.registroCabecera, .registroCabeceraAlarmado, .registroCabeceraPie, .registroCabeceraSeleccionado, .registroFechaSeleccionado, .registroFechaSeleccionadoDerecha
+{
+    max-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    flex: 1;
+    width: 288px !important;
+    margin: 2.5px;
+    border-style: solid;
+    border-width: 1px;
+    margin-bottom: 1px;
+    
+}
+
+.registroCabeceraPie
+{
+    height: 30px;
+    width: 368px !important;
+    min-width: 368px !important;
+    animation: bordes2 1s ease-in-out 0s;
+    animation-iteration-count: infinite;
+    box-shadow: 0px 0px 0px 1px red;
+}
+
+.registroCabeceraAlarmado
+{
+    display: flex;
+    margin-left: 2px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    animation: bordes2 1s ease-in-out 0s;
+    animation-iteration-count: infinite;
+    box-shadow: 0px 0px 0px 1px red;
+}
+
+
+.registroCabeceraSeleccionado
+{
+    width: 318px !important;
+}
+
+.registroCabeceraTextoPie
+{
+    text-align: center;
+    margin-left: 2px;
+    font-size: 20px !important;
+}
+
+.registroCabeceraTextoPie2
+{
+    text-align: center;
+    font-size: 18px !important;
+    font-weight: 550;
+    animation: tamano 1s ease-in-out 0s;
+    animation-iteration-count: infinite;
+}
+
+.registroCabeceraTexto
+{
+    font-size: 17px;
+    font-weight: 550;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.registroAdicionalCajas, .registroAdicionalCajasTpo, .registroAdicionalCajasDet
+{
+    display: flex;
+    flex-direction: row;
+    align-self: stretch;
+    text-align: center;
+    line-height: 18px;
+    
+}
+
+.registroAdicionalCajasDet
+{
+    margin-top: 5px;
+    
+}
+
+.registroAdicionalCaja, .registroAdicionalCajaDet, .registroAdicionalParteI, .registroAdicionalParte, .registroAdicionalParteImagen, .registroAdicionalCajaDos, .registroAdicionalCajaDet2
+{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    line-height: 18px;
+}
+
+.registroAdicionalCajaDet
+{
+    text-align: left !important;
+    margin-top: 10px !important;
+}
+
+
+.registroAdicionalCajaDet2
+{
+    min-width: 160px !important;
+}
+
+.registroAdicionalParte
+{
+
+    margin-top: 2px !important;
+    height: 30px !important;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+
+.registroAdicionalParteI
+{
+    margin-top: 2px !important;
+    height: 30px !important;
+    margin-left: 2px;
+    margin-right: 2px;
+    min-width: 160px !important;
+}
+
+.registroAdicionalCajaDos
+{
+
+    margin-top: 4px !important;
+}
+
+.registroAdicionalParteImagen
+{
+    height: 40px !important;
+}
+
+
+.registroAdicionalCajaSeleccionado, .registroAdicionalCajaPegado, .registroAdicionalCajaSig, .registroAdicionalCajaSeleccionadoUltimo, 
+.registroAdicionalCajaSeleccionadoDerecha
+{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin: 1px;
+    height: 36px !important;
+    border-width: 2px;
+    border-color: transparent !important;
+    border-style: solid;
+        
+}
+
+.registroAdicionalCajaSeleccionadoDerecha
+{
+    margin: 2px;
+}
+
+.registroAdicionalCajaSeleccionado
+{
+    border-style: solid;
+    border-width: 0.5px;
+    margin: 1px;
+    margin-right: 0px;
+}
+
+.registroAdicionalCajaSeleccionadoUltimo
+{
+    margin-right: 2px;
+    margin-left: 1px;
+}
+
+.registroAdicionalCajaPegado
+{
+    margin-left: 2px;
+}
+
+.registroAdicionalCajaSig
+{
+    margin-left: -1px;
+}
+
+.registroValor, .registroValorCentro, .registroParte, .registroValorEscaneo, .registroValorEscaneoTit
+{
+    width: 100%;
+    font-weight: 550;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.registroValorEscaneo
+{
+    font-size: 19px;
+    text-align: left;
+}
+
+.registroValorCentro
+{
+    font-size: 17px;
+    text-align: center;
+}
+
+.registroValorEscaneoTit
+{
+    font-size: 20px;
+    text-align: center;
+}
+
+
+.registroParteImagen
+{
+    margin-top: -8px !important;
+    line-height: 20px;
+}
+
+.registroValorSeleccionado
+{
+    width: 100%;
+    font-weight: 550;
+    font-size: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.registroValorDetalle
+{
+    width: 100%;
+    font-weight: 450;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+}
+
+.registroValorVarios
+{
+    width: 100%;
+    font-weight: 550;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.titulo
+{
+    font-size: 12px;
+}
+
+.tituloCentro
+{
+    font-size: 13px;
+    text-align: center;
+}
+
+
+.tituloEscaneo
+{
+    font-size: 14px;
+    text-align: left;
+}
+
+.tituloParte
+{
+    font-size: 12px;
+    line-height: 12px;
+}
+
+
+
+.dobleCaja
+{
+    display: flex;
+    flex-direction: column;
+    margin: 2px !important;
+}
+
+.cajas
+{
+    display: flex;
+    flex-direction: column;
+    padding: 2px !important;
+    flex: 1;
+    margin-top: -3px !important;
+}
+
+.subir {
+    flex: 1;
+    text-align: right;
+    align-items: right;
+    align-content: center;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 10px !important;
+    margin-right: 25px !important;
+  }
+
+.subirBoton {
+    margin-right: 10px;
+    margin-top: -20px;
+    border-radius: 48px;
+    width: 48px !important;
+    min-width: 48px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+}
+
+.subirIcono {
+    font-size: 36px;
+    align-content: center;
+    margin-top: -16px !important;
+    margin-left: 2px !important;
+    transform: rotate(90deg);
+}
+
+.ayudaCampoTitulo
+{
+    font-size: 24px;
+    font-weight: 550;
+}
+
+.registroFechaSeleccionadoDerecha
+{
+    font-size: 15px;
+    text-align: left;
+    margin-top: 0px !important;
+    max-width: 120px !important;
+    margin-right: -1px;
+    margin-left: 0px;
+}
+.registroFechaSeleccionado
+{
+    font-size: 15px;
+    text-align: left;
+    margin-top: 0px !important;
+    min-width: 220px !important;
+}
+
+.tablaItems
+{
+    overflow: hidden;
+}
+
+.cabeceraTabla
+{
+    width: 100%;
+    font-weight: 550;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-content: center;
+    height: 26px !important; 
+}
+
+.detalleTabla
+{
+    padding: 1px !important;
+    width: 100%;
+    width: 317px !important;
+    font-weight: 450;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 24px !important; 
+    border-width: 2px;
+    border-color: transparent !important;
+    border-style: solid;
+    border-bottom-style: solid;
+    margin-bottom: 1px;
+    
+}
+
+.detalleTabla1
+{
+    border-style: solid !important;
+    border-width: 2px !important;
+    border-color: rgba(255, 0, 0, 0.8) !important;
+    background-color: rgb(241, 241, 241) !important;
+    color: rgba(255, 0, 0, 0.9);
+    animation: colorear 2s ease-in-out 0s;
+    animation-iteration-count: infinite;
+}
+
+.detalleTabla2
+{
+    background-color: rgb(255, 69, 0) !important;
+    color: rgb(255, 255, 255) !important;
+    border-style: solid !important;
+    border-width: 2px !important;
+    border-color: rgba(255, 0, 0, 0.8) !important;
+
+}
+
+.detalleTabla2Caja
+{
+    background-color: rgb(255, 69, 0) !important;
+    color: rgb(255, 255, 255) !important;
+
+}
+
+.detalleTabla3
+{
+    border-width: 2px !important;
+    border-color: dodgerblue !important;
+    border-style: solid;
+    animation: prioritario 1s ease-in-out 0s;
+    animation-iteration-count: infinite;
+}
+
+.detalleTabla4
+{
+    border-width: 2px !important;
+    border-color: lightseagreen !important;
+    border-style: solid;
+    animation: prioritario2 1s ease-in-out 0s;
+    animation-iteration-count: infinite;
+}
+
+
+.prioridad2
+{
+    background-color: lightseagreen !important;
+    color: rgb(255, 255, 255) !important;
+    border-style: solid !important;
+    border-width: 0.5px !important;
+    border-color: lightseagreen !important;
+}
+
+.prioridad
+{
+    background-color: dodgerblue !important;
+    color: rgb(255, 255, 255) !important;
+    border-style: solid !important;
+    border-width: 0.5px !important;
+    border-color: deepskyblue !important;
+}
+
+.col01
+{
+    flex: 3;
+    padding: 3px;
+    margin: 1px;
+    text-align: left;
+    height: 24px !important; 
+    margin-top: -10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.col02
+{
+    flex: 5;
+    padding: 3px;
+    margin: 1px;
+    text-align: left;
+    height: 24px !important; 
+    margin-top: -10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.col03
+{
+    flex: 7;
+    padding: 3px;
+    margin: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+    display: none;
+    height: 24px !important; 
+    margin-top: -10px;
+}
+
+.col04
+{
+    flex: 2;
+    padding: 3px;
+    margin: 2px;
+    text-align: right;
+    height: 24px !important; 
+    margin-top: -10px;
+}
+
+
+
+.detalleTabla:nth-child(2n+1)
+{
+    background-color: rgba(0, 0, 0, 0.015);
+}
+
+.tablaLotes
+{
+    padding: 2px;
+    flex: 1;
+    margin-bottom: 8px;
+    min-height: 190px !important;
+    max-height: 190px !important;
+}
+
+@keyframes colorear 
+{
+    50%
+    {
+        color: rgba(255, 0, 0, 1);
+        background-color: rgba(0, 0, 0, 0.18);
+        
+    }
+}
+
+@keyframes bordes 
+{
+    50%
+    {
+        box-shadow: 0px 0px 3px 2px tomato;
+    }
+}
+
+@keyframes bordes2 
+{
+    50%
+    {
+        box-shadow: 0px 0px 0px 1px orange;
+    }
+}
+
+@keyframes prioritario 
+{
+    50%
+    {
+        border-color: deepskyblue;
+    }
+}
+
+@keyframes prioritario2 
+{
+    50%
+    {
+        border-color: limegreen;
+    }
+}
+
+
+@keyframes tamano 
+{
+    50%
+    {
+        background-color: rgb(255, 255, 255, 0.6) !important;
+    }
+}
+
+.buscadorCaja
+{
+    margin-top: -10px !important;
+    margin-left: 10px !important;
+
+}
+
+.buscador
+{
+    margin-top: -10px !important;
+    font-size: 16px !important;
+    min-height: 30px;
+    height: 30px;
+    width: 140px !important;
+}
+
+.material, .materialDet
+{
+    margin: 2px;
+    margin-top: 2px;
+    width: 190px !important;
+    margin-right: 2px !important;
+    text-align: left;
+}
+
+.materialDet
+{
+    display: flex;
+    flex-direction: row;
+    margin: 0px !important; 
+    margin-top: 2px !important;  
+    width: 100% !important;
+}
+
+
+.cajaAdicional
+{
+    height: 32px !important;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    text-align: left;
+}
+
+.dobleDatos
+{
+    display: flex;
+    flex-direction: column;
+    min-width: 302px;
+    max-height: 130px;
+    
+    margin-left: 5px !important;
+    padding: 5px;
+}
+
+.doble
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.dobleCaja
+{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.dobleDet
+{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px !important;
+}
+.marcoProceso {
+    position: absolute;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    align-content: center;
+    background-color: rgba(0,0,0, 0.75);
+    background-size: cover;
+    z-index: 1;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    
+  }
+  
+  .barraProceso {
+    width: 460px !important;
+    height: 235px;
+    font-size: 20px !important;
+    text-align: center;
+    position: relative;
+    margin: auto;
+    padding: 5px;
+    z-index: 1;
+    border-width: 2px;
+    border-style: solid;
+    border-color: orangered;
+    background-color: white;
+    color: rgb(51, 51, 51);
+    box-shadow: 0px 0px 4px 2px white;
+  }
+
+  .barraProceso2 {
+    width: 460px !important;
+    height: 130px;
+    font-size: 20px !important;
+    text-align: center;
+    position: relative;
+    margin: auto;
+    padding: 10px;
+    z-index: 1;
+    border-width: 0.5px;
+    border-style: solid;
+    background-color: white;
+    color: rgb(51, 51, 51);
+  }
+  
+
+  .prioridad
+{
+    border-width: 3px;
+    border-color: skyblue;
+    border-style: solid;
+}
+

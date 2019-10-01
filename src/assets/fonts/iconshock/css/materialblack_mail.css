@@ -1,0 +1,119 @@
+@font-face {
+  font-family: 'materialblack_mail';
+  src: url('../font/materialblack_mail.eot?26119540');
+  src: url('../font/materialblack_mail.eot?26119540#iefix') format('embedded-opentype'),
+       url('../font/materialblack_mail.woff2?26119540') format('woff2'),
+       url('../font/materialblack_mail.woff?26119540') format('woff'),
+       url('../font/materialblack_mail.ttf?26119540') format('truetype'),
+       url('../font/materialblack_mail.svg?26119540#materialblack_mail') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'materialblack_mail';
+    src: url('../font/materialblack_mail.svg?26119540#materialblack_mail') format('svg');
+  }
+}
+*/
+ 
+ [class^="iconshock-materialblack-mail-"]:before, [class*=" iconshock-materialblack-mail-"]:before {
+  font-family: "materialblack_mail";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.iconshock-materialblack-mail-address:before { content: '\e800'; } /* '' */
+.iconshock-materialblack-mail-address-book:before { content: '\e801'; } /* '' */
+.iconshock-materialblack-mail-autoresponse:before { content: '\e802'; } /* '' */
+.iconshock-materialblack-mail-black-list:before { content: '\e803'; } /* '' */
+.iconshock-materialblack-mail-block:before { content: '\e804'; } /* '' */
+.iconshock-materialblack-mail-body:before { content: '\e805'; } /* '' */
+.iconshock-materialblack-mail-bounce:before { content: '\e806'; } /* '' */
+.iconshock-materialblack-mail-contacts:before { content: '\e807'; } /* '' */
+.iconshock-materialblack-mail-file-format-imap:before { content: '\e808'; } /* '' */
+.iconshock-materialblack-mail-file-format-pop:before { content: '\e809'; } /* '' */
+.iconshock-materialblack-mail-file-format-pop3:before { content: '\e80a'; } /* '' */
+.iconshock-materialblack-mail-file-format-smtp:before { content: '\e80b'; } /* '' */
+.iconshock-materialblack-mail-flood:before { content: '\e80c'; } /* '' */
+.iconshock-materialblack-mail-folder:before { content: '\e80d'; } /* '' */
+.iconshock-materialblack-mail-footer:before { content: '\e80e'; } /* '' */
+.iconshock-materialblack-mail-hard-disk:before { content: '\e80f'; } /* '' */
+.iconshock-materialblack-mail-header:before { content: '\e810'; } /* '' */
+.iconshock-materialblack-mail-imap:before { content: '\e811'; } /* '' */
+.iconshock-materialblack-mail-imap-folder:before { content: '\e812'; } /* '' */
+.iconshock-materialblack-mail-imap-server:before { content: '\e813'; } /* '' */
+.iconshock-materialblack-mail-inbox:before { content: '\e814'; } /* '' */
+.iconshock-materialblack-mail-infected-mail:before { content: '\e815'; } /* '' */
+.iconshock-materialblack-mail-junk-mail:before { content: '\e816'; } /* '' */
+.iconshock-materialblack-mail-mail:before { content: '\e817'; } /* '' */
+.iconshock-materialblack-mail-mail-account:before { content: '\e818'; } /* '' */
+.iconshock-materialblack-mail-mail-broadcast:before { content: '\e819'; } /* '' */
+.iconshock-materialblack-mail-mail-cache:before { content: '\e81a'; } /* '' */
+.iconshock-materialblack-mail-mail-encryption:before { content: '\e81b'; } /* '' */
+.iconshock-materialblack-mail-mail-id:before { content: '\e81c'; } /* '' */
+.iconshock-materialblack-mail-mail-open:before { content: '\e81d'; } /* '' */
+.iconshock-materialblack-mail-mail-server:before { content: '\e81e'; } /* '' */
+.iconshock-materialblack-mail-mail-trash-can:before { content: '\e81f'; } /* '' */
+.iconshock-materialblack-mail-mailbox:before { content: '\e820'; } /* '' */
+.iconshock-materialblack-mail-mailbox2:before { content: '\e821'; } /* '' */
+.iconshock-materialblack-mail-mailing-list:before { content: '\e822'; } /* '' */
+.iconshock-materialblack-mail-message-id:before { content: '\e823'; } /* '' */
+.iconshock-materialblack-mail-new-mail:before { content: '\e824'; } /* '' */
+.iconshock-materialblack-mail-newspaper:before { content: '\e825'; } /* '' */
+.iconshock-materialblack-mail-outbox:before { content: '\e826'; } /* '' */
+.iconshock-materialblack-mail-paypal:before { content: '\e827'; } /* '' */
+.iconshock-materialblack-mail-pop:before { content: '\e828'; } /* '' */
+.iconshock-materialblack-mail-pop-folder:before { content: '\e829'; } /* '' */
+.iconshock-materialblack-mail-pop-server:before { content: '\e82a'; } /* '' */
+.iconshock-materialblack-mail-pop3:before { content: '\e82b'; } /* '' */
+.iconshock-materialblack-mail-pop3-folder:before { content: '\e82c'; } /* '' */
+.iconshock-materialblack-mail-pop3-server:before { content: '\e82d'; } /* '' */
+.iconshock-materialblack-mail-reply:before { content: '\e82e'; } /* '' */
+.iconshock-materialblack-mail-robot:before { content: '\e82f'; } /* '' */
+.iconshock-materialblack-mail-rss:before { content: '\e830'; } /* '' */
+.iconshock-materialblack-mail-server:before { content: '\e831'; } /* '' */
+.iconshock-materialblack-mail-smtp:before { content: '\e832'; } /* '' */
+.iconshock-materialblack-mail-smtp-folder:before { content: '\e833'; } /* '' */
+.iconshock-materialblack-mail-smtp-server:before { content: '\e834'; } /* '' */
+.iconshock-materialblack-mail-spam:before { content: '\e835'; } /* '' */
+.iconshock-materialblack-mail-tag:before { content: '\e836'; } /* '' */
+.iconshock-materialblack-mail-urgent-mail:before { content: '\e837'; } /* '' */
+.iconshock-materialblack-mail-virus-alert:before { content: '\e838'; } /* '' */
+.iconshock-materialblack-mail-virus-autoupdate:before { content: '\e839'; } /* '' */
+.iconshock-materialblack-mail-virus-definitions:before { content: '\e83a'; } /* '' */
+.iconshock-materialblack-mail-virus-inspector:before { content: '\e83b'; } /* '' */
+.iconshock-materialblack-mail-voice-mail:before { content: '\e83c'; } /* '' */
+.iconshock-materialblack-mail-web-mail:before { content: '\e83d'; } /* '' */

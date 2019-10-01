@@ -1,0 +1,134 @@
+@font-face {
+  font-family: 'materialblack_networking';
+  src: url('../font/materialblack_networking.eot?89650629');
+  src: url('../font/materialblack_networking.eot?89650629#iefix') format('embedded-opentype'),
+       url('../font/materialblack_networking.woff2?89650629') format('woff2'),
+       url('../font/materialblack_networking.woff?89650629') format('woff'),
+       url('../font/materialblack_networking.ttf?89650629') format('truetype'),
+       url('../font/materialblack_networking.svg?89650629#materialblack_networking') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'materialblack_networking';
+    src: url('../font/materialblack_networking.svg?89650629#materialblack_networking') format('svg');
+  }
+}
+*/
+ 
+ [class^="iconshock-materialblack-networking-"]:before, [class*=" iconshock-materialblack-networking-"]:before {
+  font-family: "materialblack_networking";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+}
+ 
+.iconshock-materialblack-networking-access-point:before { content: '\e800'; } /* '' */
+.iconshock-materialblack-networking-administrator:before { content: '\e801'; } /* '' */
+.iconshock-materialblack-networking-agent:before { content: '\e802'; } /* '' */
+.iconshock-materialblack-networking-aim:before { content: '\e803'; } /* '' */
+.iconshock-materialblack-networking-alarm:before { content: '\e804'; } /* '' */
+.iconshock-materialblack-networking-anonymous:before { content: '\e805'; } /* '' */
+.iconshock-materialblack-networking-antenna:before { content: '\e806'; } /* '' */
+.iconshock-materialblack-networking-antenna2:before { content: '\e807'; } /* '' */
+.iconshock-materialblack-networking-arrow-bidirectional:before { content: '\e808'; } /* '' */
+.iconshock-materialblack-networking-asymmetric-network:before { content: '\e809'; } /* '' */
+.iconshock-materialblack-networking-back-up:before { content: '\e80a'; } /* '' */
+.iconshock-materialblack-networking-backup-server:before { content: '\e80b'; } /* '' */
+.iconshock-materialblack-networking-band-aid:before { content: '\e80c'; } /* '' */
+.iconshock-materialblack-networking-bit:before { content: '\e80d'; } /* '' */
+.iconshock-materialblack-networking-bomb:before { content: '\e80e'; } /* '' */
+.iconshock-materialblack-networking-broadband:before { content: '\e80f'; } /* '' */
+.iconshock-materialblack-networking-broken-link:before { content: '\e810'; } /* '' */
+.iconshock-materialblack-networking-broken-link2:before { content: '\e811'; } /* '' */
+.iconshock-materialblack-networking-byte:before { content: '\e812'; } /* '' */
+.iconshock-materialblack-networking-certificate:before { content: '\e813'; } /* '' */
+.iconshock-materialblack-networking-certificate1:before { content: '\e814'; } /* '' */
+.iconshock-materialblack-networking-chat:before { content: '\e815'; } /* '' */
+.iconshock-materialblack-networking-chatroom:before { content: '\e816'; } /* '' */
+.iconshock-materialblack-networking-cloud:before { content: '\e817'; } /* '' */
+.iconshock-materialblack-networking-connect:before { content: '\e818'; } /* '' */
+.iconshock-materialblack-networking-cookies:before { content: '\e819'; } /* '' */
+.iconshock-materialblack-networking-disconnect:before { content: '\e81a'; } /* '' */
+.iconshock-materialblack-networking-emoji:before { content: '\e81b'; } /* '' */
+.iconshock-materialblack-networking-emoji-angry:before { content: '\e81c'; } /* '' */
+.iconshock-materialblack-networking-emoji-blush:before { content: '\e81d'; } /* '' */
+.iconshock-materialblack-networking-emoji-confused:before { content: '\e81e'; } /* '' */
+.iconshock-materialblack-networking-emoji-grin:before { content: '\e81f'; } /* '' */
+.iconshock-materialblack-networking-emoji-in-love:before { content: '\e820'; } /* '' */
+.iconshock-materialblack-networking-emoji-sad:before { content: '\e821'; } /* '' */
+.iconshock-materialblack-networking-emoji-sleeping:before { content: '\e822'; } /* '' */
+.iconshock-materialblack-networking-emoji-waiting:before { content: '\e823'; } /* '' */
+.iconshock-materialblack-networking-emoji-winking:before { content: '\e824'; } /* '' */
+.iconshock-materialblack-networking-encrypt:before { content: '\e825'; } /* '' */
+.iconshock-materialblack-networking-firewall:before { content: '\e826'; } /* '' */
+.iconshock-materialblack-networking-gateway:before { content: '\e827'; } /* '' */
+.iconshock-materialblack-networking-gateway2:before { content: '\e828'; } /* '' */
+.iconshock-materialblack-networking-group:before { content: '\e829'; } /* '' */
+.iconshock-materialblack-networking-hard-disk:before { content: '\e82a'; } /* '' */
+.iconshock-materialblack-networking-headphones:before { content: '\e82b'; } /* '' */
+.iconshock-materialblack-networking-headset:before { content: '\e82c'; } /* '' */
+.iconshock-materialblack-networking-hub:before { content: '\e82d'; } /* '' */
+.iconshock-materialblack-networking-id:before { content: '\e82e'; } /* '' */
+.iconshock-materialblack-networking-ip:before { content: '\e82f'; } /* '' */
+.iconshock-materialblack-networking-isdn:before { content: '\e830'; } /* '' */
+.iconshock-materialblack-networking-isp:before { content: '\e831'; } /* '' */
+.iconshock-materialblack-networking-lan-cable:before { content: '\e832'; } /* '' */
+.iconshock-materialblack-networking-lan-port:before { content: '\e833'; } /* '' */
+.iconshock-materialblack-networking-link:before { content: '\e834'; } /* '' */
+.iconshock-materialblack-networking-link2:before { content: '\e835'; } /* '' */
+.iconshock-materialblack-networking-log:before { content: '\e836'; } /* '' */
+.iconshock-materialblack-networking-mac-address:before { content: '\e837'; } /* '' */
+.iconshock-materialblack-networking-meeting-software:before { content: '\e838'; } /* '' */
+.iconshock-materialblack-networking-network:before { content: '\e839'; } /* '' */
+.iconshock-materialblack-networking-network-card:before { content: '\e83a'; } /* '' */
+.iconshock-materialblack-networking-network-monitor:before { content: '\e83b'; } /* '' */
+.iconshock-materialblack-networking-network-software:before { content: '\e83c'; } /* '' */
+.iconshock-materialblack-networking-node:before { content: '\e83d'; } /* '' */
+.iconshock-materialblack-networking-nurse:before { content: '\e83e'; } /* '' */
+.iconshock-materialblack-networking-osi-model:before { content: '\e83f'; } /* '' */
+.iconshock-materialblack-networking-osi-model2:before { content: '\e840'; } /* '' */
+.iconshock-materialblack-networking-password:before { content: '\e841'; } /* '' */
+.iconshock-materialblack-networking-password2:before { content: '\e842'; } /* '' */
+.iconshock-materialblack-networking-ping:before { content: '\e843'; } /* '' */
+.iconshock-materialblack-networking-piracy:before { content: '\e844'; } /* '' */
+.iconshock-materialblack-networking-piracy2:before { content: '\e845'; } /* '' */
+.iconshock-materialblack-networking-progress-bar:before { content: '\e846'; } /* '' */
+.iconshock-materialblack-networking-protocol:before { content: '\e847'; } /* '' */
+.iconshock-materialblack-networking-protocol2:before { content: '\e848'; } /* '' */
+.iconshock-materialblack-networking-protocol3:before { content: '\e849'; } /* '' */
+.iconshock-materialblack-networking-proxy-server:before { content: '\e84a'; } /* '' */
+.iconshock-materialblack-networking-remote-control:before { content: '\e84b'; } /* '' */
+.iconshock-materialblack-networking-repeater:before { content: '\e84c'; } /* '' */
+.iconshock-materialblack-networking-router:before { content: '\e84d'; } /* '' */
+.iconshock-materialblack-networking-satellite:before { content: '\e84e'; } /* '' */
+.iconshock-materialblack-networking-satellite2:before { content: '\e84f'; } /* '' */
+.iconshock-materialblack-networking-secure-connection:before { content: '\e850'; } /* '' */
+.iconshock-materialblack-networking-security:before { content: '\e851'; } /* '' */
+.iconshock-materialblack-networking-server:before { content: '\e852'; } /* '' */
+.iconshock-materialblack-networking-sms:before { content: '\e853'; } /* '' */
+.iconshock-materialblack-networking-sniffer:before { content: '\e854'; } /* '' */
+.iconshock-materialblack-networking-socket:before { content: '\e855'; } /* '' */
+.iconshock-materialblack-networking-software:before { content: '\e856'; } /* '' */
+.iconshock-materialblack-networking-spyware:before { content: '\e857'; } /* '' */
+.iconshock-materialblack-networking-spyware2:before { content: '\e858'; } /* '' */
+.iconshock-materialblack-networking-subnet2:before { content: '\e859'; } /* '' */
+.iconshock-materialblack-networking-switch:before { content: '\e85a'; } /* '' */
+.iconshock-materialblack-networking-symmetric-network:before { content: '\e85b'; } /* '' */
+.iconshock-materialblack-networking-terminal:before { content: '\e85c'; } /* '' */
+.iconshock-materialblack-networking-terminal2:before { content: '\e85d'; } /* '' */
+.iconshock-materialblack-networking-trojan:before { content: '\e85e'; } /* '' */
+.iconshock-materialblack-networking-trojan2:before { content: '\e85f'; } /* '' */
+.iconshock-materialblack-networking-ups:before { content: '\e860'; } /* '' */
+.iconshock-materialblack-networking-usb:before { content: '\e861'; } /* '' */
+.iconshock-materialblack-networking-usb2:before { content: '\e862'; } /* '' */
+.iconshock-materialblack-networking-virus:before { content: '\e863'; } /* '' */
+.iconshock-materialblack-networking-voip:before { content: '\e864'; } /* '' */
+.iconshock-materialblack-networking-vpn:before { content: '\e865'; } /* '' */
+.iconshock-materialblack-networking-wan:before { content: '\e866'; } /* '' */
+.iconshock-materialblack-networking-wap:before { content: '\e867'; } /* '' */
+.iconshock-materialblack-networking-wifi:before { content: '\e868'; } /* '' */

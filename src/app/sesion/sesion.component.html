@@ -1,0 +1,117 @@
+<div class="contenido" class="mat-typography">
+    <div class="cabecera" [style.backgroundColor]="colorBarraSuperior" [style.color]="colorLetrasTitulo" mat-dialog-title>
+        <i [ngClass]="datos.icono0"></i>
+        <span class="tituloDialogo">{{ datos.titulo }}</span>
+    </div>
+    <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="datos.sesion == 1">        
+        <div class="registroTituloSegundo" [style.backgroundColor]="colorFondoTarjeta">Perfil del usuario</div>    
+        <div class="registroValor">
+            <mat-form-field class="texto">
+                <input #txtUsuario matInput type="text" [(ngModel)]="datos.usuario" maxlength="50" autocomplete="off" name="usuario" required #usuarioN="ngModel">
+                <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+            </mat-form-field>     
+        </div>    
+        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">Contaseña</div>    
+        <div class="registroValor">
+            <mat-form-field class="texto">
+                <input matInput [type]="visibilidad" [(ngModel)]="datos.clave" maxlength="50" autocomplete="off" name="clave" required #claveN="ngModel">
+                <button mat-button matSuffix mat-icon-button (click)="visibilidad = (visibilidad == 'password' ? 'text' : 'password');">
+                    <mat-icon *ngIf="visibilidad == 'password'">visibility</mat-icon>
+                    <mat-icon *ngIf="visibilidad != 'password'">visibility_off</mat-icon>
+                    
+                </button>
+                <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+            </mat-form-field>     
+        </div>    
+    </div>
+    <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="datos.sesion == 2">        
+        <div class="registroTituloSegundo" [style.backgroundColor]="colorFondoTarjeta">Nueva contraseña</div>    
+        <div class="registroValor">
+            <mat-form-field class="texto">
+                <input #txtNvaClave matInput [type]="visibilidad2" [(ngModel)]="datos.nuevaClave" maxlength="50" autocomplete="off" name="nuevaClave" required #claveNva="ngModel">
+                <button mat-button matSuffix mat-icon-button (click)="visibilidad2 = (visibilidad2 == 'password' ? 'text' : 'password');">
+                    <mat-icon *ngIf="visibilidad2 == 'password'">visibility</mat-icon>
+                    <mat-icon *ngIf="visibilidad2 != 'password'">visibility_off</mat-icon>
+                </button>
+                <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+            </mat-form-field>     
+        </div>    
+        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">Confirmación de la contraseña</div>    
+        <div class="registroValor">
+            <mat-form-field class="texto">
+                <input matInput [type]="visibilidad3" [(ngModel)]="datos.nuevaClaveCon" maxlength="50" autocomplete="off" name="nuevaClaveCon" required #claveNvaCon="ngModel">
+                <button mat-button matSuffix mat-icon-button (click)="visibilidad3 = (visibilidad3 == 'password' ? 'text' : 'password');">
+                    <mat-icon *ngIf="visibilidad3 == 'password'">visibility</mat-icon>
+                    <mat-icon *ngIf="visibilidad3 != 'password'">visibility_off</mat-icon>
+                    
+                </button>
+                <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+                <mat-hint class="mensajeError" align="end" *ngIf="datos.nuevaClaveCon != datos.nuevaClave">La contraseña y la confirmación no coinciden</mat-hint>
+            </mat-form-field>     
+        </div>    
+    </div>
+        
+    <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="datos.sesion == 3">        
+        <div class="registroTituloSegundo" [style.backgroundColor]="colorFondoTarjeta">Contraseña actual</div>    
+            <div class="registroValor">
+                <mat-form-field class="texto">
+                    <input #txtclaveActual matInput [disabled]="claveInicializada" [type]="visibilidad1" [(ngModel)]="datos.claveActual" maxlength="50" autocomplete="off" name="claveActual" required #claveNva="ngModel">
+                    <button mat-button matSuffix mat-icon-button *ngIf="!claveInicializada" (click)="visibilidad1 = (visibilidad1 == 'password' ? 'text' : 'password');">
+                        <mat-icon *ngIf="visibilidad1 == 'password'">visibility</mat-icon>
+                        <mat-icon *ngIf="visibilidad1 != 'password'">visibility_off</mat-icon>
+                    </button>
+                    <mat-hint class="pista" align="start" *ngIf="!claveInicializada">Campo requerido</mat-hint>
+                    <mat-hint class="pista" align="start" *ngIf="claveInicializada">La contraseña ha sido inicializada por el administrador</mat-hint>
+                    <mat-hint class="pista" align="end" *ngIf="!claveInicializada && claveIncorrecta">La contraseña actual es incorrecta</mat-hint>
+                    
+                </mat-form-field>     
+            </div>    
+        <div class="registroTituloSegundo" [style.backgroundColor]="colorFondoTarjeta">Nueva contraseña</div>    
+            <div class="registroValor">
+                <mat-form-field class="texto">
+                    <input #txtNvaClave matInput [type]="visibilidad2" [(ngModel)]="datos.nuevaClave" maxlength="50" autocomplete="off" name="nuevaClave" required #claveNva="ngModel">
+                    <button mat-button matSuffix mat-icon-button (click)="visibilidad2 = (visibilidad2 == 'password' ? 'text' : 'password');">
+                        <mat-icon *ngIf="visibilidad2 == 'password'">visibility</mat-icon>
+                        <mat-icon *ngIf="visibilidad2 != 'password'">visibility_off</mat-icon>
+                    </button>
+                    <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+                </mat-form-field>     
+            </div>    
+            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">Confirmación de la contraseña</div>    
+            <div class="registroValor">
+                <mat-form-field class="texto">
+                    <input matInput [type]="visibilidad3" [(ngModel)]="datos.nuevaClaveCon" maxlength="50" autocomplete="off" name="nuevaClaveCon" required #claveNvaCon="ngModel">
+                    <button mat-button matSuffix mat-icon-button (click)="visibilidad3 = (visibilidad3 == 'password' ? 'text' : 'password');">
+                        <mat-icon *ngIf="visibilidad3 == 'password'">visibility</mat-icon>
+                        <mat-icon *ngIf="visibilidad3 != 'password'">visibility_off</mat-icon>
+                        
+                    </button>
+                    <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+                    <mat-hint class="mensajeError" align="end" *ngIf="datos.nuevaClaveCon != datos.nuevaClave">La contraseña y la confirmación no coinciden</mat-hint>
+                </mat-form-field>     
+            </div>    
+        </div>
+
+    <div class="pie" mat-dialog-actions>
+        <button type="submit" class="indice" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="validar(1)" *ngIf="datos.sesion == 1" [disabled]="datos.usuario.length==0">
+            <i [ngClass]="datos.icono1"></i>
+            <span class="indiceTexto">{{ datos.boton1STR }}</span>
+        </button>
+        <button type="submit" class="indice" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="validar(1)" *ngIf="datos.sesion == 2" [disabled]="datos.nuevaClave.length==0 || datos.nuevaClaveCon.length==0">
+            <i class="iconshock-materialblack-general-check-mark"></i>
+            <span class="indiceTexto">Establecer contraseña</span>
+        </button>
+        <button type="submit" class="indice" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="validar(1)" *ngIf="datos.sesion == 3" [disabled]="datos.nuevaClave.length==0 || datos.claveActual.length==0 || datos.nuevaClaveCon.length==0">
+            <i class="iconshock-materialblack-general-check-mark"></i>
+            <span class="indiceTexto">Cambiar contraseña</span>
+        </button>
+        <button class="indice" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button *ngIf="datos.botones>1" (click)="validar(2)">
+            <i [ngClass]="datos.icono2"></i>
+            <span class="indiceTexto">{{ datos.boton2STR }}</span>
+        </button>
+        <button class="indice" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button *ngIf="datos.botones>2" (click)="validar(3)">
+            <i [ngClass]="datos.icono3"></i>
+            <span class="indiceTexto">{{ datos.boton3STR }}</span>
+        </button>
+    </div>
+</div>

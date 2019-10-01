@@ -1,0 +1,53 @@
+<div class="contenido" class="mat-typography">
+    <div class="cabecera" [style.backgroundColor]="colorBarraSuperior" [style.color]="colorLetrasTitulo" mat-dialog-title>
+        <i [ngClass]="datos.icono0"></i>
+        <span class="tituloDialogo">{{ datos.titulo }}</span>
+    </div>
+    <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" *ngIf="datos.clave >= 1">        
+        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta" *ngIf="datos.clave == 1 && datos.causaC==0">Código de causa del movimiento</div>    
+        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta" *ngIf="datos.clave == 4">Acción a efectuar</div>    
+        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta" *ngIf="datos.clave == 1 && datos.causaC==-1">El lote se encuentra en esta causa/calidad</div>    
+        <div class="registroValorPrimero" *ngIf="datos.clave == 1 || datos.clave == 4">{{ datos.causaD }}</div>
+        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta" *ngIf="datos.clave > 1 && datos.clave < 4">Causa del movimiento de calidad</div>    
+        <mat-form-field class="texto" *ngIf="datos.clave == 2 || datos.clave == 3">
+            <mat-select [(ngModel)]="datos.causa" name="causa">
+                <mat-option *ngFor="let causa of causas; let i = index" [value]="i">{{ causa.nombre }}</mat-option>
+            </mat-select>
+            <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+        </mat-form-field>
+        <div class="registroTituloSegundo" [style.backgroundColor]="colorFondoTarjeta">Perfil del usuario</div>    
+        <div class="registroValor">
+            <mat-form-field class="texto">
+                <input matInput type="text" [(ngModel)]="datos.usuario" maxlength="50" autocomplete="off" name="usuario" required #usuarioN="ngModel">
+                <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+            </mat-form-field>     
+        </div>    
+        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">Contaseña</div>    
+        <div class="registroValor">
+            <mat-form-field class="texto">
+                <input matInput [type]="visibilidad" [(ngModel)]="datos.claves" maxlength="50" autocomplete="off" name="claves" required #clavesN="ngModel">
+                <button mat-button matSuffix mat-icon-button (click)="visibilidad = (visibilidad == 'password' ? 'text' : 'password');">
+                    <mat-icon *ngIf="visibilidad == 'password'">visibility</mat-icon>
+                    <mat-icon *ngIf="visibilidad != 'password'">visibility_off</mat-icon>
+                </button>
+                <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+            </mat-form-field>     
+        </div>    
+    </div>
+        
+    <div mat-dialog-conten class ="lista" [style.height.px]="datos.alto" [innerHTML]="datos.mensaje" *ngIf="datos.mensaje.length>0"></div>
+    <div class="pie" mat-dialog-actions>
+        <button type="submit" class="indice" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="validar(1)" [disabled]="(datos.clave >= 1 && (datos.claves.length==0 || datos.usuario.length==0)) || (datos.clave > 1  && datos.clave < 4 && datos.causa==-1)">
+            <i [ngClass]="datos.icono1"></i>
+            <span class="indiceTexto">{{ datos.boton1STR }}</span>
+        </button>
+        <button class="indice" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button *ngIf="datos.botones>1" (click)="validar(2)">
+            <i [ngClass]="datos.icono2"></i>
+            <span class="indiceTexto">{{ datos.boton2STR }}</span>
+        </button>
+        <button class="indice" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button *ngIf="datos.botones>2" (click)="validar(3)">
+            <i [ngClass]="datos.icono3"></i>
+            <span class="indiceTexto">{{ datos.boton3STR }}</span>
+        </button>
+    </div>
+</div>

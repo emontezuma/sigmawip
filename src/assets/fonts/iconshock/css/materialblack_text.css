@@ -1,0 +1,192 @@
+@font-face {
+  font-family: 'materialblack_text';
+  src: url('../font/materialblack_text.eot?38744572');
+  src: url('../font/materialblack_text.eot?38744572#iefix') format('embedded-opentype'),
+       url('../font/materialblack_text.woff2?38744572') format('woff2'),
+       url('../font/materialblack_text.woff?38744572') format('woff'),
+       url('../font/materialblack_text.ttf?38744572') format('truetype'),
+       url('../font/materialblack_text.svg?38744572#materialblack_text') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'materialblack_text';
+    src: url('../font/materialblack_text.svg?38744572#materialblack_text') format('svg');
+  }
+}
+*/
+ 
+ [class^="iconshock-materialblack-text-"]:before, [class*=" iconshock-materialblack-text-"]:before {
+  font-family: "materialblack_text";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+}
+ 
+.iconshock-materialblack-text-accept-document:before { content: '\e800'; } /* '' */
+.iconshock-materialblack-text-access:before { content: '\e801'; } /* '' */
+.iconshock-materialblack-text-acrobat:before { content: '\e802'; } /* '' */
+.iconshock-materialblack-text-add-column:before { content: '\e803'; } /* '' */
+.iconshock-materialblack-text-add-row:before { content: '\e804'; } /* '' */
+.iconshock-materialblack-text-align-center:before { content: '\e805'; } /* '' */
+.iconshock-materialblack-text-align-justify:before { content: '\e806'; } /* '' */
+.iconshock-materialblack-text-align-left:before { content: '\e807'; } /* '' */
+.iconshock-materialblack-text-align-right:before { content: '\e808'; } /* '' */
+.iconshock-materialblack-text-alphaber-cyrillic2:before { content: '\e809'; } /* '' */
+.iconshock-materialblack-text-alphaber-greek:before { content: '\e80a'; } /* '' */
+.iconshock-materialblack-text-alphaber-hebrew2:before { content: '\e80b'; } /* '' */
+.iconshock-materialblack-text-alphaber-indic:before { content: '\e80c'; } /* '' */
+.iconshock-materialblack-text-alphaber-latin:before { content: '\e80d'; } /* '' */
+.iconshock-materialblack-text-alphabet-arabic:before { content: '\e80e'; } /* '' */
+.iconshock-materialblack-text-alphabet-chinesse:before { content: '\e80f'; } /* '' */
+.iconshock-materialblack-text-alphabet-hiragana:before { content: '\e810'; } /* '' */
+.iconshock-materialblack-text-arrange-all:before { content: '\e811'; } /* '' */
+.iconshock-materialblack-text-auto-correct:before { content: '\e812'; } /* '' */
+.iconshock-materialblack-text-border-all:before { content: '\e813'; } /* '' */
+.iconshock-materialblack-text-border-bottom:before { content: '\e814'; } /* '' */
+.iconshock-materialblack-text-border-clear:before { content: '\e815'; } /* '' */
+.iconshock-materialblack-text-border-color:before { content: '\e816'; } /* '' */
+.iconshock-materialblack-text-border-diagonal:before { content: '\e817'; } /* '' */
+.iconshock-materialblack-text-border-diagonal2:before { content: '\e818'; } /* '' */
+.iconshock-materialblack-text-border-horizontal:before { content: '\e819'; } /* '' */
+.iconshock-materialblack-text-border-inner:before { content: '\e81a'; } /* '' */
+.iconshock-materialblack-text-border-left:before { content: '\e81b'; } /* '' */
+.iconshock-materialblack-text-border-outer:before { content: '\e81c'; } /* '' */
+.iconshock-materialblack-text-border-right:before { content: '\e81d'; } /* '' */
+.iconshock-materialblack-text-border-style:before { content: '\e81e'; } /* '' */
+.iconshock-materialblack-text-border-top:before { content: '\e81f'; } /* '' */
+.iconshock-materialblack-text-border-vertical:before { content: '\e820'; } /* '' */
+.iconshock-materialblack-text-bring-to-front:before { content: '\e821'; } /* '' */
+.iconshock-materialblack-text-bullets:before { content: '\e822'; } /* '' */
+.iconshock-materialblack-text-change-lowercase:before { content: '\e823'; } /* '' */
+.iconshock-materialblack-text-change-uppercase:before { content: '\e824'; } /* '' */
+.iconshock-materialblack-text-character-map:before { content: '\e825'; } /* '' */
+.iconshock-materialblack-text-clipart:before { content: '\e826'; } /* '' */
+.iconshock-materialblack-text-clipboard:before { content: '\e827'; } /* '' */
+.iconshock-materialblack-text-columns:before { content: '\e828'; } /* '' */
+.iconshock-materialblack-text-comment:before { content: '\e829'; } /* '' */
+.iconshock-materialblack-text-compare-documents:before { content: '\e82a'; } /* '' */
+.iconshock-materialblack-text-convert-to-text:before { content: '\e82b'; } /* '' */
+.iconshock-materialblack-text-copy:before { content: '\e82c'; } /* '' */
+.iconshock-materialblack-text-copy2:before { content: '\e82d'; } /* '' */
+.iconshock-materialblack-text-cover-page:before { content: '\e82e'; } /* '' */
+.iconshock-materialblack-text-delete-column:before { content: '\e82f'; } /* '' */
+.iconshock-materialblack-text-delete-row:before { content: '\e830'; } /* '' */
+.iconshock-materialblack-text-dimensions2:before { content: '\e831'; } /* '' */
+.iconshock-materialblack-text-distribute-columns:before { content: '\e832'; } /* '' */
+.iconshock-materialblack-text-distribute-rows:before { content: '\e833'; } /* '' */
+.iconshock-materialblack-text-document:before { content: '\e834'; } /* '' */
+.iconshock-materialblack-text-document-map:before { content: '\e835'; } /* '' */
+.iconshock-materialblack-text-document-orientation:before { content: '\e836'; } /* '' */
+.iconshock-materialblack-text-document-orientation-landscape:before { content: '\e837'; } /* '' */
+.iconshock-materialblack-text-document-orientation-portrtait:before { content: '\e838'; } /* '' */
+.iconshock-materialblack-text-drawing:before { content: '\e839'; } /* '' */
+.iconshock-materialblack-text-equation:before { content: '\e83a'; } /* '' */
+.iconshock-materialblack-text-excel:before { content: '\e83b'; } /* '' */
+.iconshock-materialblack-text-export:before { content: '\e83c'; } /* '' */
+.iconshock-materialblack-text-file-format-csv:before { content: '\e83d'; } /* '' */
+.iconshock-materialblack-text-file-format-doc:before { content: '\e83e'; } /* '' */
+.iconshock-materialblack-text-file-format-fon:before { content: '\e83f'; } /* '' */
+.iconshock-materialblack-text-file-format-otf:before { content: '\e840'; } /* '' */
+.iconshock-materialblack-text-file-format-ppt:before { content: '\e841'; } /* '' */
+.iconshock-materialblack-text-file-format-rtf:before { content: '\e842'; } /* '' */
+.iconshock-materialblack-text-file-format-ttf:before { content: '\e843'; } /* '' */
+.iconshock-materialblack-text-file-format-txt:before { content: '\e844'; } /* '' */
+.iconshock-materialblack-text-file-format-xls:before { content: '\e845'; } /* '' */
+.iconshock-materialblack-text-file-format-xml:before { content: '\e846'; } /* '' */
+.iconshock-materialblack-text-fill:before { content: '\e847'; } /* '' */
+.iconshock-materialblack-text-find-in-file:before { content: '\e848'; } /* '' */
+.iconshock-materialblack-text-find-next:before { content: '\e849'; } /* '' */
+.iconshock-materialblack-text-find-next2:before { content: '\e84a'; } /* '' */
+.iconshock-materialblack-text-find-next3:before { content: '\e84b'; } /* '' */
+.iconshock-materialblack-text-find-previous:before { content: '\e84c'; } /* '' */
+.iconshock-materialblack-text-find-previous2:before { content: '\e84d'; } /* '' */
+.iconshock-materialblack-text-find-previous3:before { content: '\e84e'; } /* '' */
+.iconshock-materialblack-text-font-bold:before { content: '\e84f'; } /* '' */
+.iconshock-materialblack-text-font-color:before { content: '\e850'; } /* '' */
+.iconshock-materialblack-text-font-italic:before { content: '\e851'; } /* '' */
+.iconshock-materialblack-text-font-strikethrough:before { content: '\e852'; } /* '' */
+.iconshock-materialblack-text-font-underlined:before { content: '\e853'; } /* '' */
+.iconshock-materialblack-text-footer:before { content: '\e854'; } /* '' */
+.iconshock-materialblack-text-format-painter:before { content: '\e855'; } /* '' */
+.iconshock-materialblack-text-formula:before { content: '\e856'; } /* '' */
+.iconshock-materialblack-text-full-screen-reading:before { content: '\e857'; } /* '' */
+.iconshock-materialblack-text-group:before { content: '\e858'; } /* '' */
+.iconshock-materialblack-text-header:before { content: '\e859'; } /* '' */
+.iconshock-materialblack-text-header-and-footer:before { content: '\e85a'; } /* '' */
+.iconshock-materialblack-text-highlighter:before { content: '\e85b'; } /* '' */
+.iconshock-materialblack-text-horizontal-line:before { content: '\e85c'; } /* '' */
+.iconshock-materialblack-text-import:before { content: '\e85d'; } /* '' */
+.iconshock-materialblack-text-increase-ident:before { content: '\e85e'; } /* '' */
+.iconshock-materialblack-text-insert-chart:before { content: '\e85f'; } /* '' */
+.iconshock-materialblack-text-insert-document:before { content: '\e860'; } /* '' */
+.iconshock-materialblack-text-insert-hyperlink:before { content: '\e861'; } /* '' */
+.iconshock-materialblack-text-insert-image:before { content: '\e862'; } /* '' */
+.iconshock-materialblack-text-insert-shape:before { content: '\e863'; } /* '' */
+.iconshock-materialblack-text-insert-symbol:before { content: '\e864'; } /* '' */
+.iconshock-materialblack-text-insert-table:before { content: '\e865'; } /* '' */
+.iconshock-materialblack-text-kerning:before { content: '\e866'; } /* '' */
+.iconshock-materialblack-text-labels:before { content: '\e867'; } /* '' */
+.iconshock-materialblack-text-leading:before { content: '\e868'; } /* '' */
+.iconshock-materialblack-text-mail:before { content: '\e869'; } /* '' */
+.iconshock-materialblack-text-margins:before { content: '\e86a'; } /* '' */
+.iconshock-materialblack-text-merge-cells:before { content: '\e86b'; } /* '' */
+.iconshock-materialblack-text-merge-to-pdf:before { content: '\e86c'; } /* '' */
+.iconshock-materialblack-text-multilevel-list:before { content: '\e86d'; } /* '' */
+.iconshock-materialblack-text-new-window:before { content: '\e86e'; } /* '' */
+.iconshock-materialblack-text-numbering:before { content: '\e86f'; } /* '' */
+.iconshock-materialblack-text-outlook:before { content: '\e870'; } /* '' */
+.iconshock-materialblack-text-outlook2:before { content: '\e871'; } /* '' */
+.iconshock-materialblack-text-page-border:before { content: '\e872'; } /* '' */
+.iconshock-materialblack-text-page-break:before { content: '\e873'; } /* '' */
+.iconshock-materialblack-text-page-color:before { content: '\e874'; } /* '' */
+.iconshock-materialblack-text-page-number:before { content: '\e875'; } /* '' */
+.iconshock-materialblack-text-paste:before { content: '\e876'; } /* '' */
+.iconshock-materialblack-text-powerpoint:before { content: '\e877'; } /* '' */
+.iconshock-materialblack-text-powerpoint2:before { content: '\e878'; } /* '' */
+.iconshock-materialblack-text-print:before { content: '\e879'; } /* '' */
+.iconshock-materialblack-text-print-layout:before { content: '\e87a'; } /* '' */
+.iconshock-materialblack-text-quick-parts:before { content: '\e87b'; } /* '' */
+.iconshock-materialblack-text-reduce-ident:before { content: '\e87c'; } /* '' */
+.iconshock-materialblack-text-reject-document:before { content: '\e87d'; } /* '' */
+.iconshock-materialblack-text-replace:before { content: '\e87e'; } /* '' */
+.iconshock-materialblack-text-research:before { content: '\e87f'; } /* '' */
+.iconshock-materialblack-text-rotate:before { content: '\e880'; } /* '' */
+.iconshock-materialblack-text-scissors:before { content: '\e881'; } /* '' */
+.iconshock-materialblack-text-search:before { content: '\e882'; } /* '' */
+.iconshock-materialblack-text-select-all:before { content: '\e883'; } /* '' */
+.iconshock-materialblack-text-select-all2:before { content: '\e884'; } /* '' */
+.iconshock-materialblack-text-send-to-back:before { content: '\e885'; } /* '' */
+.iconshock-materialblack-text-shapes:before { content: '\e886'; } /* '' */
+.iconshock-materialblack-text-show-symbols:before { content: '\e887'; } /* '' */
+.iconshock-materialblack-text-smallcaps:before { content: '\e888'; } /* '' */
+.iconshock-materialblack-text-sort-ascending:before { content: '\e889'; } /* '' */
+.iconshock-materialblack-text-sort-descending:before { content: '\e88a'; } /* '' */
+.iconshock-materialblack-text-spell-check:before { content: '\e88b'; } /* '' */
+.iconshock-materialblack-text-split-cell:before { content: '\e88c'; } /* '' */
+.iconshock-materialblack-text-split-column:before { content: '\e88d'; } /* '' */
+.iconshock-materialblack-text-split-row:before { content: '\e88e'; } /* '' */
+.iconshock-materialblack-text-split-table:before { content: '\e88f'; } /* '' */
+.iconshock-materialblack-text-stats-column-chart:before { content: '\e890'; } /* '' */
+.iconshock-materialblack-text-subscript:before { content: '\e891'; } /* '' */
+.iconshock-materialblack-text-superscript:before { content: '\e892'; } /* '' */
+.iconshock-materialblack-text-switch-windows:before { content: '\e893'; } /* '' */
+.iconshock-materialblack-text-symbol:before { content: '\e894'; } /* '' */
+.iconshock-materialblack-text-table:before { content: '\e895'; } /* '' */
+.iconshock-materialblack-text-text-box:before { content: '\e896'; } /* '' */
+.iconshock-materialblack-text-thesaurus:before { content: '\e897'; } /* '' */
+.iconshock-materialblack-text-track-changes:before { content: '\e898'; } /* '' */
+.iconshock-materialblack-text-tracking:before { content: '\e899'; } /* '' */
+.iconshock-materialblack-text-view-gridlines:before { content: '\e89a'; } /* '' */
+.iconshock-materialblack-text-visio:before { content: '\e89b'; } /* '' */
+.iconshock-materialblack-text-watermark:before { content: '\e89c'; } /* '' */
+.iconshock-materialblack-text-web-layout:before { content: '\e89d'; } /* '' */
+.iconshock-materialblack-text-word:before { content: '\e89e'; } /* '' */
+.iconshock-materialblack-text-word-count:before { content: '\e89f'; } /* '' */
+.iconshock-materialblack-text-word-wrap:before { content: '\e8a0'; } /* '' */
+.iconshock-materialblack-text-word-wrap2:before { content: '\e8a1'; } /* '' */
+.iconshock-materialblack-text-zoom:before { content: '\e8a2'; } /* '' */

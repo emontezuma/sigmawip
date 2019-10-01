@@ -1,0 +1,229 @@
+.cdk-global-scrollblock 
+{
+    overflow-y: hidden !important;
+}
+
+.contenido 
+{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+}
+
+.cabecera 
+{
+    margin-top: -10px !important;
+    height: 28px !important; 
+    padding: 4px;
+    font-size: 24px !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.tituloDialogo
+{
+    font-size: 20px !important;
+}
+
+
+.lista {
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+    padding: 10px;
+    text-align: center;
+    font-size: 17px !important;
+    margin-right: 0px;
+    border-radius: 0px !important;
+    margin-left: 0px !important;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: rgba(0, 0, 0, 0.15) !important;
+    color: rgb(51, 51, 51) !important;
+
+ }
+ 
+ .pista {
+    font-size: 14px  !important;
+    margin-top: 3px;
+}
+
+
+.pie
+{
+    margin-top: 5px !important;
+    margin-right: 3px !important;
+    display: flex;
+    align-items: center;
+    height: 46px !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+
+.indice:hover:enabled
+{
+    box-shadow: 0 0px 2px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+
+.indice
+{
+    border-width: 0.5px;
+    border-style: solid;
+    border-radius: 0px !important;
+    max-height: 43px !important;
+    height: 43px !important;
+    display: flex;
+    flex-direction: row;
+    font-size: 18px !important;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.indiceTexto
+{
+    font-size: 14px !important;
+    margin-top: -4px !important;
+    margin-left: 2px;
+}
+
+
+
+
+
+.registroTitulo, .registroTituloSegundo
+{
+    font-size: 15px;
+    text-align: left;
+    padding: 2px;
+    font-weight: 550;
+}
+
+.registroTituloSegundo
+{
+    margin-top: 10px;
+}
+
+.registroCampo 
+{
+    text-align: left;
+    padding: 2px;
+    padding-left: 5px;
+    line-height: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 320px !important;
+    margin-top: -15px;
+}
+
+
+::ng-deep .mat-form-field-underline {
+    background-color: rgb(51, 51, 51) !important;
+}
+
+::ng-deep .mat-form-field-ripple {
+    background-color: rgb(51, 51, 51) !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    color: rgb(51, 51, 51) !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: rgb(51, 51, 51) !important;
+}
+
+.texto
+{
+    min-height: 80px;
+    width: 100%;
+    margin-top: -10px;
+    font-size: 16px !important;
+}
+
+.registroValor, .registroValorPrimero
+{
+    width: 100%;
+    font-weight: 550;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-left: 2px;
+}
+
+.registroValorPrimero
+{
+    margin-top: 10px;
+}
+
+.cajaEstatus
+  {
+    text-align: left;
+    padding: 2px;
+    padding-left: 5px;
+    line-height: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 320px !important;
+    margin: 5px !important;
+  }
+
+  .mensajeError
+  {
+      color: red !important;
+      font-size: 14px  !important;
+    margin-top: 3px;
+  }
+  
+::ng-deep snack-bar-container.custom-class {
+    margin-top: -100px !important;
+    background-color: rgba(255, 255, 255, 0.95);
+    color: rgb(41, 41, 41);
+  }
+  
+  ::ng-deep .custom-class .mat-simple-snackbar {
+    font-size: 22px;
+    text-align: center;
+    justify-content: center;
+    white-space: normal;
+    line-height: 22px !important;
+    color: rgb(41, 41, 41);
+  }
+
+  ::ng-deep .custom-class .mat-simple-snackbar.container {
+    max-width: 600px;
+    width: 30%;
+    margin-top: -100px !important;
+
+  }
+
+  ::ng-deep snack-bar-container.custom-class-red {
+    margin-top: -100px !important;
+    background-color: rgba(255, 0, 0, 0.95);
+    color: rgb(240, 240, 240);
+  }
+  
+  ::ng-deep .custom-class-red .mat-simple-snackbar {
+    font-size: 22px;
+    text-align: center;
+    justify-content: center;
+    white-space: normal;
+    line-height: 22px !important;
+    color: rgb(240, 240, 240);
+  }
+
+  ::ng-deep .custom-class-red .mat-simple-snackbar.container {
+    max-width: 600px;
+    width: 30%;
+    margin-top: -100px !important;
+
+  }

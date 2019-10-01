@@ -1,0 +1,114 @@
+@font-face {
+  font-family: 'materialblack_security';
+  src: url('../font/materialblack_security.eot?68390990');
+  src: url('../font/materialblack_security.eot?68390990#iefix') format('embedded-opentype'),
+       url('../font/materialblack_security.woff2?68390990') format('woff2'),
+       url('../font/materialblack_security.woff?68390990') format('woff'),
+       url('../font/materialblack_security.ttf?68390990') format('truetype'),
+       url('../font/materialblack_security.svg?68390990#materialblack_security') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'materialblack_security';
+    src: url('../font/materialblack_security.svg?68390990#materialblack_security') format('svg');
+  }
+}
+*/
+ 
+ [class^="iconshock-materialblack-security-"]:before, [class*=" iconshock-materialblack-security-"]:before {
+  font-family: "materialblack_security";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+}
+ 
+.iconshock-materialblack-security-access-blocking:before { content: '\e800'; } /* '' */
+.iconshock-materialblack-security-access-control:before { content: '\e801'; } /* '' */
+.iconshock-materialblack-security-activity:before { content: '\e802'; } /* '' */
+.iconshock-materialblack-security-allow-all:before { content: '\e803'; } /* '' */
+.iconshock-materialblack-security-analyze-mail:before { content: '\e804'; } /* '' */
+.iconshock-materialblack-security-anti-dialer:before { content: '\e805'; } /* '' */
+.iconshock-materialblack-security-anti-dialer2:before { content: '\e806'; } /* '' */
+.iconshock-materialblack-security-anti-spam:before { content: '\e807'; } /* '' */
+.iconshock-materialblack-security-anti-spam2:before { content: '\e808'; } /* '' */
+.iconshock-materialblack-security-antivirus:before { content: '\e809'; } /* '' */
+.iconshock-materialblack-security-antivirus2:before { content: '\e80a'; } /* '' */
+.iconshock-materialblack-security-aplication-list:before { content: '\e80b'; } /* '' */
+.iconshock-materialblack-security-aplication-modules:before { content: '\e80c'; } /* '' */
+.iconshock-materialblack-security-aplication-modules2:before { content: '\e80d'; } /* '' */
+.iconshock-materialblack-security-authentication:before { content: '\e80e'; } /* '' */
+.iconshock-materialblack-security-backup:before { content: '\e80f'; } /* '' */
+.iconshock-materialblack-security-black-list:before { content: '\e810'; } /* '' */
+.iconshock-materialblack-security-block-all:before { content: '\e811'; } /* '' */
+.iconshock-materialblack-security-cache:before { content: '\e812'; } /* '' */
+.iconshock-materialblack-security-clean:before { content: '\e813'; } /* '' */
+.iconshock-materialblack-security-clear-log:before { content: '\e814'; } /* '' */
+.iconshock-materialblack-security-command-line-interface:before { content: '\e815'; } /* '' */
+.iconshock-materialblack-security-critical-zones:before { content: '\e816'; } /* '' */
+.iconshock-materialblack-security-decrypt:before { content: '\e817'; } /* '' */
+.iconshock-materialblack-security-decrypt2:before { content: '\e818'; } /* '' */
+.iconshock-materialblack-security-desinfect:before { content: '\e819'; } /* '' */
+.iconshock-materialblack-security-disruption:before { content: '\e81a'; } /* '' */
+.iconshock-materialblack-security-dynamic-link-library:before { content: '\e81b'; } /* '' */
+.iconshock-materialblack-security-encapsulate:before { content: '\e81c'; } /* '' */
+.iconshock-materialblack-security-encrypt:before { content: '\e81d'; } /* '' */
+.iconshock-materialblack-security-examine:before { content: '\e81e'; } /* '' */
+.iconshock-materialblack-security-exclude:before { content: '\e81f'; } /* '' */
+.iconshock-materialblack-security-file-scanner1:before { content: '\e820'; } /* '' */
+.iconshock-materialblack-security-file-scanner2:before { content: '\e821'; } /* '' */
+.iconshock-materialblack-security-filtering-router:before { content: '\e822'; } /* '' */
+.iconshock-materialblack-security-firewall:before { content: '\e823'; } /* '' */
+.iconshock-materialblack-security-fix:before { content: '\e824'; } /* '' */
+.iconshock-materialblack-security-flood:before { content: '\e825'; } /* '' */
+.iconshock-materialblack-security-hijack:before { content: '\e826'; } /* '' */
+.iconshock-materialblack-security-input-validation:before { content: '\e827'; } /* '' */
+.iconshock-materialblack-security-internet-connection:before { content: '\e828'; } /* '' */
+.iconshock-materialblack-security-intrusion-detection:before { content: '\e829'; } /* '' */
+.iconshock-materialblack-security-intrusion-detection2:before { content: '\e82a'; } /* '' */
+.iconshock-materialblack-security-kill-process:before { content: '\e82b'; } /* '' */
+.iconshock-materialblack-security-kill-process2:before { content: '\e82c'; } /* '' */
+.iconshock-materialblack-security-knowledge-base:before { content: '\e82d'; } /* '' */
+.iconshock-materialblack-security-mail-attachment:before { content: '\e82e'; } /* '' */
+.iconshock-materialblack-security-mail-obfuscator:before { content: '\e82f'; } /* '' */
+.iconshock-materialblack-security-malware:before { content: '\e830'; } /* '' */
+.iconshock-materialblack-security-monitoring:before { content: '\e831'; } /* '' */
+.iconshock-materialblack-security-packet:before { content: '\e832'; } /* '' */
+.iconshock-materialblack-security-packet-filter:before { content: '\e833'; } /* '' */
+.iconshock-materialblack-security-password-generator:before { content: '\e834'; } /* '' */
+.iconshock-materialblack-security-phishing:before { content: '\e835'; } /* '' */
+.iconshock-materialblack-security-popup:before { content: '\e836'; } /* '' */
+.iconshock-materialblack-security-popup-blocker:before { content: '\e837'; } /* '' */
+.iconshock-materialblack-security-protection:before { content: '\e838'; } /* '' */
+.iconshock-materialblack-security-quarentine2:before { content: '\e839'; } /* '' */
+.iconshock-materialblack-security-running-process:before { content: '\e83a'; } /* '' */
+.iconshock-materialblack-security-running-process2:before { content: '\e83b'; } /* '' */
+.iconshock-materialblack-security-scheduled-scan:before { content: '\e83c'; } /* '' */
+.iconshock-materialblack-security-security:before { content: '\e83d'; } /* '' */
+.iconshock-materialblack-security-security-checkmark:before { content: '\e83e'; } /* '' */
+.iconshock-materialblack-security-security-cross:before { content: '\e83f'; } /* '' */
+.iconshock-materialblack-security-security-levels:before { content: '\e840'; } /* '' */
+.iconshock-materialblack-security-security-levels-low:before { content: '\e841'; } /* '' */
+.iconshock-materialblack-security-security-levels-medium:before { content: '\e842'; } /* '' */
+.iconshock-materialblack-security-security-policy:before { content: '\e843'; } /* '' */
+.iconshock-materialblack-security-security-round:before { content: '\e844'; } /* '' */
+.iconshock-materialblack-security-security-test:before { content: '\e845'; } /* '' */
+.iconshock-materialblack-security-session:before { content: '\e846'; } /* '' */
+.iconshock-materialblack-security-session-female:before { content: '\e847'; } /* '' */
+.iconshock-materialblack-security-spam-filter:before { content: '\e848'; } /* '' */
+.iconshock-materialblack-security-spoofing:before { content: '\e849'; } /* '' */
+.iconshock-materialblack-security-spoofing2:before { content: '\e84a'; } /* '' */
+.iconshock-materialblack-security-surveillance-camera:before { content: '\e84b'; } /* '' */
+.iconshock-materialblack-security-terminate-process:before { content: '\e84c'; } /* '' */
+.iconshock-materialblack-security-terminate-process2:before { content: '\e84d'; } /* '' */
+.iconshock-materialblack-security-traffic-control2:before { content: '\e84e'; } /* '' */
+.iconshock-materialblack-security-update:before { content: '\e84f'; } /* '' */
+.iconshock-materialblack-security-virus:before { content: '\e850'; } /* '' */
+.iconshock-materialblack-security-virus-update:before { content: '\e851'; } /* '' */
+.iconshock-materialblack-security-vulnerability:before { content: '\e852'; } /* '' */
+.iconshock-materialblack-security-white-list:before { content: '\e853'; } /* '' */
+.iconshock-materialblack-security-worms:before { content: '\e854'; } /* '' */

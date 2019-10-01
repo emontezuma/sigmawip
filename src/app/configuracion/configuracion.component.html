@@ -1,0 +1,260 @@
+
+<div id="todo" class="mat-typography">
+    <div class="pantallaError" [style.borderColor]="colorBorde" [style.color]="colorLetrasBox" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}" *ngIf="pantalla==1">
+        <div class="cabeceraMensaje" [style.backgroundColor]="colorFondoTarjeta" >{{ errorTitulo }}</div>
+        <div class="mensaje" [innerHTML]="errorMensaje"></div>
+    </div>
+    <div class="catalogos" [style.height.px]="altoPantalla" [style.width.px]="anchoPantalla" cdkScrollable [style.overflowY]="verBarra" *ngIf="pantalla==2">
+        <div class="cabecera" [style.backgroundColor]="colorFondoCabecera" [ngStyle]="{'border': '1px solid' + colorSN}">
+            <button class="indiceDivisionCorto" [style.color]="(botonera[0] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[0] ? 'inherit' : colorFondoBoton)" mat-button (click)="guardar()" [matTooltip] = "ayuda01" matTooltipClass = "toolTip" matTooltipShowDelay = "100" [disabled]="botonera[0]">
+                <i class="iconshock-materialblack-general-diskette"></i>
+            </button>
+            <button class="indiceUltimo" [style.color]="(botonera[1] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[1] ? 'inherit' : colorFondoBoton)" mat-button (click)="cancelar()" [matTooltip] = "ayuda02" matTooltipClass = "toolTip" matTooltipShowDelay = "100" [disabled]="botonera[1]">
+                <i class="iconshock-materialblack-general-reload"></i>
+            </button>
+        </div>
+    <div class="contenedorScroll" [style.color]="colorLetrasBox" [style.backgroundColor]="colorFondo" [ngStyle]="{'border': '1px solid' + colorSN}" cdkScrollable [style.overflowY]="verBarra">
+        <div class="plantilla" @esquema [style.color]="colorLetrasBox" [style.backgroundColor]="colorFondo">
+            <div class="registroCaja">
+                <div class="alertaCaja" *ngIf="editando" [style.backgroundColor]="colorFondoTarjeta">
+                    <mat-icon class="alertaIcono">warning</mat-icon>
+                    <span class="alertaMensaje" [innerHTML]="faltaMensaje"></span>
+                </div>
+                <div class="registroGeneral">
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">1. Número de meses en linea (autogestión de datos)</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <input matInput #txtMeses type="number" [(ngModel)]="detalleRegistro.gestion_meses" maxlength="2" autocomplete="off" name="gestion_meses" #gestion_mesesN="ngModel" (input)="cambiando($event)">
+                            <mat-hint class="pista" align="start"><strong>1-48 meses</strong></mat-hint>
+                        </mat-form-field>                            
+                    </div>    
+                </div>
+
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                        <div class="registroTituloArriba" [style.backgroundColor]="colorFondoTarjeta">2. Reverso de lote en la opción de Flujo de material</div>    
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">2.1. Permitir reverso</div>    
+                    <mat-form-field class="texto">
+                        <mat-select [(ngModel)]="detalleRegistro.reverso_permitir" name="reverso_permitir" (selectionChange)="cambiando($event)" >
+                            <mat-option value="S">Permitir el reverso sin contraseña</mat-option>
+                            <mat-option value="C">Permitir el reverso con contraseña</mat-option>
+                            <mat-option value="N">NO permitir reverso de lote</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">2.2. Código a leer para el reverso de lote</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <input matInput #txtMeses [(ngModel)]="detalleRegistro.reverso_referencia" maxlength="20" autocomplete="off" name="reverso_referencia" #reverso_referenciaN="ngModel" (input)="cambiando($event)">
+                            <mat-hint class="pista" align="start">{{reverso_referenciaN.value?.length || 0}} de 20</mat-hint>
+                        </mat-form-field>                            
+                    </div>    
+                </div>
+
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">3. Servidor por defecto de MMCall</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <input matInput #txtMeses [(ngModel)]="detalleRegistro.server_mmcall" maxlength="100" autocomplete="off" name="server_mmcall" #server_mmcallN="ngModel" (input)="cambiando($event)">
+                            <mat-hint class="pista" align="start">{{reverso_referenciaN.value?.length || 0}} de 100</mat-hint>
+                        </mat-form-field>                            
+                    </div>    
+                </div>
+
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">4. Solicitar contraseña para acciones de calidad</div>    
+                    <mat-form-field class="texto">
+                        <mat-select [(ngModel)]="detalleRegistro.lote_inspeccion_clave" name="lote_inspeccion_clave" (selectionChange)="cambiando($event)" >
+                            <mat-option value="S">SI</mat-option>
+                            <mat-option value="N">NO</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTituloArriba" [style.backgroundColor]="colorFondoTarjeta">5. Optimización de mensajes (cuando se acumulan)</div>    
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">5.1. Optimizar mensajes de MMCall</div>    
+                    <mat-form-field class="texto">
+                        <mat-select [(ngModel)]="detalleRegistro.optimizar_mmcall" name="optimizar_mmcall" (selectionChange)="cambiando($event)" >
+                            <mat-option value="S">SI</mat-option>
+                            <mat-option value="N">NO</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">5.2. Optimizar mensajes de correo</div>    
+                    <mat-form-field class="texto">
+                        <mat-select [(ngModel)]="detalleRegistro.optimizar_correo" name="optimizar_correo" (selectionChange)="cambiando($event)" >
+                            <mat-option value="S">SI</mat-option>
+                            <mat-option value="N">NO</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTituloArriba" [style.backgroundColor]="colorFondoTarjeta">6. Formato para los indicadores de cumplimiento</div>    
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">6.1. Servicio bajo</div>    
+                    <div class="cajaColor">
+                        <mat-form-field class="textoAltoPeq">
+                            <input matInput placeholder="Menor a (%)" type="number" min="1" max="100" [(ngModel)]="detalleRegistro.bajo_hasta" maxlength="3" autocomplete="off" name="bajo_hasta" #bajo_hastaN="ngModel" (input)="cambiando($event)">
+                            <mat-hint class="pista" align="start">PCT: 1-100</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field class="textoAlto">
+                            <input matInput placeholder="Etiqueta" [(ngModel)]="detalleRegistro.bajo_etiqueta" maxlength="30" autocomplete="off" name="bajo_etiqueta" #bajo_etiquetaN="ngModel"  (input)="cambiando($event)">
+                            <mat-hint class="pista" align="end">{{bajo_etiquetaN.value?.length || 0}} de 30</mat-hint>
+                        </mat-form-field>
+                        <dx-color-box class="colores" [(value)]="detalleRegistro.bajo_color" applyButtonText="Aceptar" cancelButtonText="Cancelar" (click)="cambiando($event)"></dx-color-box>
+                    </div>
+                </div>
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">6.2. Servicio medio</div>    
+                    <div class="cajaColor">
+                        <mat-form-field class="textoAltoPeq">
+                            <input matInput placeholder="Menor a (%)" type="number" min="1" max="100" [(ngModel)]="detalleRegistro.medio_hasta" maxlength="3" autocomplete="off" name="medio_hasta" #medio_hastaN="ngModel" (input)="cambiando($event)">
+                            <mat-hint class="pista" align="start">PCT: 1-100</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field class="textoAlto">
+                            <input matInput placeholder="Etiqueta" [(ngModel)]="detalleRegistro.medio_etiqueta" maxlength="30" autocomplete="off" name="medio_etiqueta" #medio_etiquetaN="ngModel"  (input)="cambiando($event)">
+                            <mat-hint class="pista" align="end">{{medio_etiquetaN.value?.length || 0}} de 30</mat-hint>
+                        </mat-form-field>
+                        <dx-color-box class="colores" [(value)]="detalleRegistro.medio_color" applyButtonText="Aceptar" cancelButtonText="Cancelar" (click)="cambiando($event)"></dx-color-box>
+                    </div>
+                </div>
+
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">6.3. Servicio alto</div>    
+                    <div class="cajaColor">
+                        <mat-form-field class="textoAlto">
+                            <input matInput placeholder="Etiqueta" [(ngModel)]="detalleRegistro.alto_etiqueta" maxlength="30" autocomplete="off" name="alto_etiqueta" #alto_etiquetaN="ngModel"  (input)="cambiando($event)">
+                            <mat-hint class="pista" align="end">{{alto_etiquetaN.value?.length || 0}} de 30</mat-hint>
+                        </mat-form-field>
+                        <dx-color-box class="colores" [(value)]="detalleRegistro.alto_color" applyButtonText="Aceptar" cancelButtonText="Cancelar" (click)="cambiando($event)"></dx-color-box>
+                    </div>
+                </div>
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">7. Tiempo de espera para el escaneo (milisegundos)</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <input matInput type="number" [(ngModel)]="detalleRegistro.tiempo_escaner" maxlength="4" autocomplete="off" name="tiempo_escaner" #tiempo_escanerN="ngModel" (input)="cambiando($event)">
+                        </mat-form-field>                            
+                    </div>    
+                </div>
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">8. Tiempo de espera entre escaneos múltiples (segundos)</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <input matInput type="number" [(ngModel)]="detalleRegistro.tiempo_entre_lecturas" maxlength="4" autocomplete="off" name="tiempo_entre_lecturas" #tiempo_entre_lecturasN="ngModel" (input)="cambiando($event)">
+                        </mat-form-field>                            
+                    </div>    
+                </div>
+
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">9. Tipo de flujo de material</div>    
+                    <mat-form-field class="texto">
+                        <mat-select [(ngModel)]="detalleRegistro.tipo_flujo" name="tipo_flujo" (selectionChange)="cambiando($event)" >
+                            <mat-option value="E">Empujar el lote (se envía a otra operación)</mat-option>
+                            <mat-option value="J">Halar el lote sin confirmar</mat-option>
+                            <mat-option value="C">Halar el lote confirmando</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">10. Tiempo mínimo para generar una reprogramación de cargas (en segundos)</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <input matInput type="number" [(ngModel)]="detalleRegistro.holgura_reprogramar" maxlength="6" autocomplete="off" name="holgura_reprogramar" #holgura_reprogramarN="ngModel" (input)="cambiando($event)">
+                        </mat-form-field>                            
+                    </div>    
+                </div>
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">11. Tiempo de holgura para generar las alarmas (en segundos)</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <input matInput type="number" [(ngModel)]="detalleRegistro.tiempo_holgura" maxlength="6" autocomplete="off" name="tiempo_holgura" #tiempo_holguraN="ngModel" (input)="cambiando($event)">
+                        </mat-form-field>                            
+                    </div>    
+                </div>
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">12. Tiempo previo para avisar de una posible alerta (en segundos)</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <input matInput type="number" [(ngModel)]="detalleRegistro.avisar_segundos" maxlength="6" autocomplete="off" name="avisar_segundos" #avisar_segundosN="ngModel" (input)="cambiando($event)">
+                        </mat-form-field>                            
+                    </div>    
+                </div>
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">13. Estimado de productividad (Gráfica de productividad por operación) (porcentaje)</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <input matInput type="number" [(ngModel)]="detalleRegistro.estimado_productividad" maxlength="3" autocomplete="off" name="estimado_productividad" #estimado_productividadN="ngModel" (input)="cambiando($event)">
+                            <mat-hint class="pista" align="start">1-200</mat-hint>
+                        </mat-form-field>                            
+                    </div>    
+                </div>
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTituloArriba" [style.backgroundColor]="colorFondoTarjeta">14. Correo electrónico corporativo</div>    
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">14.1. Cuenta de correo</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <input matInput [(ngModel)]="detalleRegistro.correo_cuenta" maxlength="100" autocomplete="off" name="correo_cuenta" #correo_cuentaN="ngModel" (input)="cambiando($event)">
+                            <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+                            <mat-hint class="pista" align="end">{{correo_cuentaN.value?.length || 0}} de 100</mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">14.2. Contraseña del correo</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <input matInput type="password"[(ngModel)]="detalleRegistro.correo_clave" maxlength="100" autocomplete="off" name="correo_clave" #correo_claveN="ngModel" (input)="cambiando($event)">
+                            <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+                            <mat-hint class="pista" align="end">{{correo_claveN.value?.length || 0}} de 100</mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">14.3. Número de puerto</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <input matInput [(ngModel)]="detalleRegistro.correo_puerto" maxlength="100" autocomplete="off" name="correo_puerto" #correo_puertoN="ngModel" (input)="cambiando($event)">
+                            <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+                            <mat-hint class="pista" align="end">{{correo_puertoN.value?.length || 0}} de 100</mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">14.4. Nombre del host</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <input matInput [(ngModel)]="detalleRegistro.correo_host" maxlength="100" autocomplete="off" name="correo_host" #correo_hostN="ngModel" (input)="cambiando($event)">
+                            <mat-hint class="pista" align="start">Campo requerido</mat-hint>
+                            <mat-hint class="pista" align="end">{{correo_hostN.value?.length || 0}} de 100</mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                    <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">14.5. Activar SSL</div>    
+                    <div class="registroValor">
+                        <mat-form-field class="texto">
+                            <mat-select [(ngModel)]="detalleRegistro.correo_ssl" name="correo_ssl" (selectionChange)="cambiando($event)" >
+                                <mat-option value="S">SI</mat-option>
+                                <mat-option value="N">NO</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                
+            </div>    
+            </div>
+        </div>
+        </div>
+        <div class="subir" *ngIf="verIrArriba" @arriba>
+            <button class="subirBoton" [style.color]="colorLetrasTitulo" [style.backgroundColor]="colorBarraSuperior" mat-flat-button color (click)="irArriba()" [matTooltip]="irArribaTT" matTooltipClass = "toolTip">
+                <mat-icon class="subirIcono">first_page</mat-icon>
+            </button>
+        </div>
+    </div>
+</div> 

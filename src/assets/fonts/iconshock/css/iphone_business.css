@@ -1,0 +1,141 @@
+@font-face {
+  font-family: 'iphone_business';
+  src: url('../font/iphone_business.eot?91967326');
+  src: url('../font/iphone_business.eot?91967326#iefix') format('embedded-opentype'),
+       url('../font/iphone_business.woff2?91967326') format('woff2'),
+       url('../font/iphone_business.woff?91967326') format('woff'),
+       url('../font/iphone_business.ttf?91967326') format('truetype'),
+       url('../font/iphone_business.svg?91967326#iphone_business') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'iphone_business';
+    src: url('../font/iphone_business.svg?91967326#iphone_business') format('svg');
+  }
+}
+*/
+ 
+ [class^="iconshock-iphone-business-"]:before, [class*=" iconshock-iphone-business-"]:before {
+  font-family: "iphone_business";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+}
+ 
+.iconshock-iphone-business-acquisition:before { content: '\e800'; } /* '' */
+.iconshock-iphone-business-acquisition2:before { content: '\e801'; } /* '' */
+.iconshock-iphone-business-acquisition3:before { content: '\e802'; } /* '' */
+.iconshock-iphone-business-advertising:before { content: '\e803'; } /* '' */
+.iconshock-iphone-business-alliance:before { content: '\e804'; } /* '' */
+.iconshock-iphone-business-alliance2:before { content: '\e805'; } /* '' */
+.iconshock-iphone-business-benchmarking:before { content: '\e806'; } /* '' */
+.iconshock-iphone-business-best-product:before { content: '\e807'; } /* '' */
+.iconshock-iphone-business-billboard:before { content: '\e808'; } /* '' */
+.iconshock-iphone-business-brand:before { content: '\e809'; } /* '' */
+.iconshock-iphone-business-brochure:before { content: '\e80a'; } /* '' */
+.iconshock-iphone-business-catalog:before { content: '\e80b'; } /* '' */
+.iconshock-iphone-business-certificate2:before { content: '\e80c'; } /* '' */
+.iconshock-iphone-business-champagne:before { content: '\e80d'; } /* '' */
+.iconshock-iphone-business-checkered-flag:before { content: '\e80e'; } /* '' */
+.iconshock-iphone-business-company:before { content: '\e80f'; } /* '' */
+.iconshock-iphone-business-company2:before { content: '\e810'; } /* '' */
+.iconshock-iphone-business-competitors:before { content: '\e811'; } /* '' */
+.iconshock-iphone-business-corporation:before { content: '\e812'; } /* '' */
+.iconshock-iphone-business-decision-support-system:before { content: '\e813'; } /* '' */
+.iconshock-iphone-business-defective-product:before { content: '\e814'; } /* '' */
+.iconshock-iphone-business-demographic:before { content: '\e815'; } /* '' */
+.iconshock-iphone-business-directive-board:before { content: '\e816'; } /* '' */
+.iconshock-iphone-business-directive-board2:before { content: '\e817'; } /* '' */
+.iconshock-iphone-business-discontinued-product:before { content: '\e818'; } /* '' */
+.iconshock-iphone-business-diversity:before { content: '\e819'; } /* '' */
+.iconshock-iphone-business-excel:before { content: '\e81a'; } /* '' */
+.iconshock-iphone-business-extract-e-mail:before { content: '\e81b'; } /* '' */
+.iconshock-iphone-business-filter:before { content: '\e81c'; } /* '' */
+.iconshock-iphone-business-filter-data:before { content: '\e81d'; } /* '' */
+.iconshock-iphone-business-focus-group:before { content: '\e81e'; } /* '' */
+.iconshock-iphone-business-franchise:before { content: '\e81f'; } /* '' */
+.iconshock-iphone-business-front-desk:before { content: '\e820'; } /* '' */
+.iconshock-iphone-business-glass-bottle:before { content: '\e821'; } /* '' */
+.iconshock-iphone-business-graphic-report:before { content: '\e822'; } /* '' */
+.iconshock-iphone-business-graphic-report2:before { content: '\e823'; } /* '' */
+.iconshock-iphone-business-grouped-data:before { content: '\e824'; } /* '' */
+.iconshock-iphone-business-hand-handshake:before { content: '\e825'; } /* '' */
+.iconshock-iphone-business-insurance:before { content: '\e826'; } /* '' */
+.iconshock-iphone-business-investment:before { content: '\e827'; } /* '' */
+.iconshock-iphone-business-investor:before { content: '\e828'; } /* '' */
+.iconshock-iphone-business-loss:before { content: '\e829'; } /* '' */
+.iconshock-iphone-business-market-segmentation:before { content: '\e82a'; } /* '' */
+.iconshock-iphone-business-market-segmentation2:before { content: '\e82b'; } /* '' */
+.iconshock-iphone-business-meeting:before { content: '\e82c'; } /* '' */
+.iconshock-iphone-business-meeting2:before { content: '\e82d'; } /* '' */
+.iconshock-iphone-business-meeting3:before { content: '\e82e'; } /* '' */
+.iconshock-iphone-business-meeting4:before { content: '\e82f'; } /* '' */
+.iconshock-iphone-business-merger:before { content: '\e830'; } /* '' */
+.iconshock-iphone-business-merger2:before { content: '\e831'; } /* '' */
+.iconshock-iphone-business-merger3:before { content: '\e832'; } /* '' */
+.iconshock-iphone-business-negotiation:before { content: '\e833'; } /* '' */
+.iconshock-iphone-business-new-product:before { content: '\e834'; } /* '' */
+.iconshock-iphone-business-niche:before { content: '\e835'; } /* '' */
+.iconshock-iphone-business-offer:before { content: '\e836'; } /* '' */
+.iconshock-iphone-business-offer2:before { content: '\e837'; } /* '' */
+.iconshock-iphone-business-offer3:before { content: '\e838'; } /* '' */
+.iconshock-iphone-business-oil:before { content: '\e839'; } /* '' */
+.iconshock-iphone-business-organizational-chart:before { content: '\e83a'; } /* '' */
+.iconshock-iphone-business-parent:before { content: '\e83b'; } /* '' */
+.iconshock-iphone-business-parent2:before { content: '\e83c'; } /* '' */
+.iconshock-iphone-business-parent3:before { content: '\e83d'; } /* '' */
+.iconshock-iphone-business-partnership:before { content: '\e83e'; } /* '' */
+.iconshock-iphone-business-personal-card:before { content: '\e83f'; } /* '' */
+.iconshock-iphone-business-plastic-bottle:before { content: '\e840'; } /* '' */
+.iconshock-iphone-business-positioning:before { content: '\e841'; } /* '' */
+.iconshock-iphone-business-presentation:before { content: '\e842'; } /* '' */
+.iconshock-iphone-business-presentation2:before { content: '\e843'; } /* '' */
+.iconshock-iphone-business-private-company:before { content: '\e844'; } /* '' */
+.iconshock-iphone-business-product:before { content: '\e845'; } /* '' */
+.iconshock-iphone-business-product-combo:before { content: '\e846'; } /* '' */
+.iconshock-iphone-business-profit:before { content: '\e847'; } /* '' */
+.iconshock-iphone-business-projection-screen:before { content: '\e848'; } /* '' */
+.iconshock-iphone-business-projector:before { content: '\e849'; } /* '' */
+.iconshock-iphone-business-public-company:before { content: '\e84a'; } /* '' */
+.iconshock-iphone-business-public-private-partnership-company:before { content: '\e84b'; } /* '' */
+.iconshock-iphone-business-quality:before { content: '\e84c'; } /* '' */
+.iconshock-iphone-business-receptionist:before { content: '\e84d'; } /* '' */
+.iconshock-iphone-business-registered-trademark:before { content: '\e84e'; } /* '' */
+.iconshock-iphone-business-report:before { content: '\e84f'; } /* '' */
+.iconshock-iphone-business-report2:before { content: '\e850'; } /* '' */
+.iconshock-iphone-business-risk:before { content: '\e851'; } /* '' */
+.iconshock-iphone-business-risk-assessment:before { content: '\e852'; } /* '' */
+.iconshock-iphone-business-risk2:before { content: '\e853'; } /* '' */
+.iconshock-iphone-business-salesman:before { content: '\e854'; } /* '' */
+.iconshock-iphone-business-service-electricity:before { content: '\e855'; } /* '' */
+.iconshock-iphone-business-service-gas:before { content: '\e856'; } /* '' */
+.iconshock-iphone-business-service-telephone:before { content: '\e857'; } /* '' */
+.iconshock-iphone-business-service-waste-disposal:before { content: '\e858'; } /* '' */
+.iconshock-iphone-business-service-water:before { content: '\e859'; } /* '' */
+.iconshock-iphone-business-shoping-cart:before { content: '\e85a'; } /* '' */
+.iconshock-iphone-business-shopping-basket:before { content: '\e85b'; } /* '' */
+.iconshock-iphone-business-sole-propietorship:before { content: '\e85c'; } /* '' */
+.iconshock-iphone-business-solution:before { content: '\e85d'; } /* '' */
+.iconshock-iphone-business-spreadsheet:before { content: '\e85e'; } /* '' */
+.iconshock-iphone-business-stats-area-chart:before { content: '\e85f'; } /* '' */
+.iconshock-iphone-business-stats-bar-chart:before { content: '\e860'; } /* '' */
+.iconshock-iphone-business-stats-column-chart:before { content: '\e861'; } /* '' */
+.iconshock-iphone-business-stats-histogram:before { content: '\e862'; } /* '' */
+.iconshock-iphone-business-stats-line-chart:before { content: '\e863'; } /* '' */
+.iconshock-iphone-business-stats-pie-chart:before { content: '\e864'; } /* '' */
+.iconshock-iphone-business-stats-polar-chart:before { content: '\e865'; } /* '' */
+.iconshock-iphone-business-stock:before { content: '\e866'; } /* '' */
+.iconshock-iphone-business-stock-market:before { content: '\e867'; } /* '' */
+.iconshock-iphone-business-subsidiary:before { content: '\e868'; } /* '' */
+.iconshock-iphone-business-subsidiary2:before { content: '\e869'; } /* '' */
+.iconshock-iphone-business-subsidiary3:before { content: '\e86a'; } /* '' */
+.iconshock-iphone-business-summary:before { content: '\e86b'; } /* '' */
+.iconshock-iphone-business-target:before { content: '\e86c'; } /* '' */
+.iconshock-iphone-business-task:before { content: '\e86d'; } /* '' */
+.iconshock-iphone-business-trophy:before { content: '\e86e'; } /* '' */
+.iconshock-iphone-business-web-advertising:before { content: '\e86f'; } /* '' */

@@ -1,0 +1,6 @@
+
+.shock-addons-cancel:before { content: '\e800'; } /* '' */
+.shock-addons-checkbox_empty:before { content: '\e801'; } /* '' */
+.shock-addons-checkbox_empty_black:before { content: '\e802'; } /* '' */
+.shock-addons-circle:before { content: '\e803'; } /* '' */
+.shock-addons-circle_black:before { content: '\e804'; } /* '' */

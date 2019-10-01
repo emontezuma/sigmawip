@@ -1,0 +1,181 @@
+@font-face {
+  font-family: 'materialblack_communications';
+  src: url('../font/materialblack_communications.eot?88176955');
+  src: url('../font/materialblack_communications.eot?88176955#iefix') format('embedded-opentype'),
+       url('../font/materialblack_communications.woff2?88176955') format('woff2'),
+       url('../font/materialblack_communications.woff?88176955') format('woff'),
+       url('../font/materialblack_communications.ttf?88176955') format('truetype'),
+       url('../font/materialblack_communications.svg?88176955#materialblack_communications') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'materialblack_communications';
+    src: url('../font/materialblack_communications.svg?88176955#materialblack_communications') format('svg');
+  }
+}
+*/
+ 
+ [class^="iconshock-materialblack-communications-"]:before, [class*=" iconshock-materialblack-communications-"]:before {
+  font-family: "materialblack_communications";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+}
+ 
+.iconshock-materialblack-communications-active-rooms:before { content: '\e800'; } /* '' */
+.iconshock-materialblack-communications-address-book:before { content: '\e801'; } /* '' */
+.iconshock-materialblack-communications-allow-list2:before { content: '\e802'; } /* '' */
+.iconshock-materialblack-communications-alphabet-latin:before { content: '\e803'; } /* '' */
+.iconshock-materialblack-communications-apache-server:before { content: '\e804'; } /* '' */
+.iconshock-materialblack-communications-ares:before { content: '\e805'; } /* '' */
+.iconshock-materialblack-communications-ascii:before { content: '\e806'; } /* '' */
+.iconshock-materialblack-communications-audio-warning:before { content: '\e807'; } /* '' */
+.iconshock-materialblack-communications-avatar:before { content: '\e808'; } /* '' */
+.iconshock-materialblack-communications-backgrounds:before { content: '\e809'; } /* '' */
+.iconshock-materialblack-communications-ball-football:before { content: '\e80a'; } /* '' */
+.iconshock-materialblack-communications-beer:before { content: '\e80b'; } /* '' */
+.iconshock-materialblack-communications-bit-torrent:before { content: '\e80c'; } /* '' */
+.iconshock-materialblack-communications-black-list:before { content: '\e80d'; } /* '' */
+.iconshock-materialblack-communications-block-list:before { content: '\e80e'; } /* '' */
+.iconshock-materialblack-communications-block-list2:before { content: '\e80f'; } /* '' */
+.iconshock-materialblack-communications-blog:before { content: '\e810'; } /* '' */
+.iconshock-materialblack-communications-broken-heart:before { content: '\e811'; } /* '' */
+.iconshock-materialblack-communications-buzz:before { content: '\e812'; } /* '' */
+.iconshock-materialblack-communications-cafe:before { content: '\e813'; } /* '' */
+.iconshock-materialblack-communications-cake:before { content: '\e814'; } /* '' */
+.iconshock-materialblack-communications-call:before { content: '\e815'; } /* '' */
+.iconshock-materialblack-communications-call-conference:before { content: '\e816'; } /* '' */
+.iconshock-materialblack-communications-call-incomming:before { content: '\e817'; } /* '' */
+.iconshock-materialblack-communications-call-missed:before { content: '\e818'; } /* '' */
+.iconshock-materialblack-communications-call-outgoing:before { content: '\e819'; } /* '' */
+.iconshock-materialblack-communications-car:before { content: '\e81a'; } /* '' */
+.iconshock-materialblack-communications-cat:before { content: '\e81b'; } /* '' */
+.iconshock-materialblack-communications-cat2:before { content: '\e81c'; } /* '' */
+.iconshock-materialblack-communications-champagne:before { content: '\e81d'; } /* '' */
+.iconshock-materialblack-communications-channel-list:before { content: '\e81e'; } /* '' */
+.iconshock-materialblack-communications-character-encoding:before { content: '\e81f'; } /* '' */
+.iconshock-materialblack-communications-chat-emoticon:before { content: '\e820'; } /* '' */
+.iconshock-materialblack-communications-check-for-virus:before { content: '\e821'; } /* '' */
+.iconshock-materialblack-communications-clock:before { content: '\e822'; } /* '' */
+.iconshock-materialblack-communications-clouds:before { content: '\e823'; } /* '' */
+.iconshock-materialblack-communications-cocktail:before { content: '\e824'; } /* '' */
+.iconshock-materialblack-communications-coffee:before { content: '\e825'; } /* '' */
+.iconshock-materialblack-communications-color2:before { content: '\e826'; } /* '' */
+.iconshock-materialblack-communications-contact:before { content: '\e827'; } /* '' */
+.iconshock-materialblack-communications-contacts:before { content: '\e828'; } /* '' */
+.iconshock-materialblack-communications-contacts-filter:before { content: '\e829'; } /* '' */
+.iconshock-materialblack-communications-conversation:before { content: '\e82a'; } /* '' */
+.iconshock-materialblack-communications-dog:before { content: '\e82b'; } /* '' */
+.iconshock-materialblack-communications-ecard:before { content: '\e82c'; } /* '' */
+.iconshock-materialblack-communications-emoji:before { content: '\e82d'; } /* '' */
+.iconshock-materialblack-communications-emoji-angry:before { content: '\e82e'; } /* '' */
+.iconshock-materialblack-communications-emoji-blush:before { content: '\e82f'; } /* '' */
+.iconshock-materialblack-communications-emoji-confused:before { content: '\e830'; } /* '' */
+.iconshock-materialblack-communications-emoji-grin:before { content: '\e831'; } /* '' */
+.iconshock-materialblack-communications-emoji-in-love:before { content: '\e832'; } /* '' */
+.iconshock-materialblack-communications-emoji-sad:before { content: '\e833'; } /* '' */
+.iconshock-materialblack-communications-emoji-sleeping:before { content: '\e834'; } /* '' */
+.iconshock-materialblack-communications-emoji-waiting:before { content: '\e835'; } /* '' */
+.iconshock-materialblack-communications-emoji-winking:before { content: '\e836'; } /* '' */
+.iconshock-materialblack-communications-events:before { content: '\e837'; } /* '' */
+.iconshock-materialblack-communications-external-contact:before { content: '\e838'; } /* '' */
+.iconshock-materialblack-communications-facebook:before { content: '\e839'; } /* '' */
+.iconshock-materialblack-communications-firewall:before { content: '\e83a'; } /* '' */
+.iconshock-materialblack-communications-flower:before { content: '\e83b'; } /* '' */
+.iconshock-materialblack-communications-font-color:before { content: '\e83c'; } /* '' */
+.iconshock-materialblack-communications-forum:before { content: '\e83d'; } /* '' */
+.iconshock-materialblack-communications-free-hands-set:before { content: '\e83e'; } /* '' */
+.iconshock-materialblack-communications-games-control:before { content: '\e83f'; } /* '' */
+.iconshock-materialblack-communications-gift:before { content: '\e840'; } /* '' */
+.iconshock-materialblack-communications-google-talk:before { content: '\e841'; } /* '' */
+.iconshock-materialblack-communications-group2:before { content: '\e842'; } /* '' */
+.iconshock-materialblack-communications-hamburger:before { content: '\e843'; } /* '' */
+.iconshock-materialblack-communications-hand-thumbsdown:before { content: '\e844'; } /* '' */
+.iconshock-materialblack-communications-hand-thumbsup:before { content: '\e845'; } /* '' */
+.iconshock-materialblack-communications-heart:before { content: '\e846'; } /* '' */
+.iconshock-materialblack-communications-high-connection:before { content: '\e847'; } /* '' */
+.iconshock-materialblack-communications-hotdog:before { content: '\e848'; } /* '' */
+.iconshock-materialblack-communications-hourglass:before { content: '\e849'; } /* '' */
+.iconshock-materialblack-communications-hug:before { content: '\e84a'; } /* '' */
+.iconshock-materialblack-communications-icq:before { content: '\e84b'; } /* '' */
+.iconshock-materialblack-communications-ignore-list:before { content: '\e84c'; } /* '' */
+.iconshock-materialblack-communications-ignore-list2:before { content: '\e84d'; } /* '' */
+.iconshock-materialblack-communications-inbox:before { content: '\e84e'; } /* '' */
+.iconshock-materialblack-communications-instant-message:before { content: '\e84f'; } /* '' */
+.iconshock-materialblack-communications-instant-message2:before { content: '\e850'; } /* '' */
+.iconshock-materialblack-communications-kiss:before { content: '\e851'; } /* '' */
+.iconshock-materialblack-communications-layout:before { content: '\e852'; } /* '' */
+.iconshock-materialblack-communications-log:before { content: '\e853'; } /* '' */
+.iconshock-materialblack-communications-login:before { content: '\e854'; } /* '' */
+.iconshock-materialblack-communications-low-connection:before { content: '\e855'; } /* '' */
+.iconshock-materialblack-communications-makeout:before { content: '\e856'; } /* '' */
+.iconshock-materialblack-communications-medium-connection:before { content: '\e857'; } /* '' */
+.iconshock-materialblack-communications-message:before { content: '\e858'; } /* '' */
+.iconshock-materialblack-communications-message-to-all:before { content: '\e859'; } /* '' */
+.iconshock-materialblack-communications-mobile-integration:before { content: '\e85a'; } /* '' */
+.iconshock-materialblack-communications-moon:before { content: '\e85b'; } /* '' */
+.iconshock-materialblack-communications-msn:before { content: '\e85c'; } /* '' */
+.iconshock-materialblack-communications-newspaper:before { content: '\e85d'; } /* '' */
+.iconshock-materialblack-communications-nickname:before { content: '\e85e'; } /* '' */
+.iconshock-materialblack-communications-online-radio:before { content: '\e85f'; } /* '' */
+.iconshock-materialblack-communications-outbox:before { content: '\e860'; } /* '' */
+.iconshock-materialblack-communications-palm-tree:before { content: '\e861'; } /* '' */
+.iconshock-materialblack-communications-password:before { content: '\e862'; } /* '' */
+.iconshock-materialblack-communications-personal-photo:before { content: '\e863'; } /* '' */
+.iconshock-materialblack-communications-photo-gallery:before { content: '\e864'; } /* '' */
+.iconshock-materialblack-communications-pizza:before { content: '\e865'; } /* '' */
+.iconshock-materialblack-communications-plugin:before { content: '\e866'; } /* '' */
+.iconshock-materialblack-communications-privacy2:before { content: '\e867'; } /* '' */
+.iconshock-materialblack-communications-private-message:before { content: '\e868'; } /* '' */
+.iconshock-materialblack-communications-profile:before { content: '\e869'; } /* '' */
+.iconshock-materialblack-communications-public-chat:before { content: '\e86a'; } /* '' */
+.iconshock-materialblack-communications-public-chat2:before { content: '\e86b'; } /* '' */
+.iconshock-materialblack-communications-public-chat3:before { content: '\e86c'; } /* '' */
+.iconshock-materialblack-communications-push-pin:before { content: '\e86d'; } /* '' */
+.iconshock-materialblack-communications-rain:before { content: '\e86e'; } /* '' */
+.iconshock-materialblack-communications-recieved-files:before { content: '\e86f'; } /* '' */
+.iconshock-materialblack-communications-recieved-files2:before { content: '\e870'; } /* '' */
+.iconshock-materialblack-communications-remote-control:before { content: '\e871'; } /* '' */
+.iconshock-materialblack-communications-ringtone:before { content: '\e872'; } /* '' */
+.iconshock-materialblack-communications-risk:before { content: '\e873'; } /* '' */
+.iconshock-materialblack-communications-script-editor:before { content: '\e874'; } /* '' */
+.iconshock-materialblack-communications-secure-message:before { content: '\e875'; } /* '' */
+.iconshock-materialblack-communications-send-file:before { content: '\e876'; } /* '' */
+.iconshock-materialblack-communications-send-photo:before { content: '\e877'; } /* '' */
+.iconshock-materialblack-communications-send-sms:before { content: '\e878'; } /* '' */
+.iconshock-materialblack-communications-shared-folder:before { content: '\e879'; } /* '' */
+.iconshock-materialblack-communications-sign-in:before { content: '\e87a'; } /* '' */
+.iconshock-materialblack-communications-sign-out:before { content: '\e87b'; } /* '' */
+.iconshock-materialblack-communications-skins:before { content: '\e87c'; } /* '' */
+.iconshock-materialblack-communications-skype:before { content: '\e87d'; } /* '' */
+.iconshock-materialblack-communications-sort-by-groups:before { content: '\e87e'; } /* '' */
+.iconshock-materialblack-communications-sort-by-mail:before { content: '\e87f'; } /* '' */
+.iconshock-materialblack-communications-sort-by-nickname:before { content: '\e880'; } /* '' */
+.iconshock-materialblack-communications-sort-by-status:before { content: '\e881'; } /* '' */
+.iconshock-materialblack-communications-status:before { content: '\e882'; } /* '' */
+.iconshock-materialblack-communications-status-at-phone:before { content: '\e883'; } /* '' */
+.iconshock-materialblack-communications-status-away:before { content: '\e884'; } /* '' */
+.iconshock-materialblack-communications-status-busy:before { content: '\e885'; } /* '' */
+.iconshock-materialblack-communications-status-idle:before { content: '\e886'; } /* '' */
+.iconshock-materialblack-communications-status-invisible:before { content: '\e887'; } /* '' */
+.iconshock-materialblack-communications-status-out-to-lunch:before { content: '\e888'; } /* '' */
+.iconshock-materialblack-communications-sun:before { content: '\e889'; } /* '' */
+.iconshock-materialblack-communications-telephone:before { content: '\e88a'; } /* '' */
+.iconshock-materialblack-communications-thread:before { content: '\e88b'; } /* '' */
+.iconshock-materialblack-communications-threads:before { content: '\e88c'; } /* '' */
+.iconshock-materialblack-communications-turtle:before { content: '\e88d'; } /* '' */
+.iconshock-materialblack-communications-twitter:before { content: '\e88e'; } /* '' */
+.iconshock-materialblack-communications-unicode:before { content: '\e88f'; } /* '' */
+.iconshock-materialblack-communications-update-version:before { content: '\e890'; } /* '' */
+.iconshock-materialblack-communications-visual-warning:before { content: '\e891'; } /* '' */
+.iconshock-materialblack-communications-visual-warning2:before { content: '\e892'; } /* '' */
+.iconshock-materialblack-communications-voice-chat:before { content: '\e893'; } /* '' */
+.iconshock-materialblack-communications-white-list:before { content: '\e894'; } /* '' */
+.iconshock-materialblack-communications-wine:before { content: '\e895'; } /* '' */
+.iconshock-materialblack-communications-withered-flower2:before { content: '\e896'; } /* '' */
+.iconshock-materialblack-communications-yahoo:before { content: '\e897'; } /* '' */
