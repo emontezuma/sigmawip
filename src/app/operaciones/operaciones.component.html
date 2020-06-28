@@ -214,7 +214,7 @@
 
             <div class="detalle" @esquema (@esquema.done)="salidaEfecto($event)" *ngIf="verRegistro == 3">
                 <div class="listaBotones">
-                    <button class="indiceProcesoLote" [style.borderColor]="colorBorde" mat-button *ngFor="let detalle of detalles; let i = index" (click)="nada(proceso)" [style.borderColor]="( detalle.alarmado != '0' ? 'tomato' : (detalle.prioridad ==100 ? colorBorde : (detalle.inspecciones>0 ? 'lightseagreen' : 'dodgerblue')))" [style.boxShadow]="( detalle.alarmado != '0' ? '0px 0px 2px 2px tomato' : (detalle.prioridad ==100 ? none : (detalle.inspecciones >0 ? '0px 0px 2px 2px lightseagreen' : '0px 0px 2px 2px dodgerblue')))">
+                    <button class="indiceProcesoLote" [style.borderColor]="colorBorde" mat-button *ngFor="let detalle of detalles; let i = index" (click)="nada(i)" [style.borderColor]="( detalle.alarmado != '0' ? 'tomato' : (detalle.prioridad ==100 ? colorBorde : (detalle.inspecciones>0 ? 'lightseagreen' : 'dodgerblue')))" [style.boxShadow]="( detalle.alarmado != '0' ? '0px 0px 2px 2px tomato' : (detalle.prioridad ==100 ? none : (detalle.inspecciones >0 ? '0px 0px 2px 2px lightseagreen' : '0px 0px 2px 2px dodgerblue')))">
                         <div class="miBoton">
                             <div class="registroCabecera" [ngStyle]="{'border': '0.5px solid' + colorSN}" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoTarjeta" >
                                 <span class="registroCabeceraTexto">LOTE: {{ detalle.numero }}</span>

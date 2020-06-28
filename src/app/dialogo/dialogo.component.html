@@ -13,7 +13,6 @@
             <mat-select [(ngModel)]="datos.causa" name="causa">
                 <mat-option *ngFor="let causa of causas; let i = index" [value]="i">{{ causa.nombre }}</mat-option>
             </mat-select>
-            <mat-hint class="pista" align="start">Campo requerido</mat-hint>
         </mat-form-field>
         <div class="registroTituloSegundo" [style.backgroundColor]="colorFondoTarjeta">Perfil del usuario</div>    
         <div class="registroValor">

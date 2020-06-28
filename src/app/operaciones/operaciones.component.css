@@ -698,10 +698,15 @@
     min-width: 220px !important;
 }
 
-.tablaItems
+.tablaItems_b
 {
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
 }
+
+
 
 .cabeceraTabla
 {

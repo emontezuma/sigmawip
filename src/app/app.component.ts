@@ -13,6 +13,7 @@ import { ServicioService } from './servicio/servicio.service';
 import { R3TargetBinder } from '@angular/compiler';
 import { SesionComponent } from './sesion/sesion.component';
 import { DialogoComponent } from './dialogo/dialogo.component';
+import { InactivarComponent } from './inactivar/inactivar.component';
 
 @Component({
   selector: 'app-root',
@@ -127,7 +128,7 @@ export class AppComponent implements AfterContentInit {
   primerNombre: string = "";
 
   estado: string = "";  
-  version: string = "Gestión de WIP v1.00.011019"
+  version: string = "Gestión de WIP v2.00.070120"
   verBarra: boolean = false;
   verPie: boolean = true;
   iconoHamburguesa: string = "menu";
@@ -733,7 +734,7 @@ aplicarSN()
     {
       rolBuscar = "G";
     }
-    else if (opcion>=40 && opcion<=42)
+    else if (opcion>=40 && opcion<=50)
     {
       rolBuscar = "A";
     }
@@ -801,6 +802,21 @@ aplicarSN()
           this.servicio.vista_5.emit(opcion);
         }
         
+      }
+      else if (opcion==50)
+      {
+        const respuesta = this.dialog.open(InactivarComponent, 
+          {
+            width: "480px", data: { sesion: 1, rolBuscar: rolBuscar, opcionSel: opcion, idUsuario: 0, usuario: "", clave: "", titulo: "Sesión de usuario", mensaje: "", alto: "90", id: 0, accion: 0, botones: 2, boton1STR: "Ingresar", icono1: "iconshock-materialblack-general-check-mark", boton2STR: "Cancelar", icono2: "iconshock-materialblack-general-reload", icono0: "iconshock-materialblack-general-key" }
+          });
+          respuesta.afterClosed().subscribe(result => 
+          {
+            if (result.accion == 1) 
+            {
+              this.seleccion = opcion;
+              this.recuperar(result.idUsuario, opcion);
+            }
+          })
       }
       this.cerrarSalir();
     }

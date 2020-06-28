@@ -160,6 +160,7 @@ export class FlujoComponent implements AfterViewInit, OnInit {
     this.validarTabla();
   }
 
+  nombreReg: string = "";
   botonera: any = [false, true, true, true, true, true, false, true, true, true, true]
   ayuda01: string = "Descarga la lista actual en formato CSV";
   ayuda02: string = "Filtrar la lista actual"
@@ -179,6 +180,7 @@ export class FlujoComponent implements AfterViewInit, OnInit {
   ayuda16: string = "Ver todos los elementos";
   ayuda17: string = "Ver sólo cargas activas";
   ayuda18: string = "Ver todas las cargas";
+  ayuda19: string = "Volver a la pantalla anterior";
 
   sentenciaR: string = "";
 
@@ -204,6 +206,7 @@ export class FlujoComponent implements AfterViewInit, OnInit {
   cadHistorico: string = "";
   actual: number = 0;
   vistaDetalle: number = 0;
+  pantallaAnterior: number = 0;
 
   segStock: string = "0min";
   segProceso: string = "0min";
@@ -347,8 +350,8 @@ export class FlujoComponent implements AfterViewInit, OnInit {
   {
     let mensajeNoHay = "";
     this.servicio.activarSpinner.emit(true);       
-    let sentencia =   "SELECT a.id, a.completada, a.fecha, a.reprogramaciones, SEC_TO_TIME(TIME_TO_SEC(TIMEDIFF(a.fecha, a.fecha_anterior))) AS sumado, CONCAT('Carga # ', a.carga) AS nombre, IFNULL((SELECT COUNT(DISTINCT(parte)) FROM sigma.programacion WHERE carga = a.id AND estatus = 'A'), 0) AS partes, IFNULL((SELECT SUM(cantidad) FROM sigma.programacion WHERE carga = a.id AND estatus = 'A'), 0) AS piezas, IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE carga = a.id), 0) AS avance, IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE carga = a.id AND equipo > 0), 0) AS avancec, IF((SELECT piezas) = 0, 0, FLOOR((SELECT avance) / (SELECT piezas) * 100)) as pct, IF((SELECT piezas) = 0, 0, FLOOR((SELECT avancec) / (SELECT piezas) * 100)) as pctc, d.capacidad, IFNULL(d.nombre, 'N/A') AS equipo, IFNULL(a.modificacion, 'N/A') AS fcambio, IF(a.estatus = 'A', 'activo', 'inactivo') AS estatus, IFNULL(c.nombre, 'N/A') AS ucambio FROM sigma.cargas a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id LEFT JOIN sigma.det_procesos d ON a.equipo = d.id " + (this.soloActivas ? "WHERE a.completada <> 'Y'" : "") + " ORDER BY a.completada DESC, a.fecha, a.carga";
-    this.sentenciaR =   "SELECT 'Reporte de cargas (programación)', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Carga', 'Estado', 'Notas', 'Fecha promesa', 'Fecha anterior a la ultima reprogramacion', 'Total reprogramaciones', 'Fecha promesa original', 'Numeros de partes', 'Lotes', 'Lotes en la operacion', 'PCT de completado', 'Equipo', 'Lotes cargados en equipo', 'PCT de ejecucion', 'Estatus', 'Numero de parte (referencia)', 'Numero de parte (descripcion)', 'Lotes programados', 'Lotes en la operacion', 'Lotes cargados al equipo'  UNION ALL SELECT a.id, a.carga, CASE WHEN a.completada = 'Y' THEN 'Ejecutada' WHEN a.completada = 'U' THEN 'Equipando' WHEN a.completada = 'S' THEN 'Completa' WHEN a.completada = 'N' THEN 'En curso' END, a.notas, a.fecha, a.fecha_anterior, a.reprogramaciones, a.fecha_original, IFNULL((SELECT COUNT(DISTINCT(parte)) FROM sigma.programacion WHERE carga = a.id AND estatus = 'A'), 0), IFNULL((SELECT SUM(cantidad) FROM sigma.programacion WHERE carga = a.id AND estatus = 'A' ), 0) AS piezas, IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE carga = a.id), 0) AS avance, IF((SELECT piezas) = 0, 0, FLOOR((SELECT avance) / (SELECT piezas) * 100)), IFNULL(d.nombre, 'N/A'), IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE carga = a.id AND equipo > 0), 0) AS avancec, IF((SELECT piezas) = 0, 0, FLOOR((SELECT avancec) / (SELECT piezas) * 100)), IF(a.estatus = 'A', 'activo', 'inactivo'), b.referencia, IFNULL(b.nombre, 'N/A'), c.cantidad, IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE carga = a.id AND parte = b.id), 0), IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE carga = a.id AND parte = b.id AND equipo > 0), 0) FROM sigma.cargas a LEFT JOIN sigma.programacion c ON a.id = c.carga LEFT JOIN sigma.cat_partes b ON c.parte = b.id LEFT JOIN sigma.det_procesos d ON a.equipo = d.id" + (this.soloActivas ? " WHERE a.completada <> 'Y'" : "");
+    let sentencia =   "SELECT a.id, a.completada, a.fecha, a.reprogramaciones, SEC_TO_TIME(TIME_TO_SEC(TIMEDIFF(a.fecha, a.fecha_anterior))) AS sumado, CONCAT('Carga # ', a.carga) AS nombre, IFNULL((SELECT COUNT(DISTINCT(parte)) FROM sigma.programacion WHERE carga = a.id AND estatus = 'A'), 0) AS partes, IFNULL((SELECT SUM(cantidad) FROM sigma.programacion WHERE carga = a.id AND estatus = 'A'), 0) AS piezas, IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE estatus = 'A' AND carga = a.id), 0) AS avance, IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE estatus = 'A' AND carga = a.id AND equipo > 0), 0) AS avancec, IF((SELECT piezas) = 0, 0, FLOOR((SELECT avance) / (SELECT piezas) * 100)) as pct, IF((SELECT piezas) = 0, 0, FLOOR((SELECT avancec) / (SELECT piezas) * 100)) as pctc, d.capacidad, IFNULL(d.nombre, 'N/A') AS equipo, IFNULL(a.modificacion, 'N/A') AS fcambio, IF(a.estatus = 'A', 'activo', 'inactivo') AS estatus, IFNULL(c.nombre, 'N/A') AS ucambio FROM sigma.cargas a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id LEFT JOIN sigma.det_procesos d ON a.equipo = d.id " + (this.soloActivas ? "WHERE a.completada <> 'Y'" : "") + " ORDER BY a.fecha, a.carga";
+    this.sentenciaR =   "SELECT 'id', 'Carga', 'Estado', 'Notas', 'Fecha promesa', 'Fecha anterior a la ultima reprogramacion', 'Total reprogramaciones', 'Fecha promesa original', 'Numeros de partes', 'Lotes', 'Lotes en la operacion', 'PCT de completado', 'Equipo', 'Lotes cargados en equipo', 'PCT de ejecucion', 'Estatus', 'Numero de parte (referencia)', 'Numero de parte (descripcion)', 'Lotes programados', 'Lotes en la operacion', 'Lotes cargados al equipo'  UNION ALL SELECT a.id, a.carga, CASE WHEN a.completada = 'Y' THEN 'Ejecutada' WHEN a.completada = 'U' THEN 'Equipando' WHEN a.completada = 'S' THEN 'Completa' WHEN a.completada = 'N' THEN 'En curso' END, a.notas, a.fecha, a.fecha_anterior, a.reprogramaciones, a.fecha_original, IFNULL((SELECT COUNT(DISTINCT(parte)) FROM sigma.programacion WHERE carga = a.id AND estatus = 'A'), 0), IFNULL((SELECT SUM(cantidad) FROM sigma.programacion WHERE carga = a.id AND estatus = 'A' ), 0) AS piezas, IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE estatus = 'A' AND carga = a.id), 0) AS avance, IF((SELECT piezas) = 0, 0, FLOOR((SELECT avance) / (SELECT piezas) * 100)), IFNULL(d.nombre, 'N/A'), IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE estatus = 'A' AND carga = a.id AND equipo > 0), 0) AS avancec, IF((SELECT piezas) = 0, 0, FLOOR((SELECT avancec) / (SELECT piezas) * 100)), IF(a.estatus = 'A', 'activo', 'inactivo'), b.referencia, IFNULL(b.nombre, 'N/A'), c.cantidad, IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE estatus = 'A' AND carga = a.id AND parte = b.id), 0), IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE estatus = 'A' AND carga = a.id AND parte = b.id AND equipo > 0), 0) FROM sigma.cargas a LEFT JOIN sigma.programacion c ON a.id = c.carga LEFT JOIN sigma.cat_partes b ON c.parte = b.id LEFT JOIN sigma.det_procesos d ON a.equipo = d.id" + (this.soloActivas ? " WHERE a.completada <> 'Y'" : "");
     if (this.maestroActual == 0 && this.nivelActual==0)
     {
       mensajeNoHay = "No se hallaron cargas en el sistema";
@@ -358,23 +361,25 @@ export class FlujoComponent implements AfterViewInit, OnInit {
       this.literalSingular = "carga";
       this.literalPlural = "cargas";
       this.literalSingularArticulo = "La carga";
+      this.nombreReg = "";
     }
     else if (this.maestroActual == 0 && this.nivelActual==1)
     {
-      sentencia = "SELECT a.id, a.cantidad, IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE parte = a.parte AND carga = a.carga), 0) AS avance, IF(a.cantidad = 0, 0, FLOOR((SELECT avance) / a.cantidad * 100)) as pct, IFNULL(d.nombre, 'N/A') as nombre, d.referencia, IFNULL(a.modificacion, 'N/A') AS fcambio, IF(a.estatus = 'A', 'activo', 'inactivo') AS estatus, IFNULL(c.nombre, 'N/A') AS ucambio, d.imagen, 'S' AS mostrarImagen FROM sigma.programacion a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id LEFT JOIN sigma.cat_partes d ON a.parte = d.id WHERE a.carga = " + this.idNivel0 + " ORDER BY d.nombre";
-      this.sentenciaR =   "SELECT 'Reporte de cargas (programación)', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Carga', 'Notas', 'Fecha promesa', 'Fecha anterior a la ultima reprogramacion', 'Total reprogramaciones', 'Fecha promesa original', 'Numeros de partes', 'Lotes', 'Lotes avance', 'PCT de avance', 'Equipo', 'Estatus', 'Numero de parte (referencia)', 'Numero de parte (descripcion)', 'Lotes programados'  UNION ALL SELECT a.id, a.carga, a.notas, a.fecha, a.fecha_anterior, a.reprogramaciones, a.fecha_original, IFNULL((SELECT COUNT(DISTINCT(parte)) FROM sigma.programacion WHERE carga = a.id AND estatus = 'A'), 0), IFNULL((SELECT SUM(cantidad) FROM sigma.programacion WHERE carga = a.id AND estatus = 'A'), 0) AS piezas, IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE carga = a.id), 0) AS avance, IF((SELECT piezas) = 0, 0, FLOOR((SELECT avance) / (SELECT piezas) * 100)), IFNULL(d.nombre, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo'), b.referencia, IFNULL(b.nombre, 'N/A'), c.cantidad FROM sigma.cargas a LEFT JOIN sigma.programacion c ON a.id = c.carga LEFT JOIN sigma.cat_partes b ON c.parte = b.id LEFT JOIN sigma.det_procesos d ON a.equipo = d.id";
+      sentencia = "SELECT a.id, a.cantidad, IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE estatus = 'A' AND parte = a.parte AND carga = a.carga), 0) AS avance, IF(a.cantidad = 0, 0, FLOOR((SELECT avance) / a.cantidad * 100)) as pct, IFNULL(d.nombre, 'N/A') as nombre, d.referencia, IFNULL(a.modificacion, 'N/A') AS fcambio, IF(a.estatus = 'A', 'activo', 'inactivo') AS estatus, IFNULL(c.nombre, 'N/A') AS ucambio, d.imagen, 'S' AS mostrarImagen FROM sigma.programacion a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id LEFT JOIN sigma.cat_partes d ON a.parte = d.id WHERE a.carga = " + this.idNivel0 + " ORDER BY d.nombre";
+      this.sentenciaR =   "SELECT 'id', 'Carga', 'Notas', 'Fecha promesa', 'Fecha anterior a la ultima reprogramacion', 'Total reprogramaciones', 'Fecha promesa original', 'Numeros de partes', 'Lotes', 'Lotes avance', 'PCT de avance', 'Equipo', 'Estatus', 'Numero de parte (referencia)', 'Numero de parte (descripcion)', 'Lotes programados'  UNION ALL SELECT a.id, a.carga, a.notas, a.fecha, a.fecha_anterior, a.reprogramaciones, a.fecha_original, IFNULL((SELECT COUNT(DISTINCT(parte)) FROM sigma.programacion WHERE carga = a.id AND estatus = 'A'), 0), IFNULL((SELECT SUM(cantidad) FROM sigma.programacion WHERE carga = a.id AND estatus = 'A'), 0) AS piezas, IFNULL((SELECT COUNT(*) FROM sigma.lotes WHERE estatus = 'A' AND carga = a.id), 0) AS avance, IF((SELECT piezas) = 0, 0, FLOOR((SELECT avance) / (SELECT piezas) * 100)), IFNULL(d.nombre, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo'), b.referencia, IFNULL(b.nombre, 'N/A'), c.cantidad FROM sigma.cargas a LEFT JOIN sigma.programacion c ON a.id = c.carga LEFT JOIN sigma.cat_partes b ON c.parte = b.id LEFT JOIN sigma.det_procesos d ON a.equipo = d.id";
       mensajeNoHay="No se hallaron Números de parte para la Carga seleccionada";
       this.iconoGeneral = "iconshock-iphone-business-product-combo";
       this.nuevoRegistro = "Agregar un Número de parte";
       this.literalSingular = "Número de parte";
       this.literalPlural = "Números de parte";
       this.literalSingularArticulo = "El Número de parte";
+      this.nombreReg = "";
     }
     if (this.maestroActual == 1) 
     {
       mensajeNoHay="No se hallaron prioridades en el sistema";
       sentencia = "SELECT a.id, a.fecha, d.nombre, IFNULL(e.nombre, 'N/A') as nproceso, a.orden, d.referencia, IFNULL(a.modificacion, 'N/A') AS fcambio, IF(a.estatus = 'A', 'activo', 'inactivo') AS estatus, IFNULL(c.nombre, 'N/A') AS ucambio, d.imagen, 'S' AS mostrarImagen FROM sigma.prioridades a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id LEFT JOIN sigma.cat_partes d ON a.parte = d.id LEFT JOIN sigma.cat_procesos e ON a.proceso = e.id ORDER BY a.orden, a.fecha, d.nombre";
-      this.sentenciaR =   "SELECT 'Reporte de prioridades', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Numero de parte (referencia)', 'Numero de parte (descripcion)', 'Prioridad', 'Fecha de vencimiento', 'Proceso', 'Lotes con la prioridad', 'Notas', 'Estatus' UNION ALL SELECT a.id, d.referencia, IFNULL(d.nombre, 'N/A'), a.orden, a.fecha, IFNULL(e.nombre, 'N/A'), (SELECT COUNT(*) FROM sigma.lotes WHERE estado <= 50 AND estatus = 'A' AND estado <= 50 AND proceso = a.proceso AND estatus = 'A'), a.notas, IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.prioridades a LEFT JOIN sigma.cat_partes d ON a.parte = d.id LEFT JOIN sigma.cat_procesos e ON a.proceso = e.id";
+      this.sentenciaR =   "SELECT 'id', 'Numero de parte (referencia)', 'Numero de parte (descripcion)', 'Prioridad', 'Fecha de vencimiento', 'Proceso', 'Lotes con la prioridad', 'Notas', 'Estatus' UNION ALL SELECT a.id, d.referencia, IFNULL(d.nombre, 'N/A'), a.orden, a.fecha, IFNULL(e.nombre, 'N/A'), (SELECT COUNT(*) FROM sigma.lotes WHERE estado <= 50 AND estatus = 'A' AND estado <= 50 AND proceso = a.proceso AND estatus = 'A'), a.notas, IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.prioridades a LEFT JOIN sigma.cat_partes d ON a.parte = d.id LEFT JOIN sigma.cat_procesos e ON a.proceso = e.id";
       
       this.titulo_fecha = "Fecha de vencimiento";
       this.iconoGeneral = "iconshock-materialblack-general-bell";
@@ -382,19 +387,21 @@ export class FlujoComponent implements AfterViewInit, OnInit {
       this.literalSingular = "prioridad";
       this.literalPlural = "prioridades";
       this.literalSingularArticulo = "La prioridad";
+      this.nombreReg = "";
     }
     if (this.maestroActual == 2) 
     {
       this.titulo_lote = "Causa de la inspección";
       mensajeNoHay="No se hallaron lotes en inspección";
       sentencia = "SELECT a.id, IFNULL((SELECT MIN(orden) FROM sigma.prioridades WHERE parte = a.parte  AND proceso = a.proceso AND fecha >= NOW() AND estatus = 'A'), 100) AS prioridad, CONCAT('LOTE/OP: ', a.numero) AS nombre, a.numero AS elote, a.inspeccion as fecha, IFNULL(c.nombre, 'N/A') AS causa, IFNULL(e.nombre, 'N/A') AS nproceso, IFNULL(c.referencia, 'N/A') AS causaref, d.imagen, 'S' AS mostrarImagen, IFNULL(d.referencia, 'N/A') AS referencia, IFNULL(d.nombre, 'N/A') AS producto, IFNULL(b.nombre, 'N/A') AS ucambio, a.proceso, a.ruta_secuencia FROM sigma.lotes a LEFT JOIN sigma.cat_usuarios b ON a.inspeccionado_por = b.id LEFT JOIN sigma.cat_situaciones c ON a.inspeccion_id = c.id LEFT JOIN sigma.cat_partes d ON a.parte = d.id LEFT JOIN sigma.cat_procesos e ON a.proceso = e.id WHERE a.estado = 80 ORDER BY 2, a.fecha, a.numero";
-      this.sentenciaR =   "SELECT 'Reporte de lotes en inspeccion', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Lote', 'Numero de parte (referencia)', 'Numero de parte (descripcion)', 'Prioridad', 'Fecha de inspeccion', 'Referencia inspeccion', 'Causa de la inspeccion', 'Inspeccionado por', 'Proceso', 'Secuencia en la ruta' UNION ALL SELECT a.numero, d.referencia, IFNULL(d.nombre, 'N/A'), IFNULL((SELECT MIN(orden) FROM sigma.prioridades WHERE parte = a.parte  AND proceso = a.proceso AND fecha >= NOW() AND estatus = 'A'), 'N/A'), a.inspeccion, IFNULL(c.referencia, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(b.nombre, 'N/A'), IFNULL(e.nombre, 'N/A'), a.ruta_secuencia FROM sigma.lotes a LEFT JOIN sigma.cat_usuarios b ON a.inspeccionado_por = b.id LEFT JOIN sigma.cat_situaciones c ON a.inspeccion_id = c.id LEFT JOIN sigma.cat_partes d ON a.parte = d.id LEFT JOIN sigma.cat_procesos e ON a.proceso = e.id WHERE a.estado = 80";
+      this.sentenciaR =   "SELECT 'Lote', 'Numero de parte (referencia)', 'Numero de parte (descripcion)', 'Prioridad', 'Fecha de inspeccion', 'Referencia inspeccion', 'Causa de la inspeccion', 'Inspeccionado por', 'Proceso', 'Secuencia en la ruta' UNION ALL SELECT a.numero, d.referencia, IFNULL(d.nombre, 'N/A'), IFNULL((SELECT MIN(orden) FROM sigma.prioridades WHERE parte = a.parte  AND proceso = a.proceso AND fecha >= NOW() AND estatus = 'A'), 'N/A'), a.inspeccion, IFNULL(c.referencia, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(b.nombre, 'N/A'), IFNULL(e.nombre, 'N/A'), a.ruta_secuencia FROM sigma.lotes a LEFT JOIN sigma.cat_usuarios b ON a.inspeccionado_por = b.id LEFT JOIN sigma.cat_situaciones c ON a.inspeccion_id = c.id LEFT JOIN sigma.cat_partes d ON a.parte = d.id LEFT JOIN sigma.cat_procesos e ON a.proceso = e.id WHERE a.estado = 80";
       this.titulo_fecha = "Entrada a inspección";
       this.iconoGeneral = "iconshock-materialblack-general-preview2";
       this.nuevoRegistro = "";
       this.literalSingular = "lote en inspección";
       this.literalPlural = "lotes en en inspección";
       this.literalSingularArticulo = "El lote en inspección";
+      this.nombreReg = "";
       
     }
 
@@ -403,13 +410,14 @@ export class FlujoComponent implements AfterViewInit, OnInit {
       this.titulo_lote = "Causa del rechazo";
       mensajeNoHay="No se hallaron lotes rechazados";
       sentencia = "SELECT a.id, IFNULL((SELECT MIN(orden) FROM sigma.prioridades WHERE parte = a.parte  AND proceso = a.proceso AND fecha >= NOW() AND estatus = 'A'), 100) AS prioridad, CONCAT('LOTE/OP: ', a.numero) AS nombre, a.numero AS elote, a.rechazo as fecha, IFNULL(c.nombre, 'N/A') AS causa, IFNULL(e.nombre, 'N/A') AS nproceso, IFNULL(c.referencia, 'N/A') AS causaref, d.imagen, 'S' AS mostrarImagen, IFNULL(d.referencia, 'N/A') AS referencia, IFNULL(d.nombre, 'N/A') AS producto, IFNULL(b.nombre, 'N/A') AS ucambio, a.proceso, a.ruta_secuencia FROM sigma.lotes a LEFT JOIN sigma.cat_usuarios b ON a.rechazado_por = b.id LEFT JOIN sigma.cat_situaciones c ON a.rechazo_id = c.id LEFT JOIN sigma.cat_partes d ON a.parte = d.id LEFT JOIN sigma.cat_procesos e ON a.proceso = e.id WHERE a.estado = 90 ORDER BY 2, a.fecha, a.numero";
-      this.sentenciaR =   "SELECT 'Reporte de lotes rechazados', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Lote', 'Numero de parte (referencia)', 'Numero de parte (descripcion)', 'Prioridad', 'Fecha de rechazo', 'Referencia rechazo', 'Causa del rechazo', 'Rechazado por', 'Proceso''Secuencia en la ruta'  UNION ALL SELECT a.numero, d.referencia, IFNULL(d.nombre, 'N/A'), IFNULL((SELECT MIN(orden) FROM sigma.prioridades WHERE parte = a.parte  AND proceso = a.proceso AND fecha >= NOW() AND estatus = 'A'), 'N/A'), a.rechazo, IFNULL(c.referencia, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(b.nombre, 'N/A'), IFNULL(e.nombre, 'N/A'), a.ruta_secuencia FROM sigma.lotes a LEFT JOIN sigma.cat_usuarios b ON a.rechazado_por = b.id LEFT JOIN sigma.cat_situaciones c ON a.rechazo_id = c.id LEFT JOIN sigma.cat_partes d ON a.parte = d.id LEFT JOIN sigma.cat_procesos e ON a.proceso = e.id WHERE a.estado = 90";
+      this.sentenciaR =   "SELECT 'Lote', 'Numero de parte (referencia)', 'Numero de parte (descripcion)', 'Prioridad', 'Fecha de rechazo', 'Referencia rechazo', 'Causa del rechazo', 'Rechazado por', 'Proceso''Secuencia en la ruta'  UNION ALL SELECT a.numero, d.referencia, IFNULL(d.nombre, 'N/A'), IFNULL((SELECT MIN(orden) FROM sigma.prioridades WHERE parte = a.parte  AND proceso = a.proceso AND fecha >= NOW() AND estatus = 'A'), 'N/A'), a.rechazo, IFNULL(c.referencia, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(b.nombre, 'N/A'), IFNULL(e.nombre, 'N/A'), a.ruta_secuencia FROM sigma.lotes a LEFT JOIN sigma.cat_usuarios b ON a.rechazado_por = b.id LEFT JOIN sigma.cat_situaciones c ON a.rechazo_id = c.id LEFT JOIN sigma.cat_partes d ON a.parte = d.id LEFT JOIN sigma.cat_procesos e ON a.proceso = e.id WHERE a.estado = 90";
       this.titulo_fecha = "Fecha de rechazo";
       this.iconoGeneral = "iconshock-materialblack-general-cancel";
       this.nuevoRegistro = "";
       this.literalSingular = "lote rechazado";
       this.literalPlural = "lotes rechazados";
-      this.literalSingularArticulo = "El lote rechazado";      
+      this.literalSingularArticulo = "El lote rechazado";    
+      this.nombreReg = "";  
     }
     if (this.maestroActual == 4 && (this.vision==0 || this.vistaDetalle==1)) 
     {
@@ -419,23 +427,23 @@ export class FlujoComponent implements AfterViewInit, OnInit {
       {
         if (this.vision==1)
         {
-          adicional = " a.estado <> 99 AND a.proceso = " + this.idNivel1;
+          adicional = " a.estado <> 99 AND a.estatus = 'A' AND a.proceso = " + this.idNivel1;
         }
         else if (this.vision==2)
         {
-          adicional = " a.estado <> 99 AND (a.equipo = " + this.idNivel1 + " AND a.estado = 50)";
+          adicional = " a.estado <> 99 AND a.estatus = 'A' AND (a.equipo = " + this.idNivel1 + " AND a.estado = 50)";
         }
         else if (this.vision==3)
         {
-          adicional = " a.estado <> 99 AND a.parte = " + this.idNivel1;
+          adicional = " a.estado <> 99 AND a.estatus = 'A' AND a.parte = " + this.idNivel1;
         }
         else if (this.vision==4)
         {
-          adicional = " a.estado = " + this.idNivel1;
+          adicional = " a.estatus = 'A' AND a.estado = " + this.idNivel1;
         }
       }
       sentencia = "SELECT a.inicia, a.carga, IFNULL(f.carga, 'N/A') AS ncarga, a.finaliza, a.estimada, 'activo' as estatus, IFNULL((SELECT MIN(orden) FROM sigma.prioridades WHERE parte = a.parte  AND proceso = a.proceso AND fecha >= NOW() AND estatus = 'A'), 100) AS prioridad, a.id, a.numero, CASE WHEN a.estado = 0 THEN 'En Espera' WHEN a.estado = 20 THEN 'En Stock' WHEN a.estado = 50 THEN 'En Proceso' WHEN a.estado = 80 THEN 'En Inspección' WHEN a.estado = 90 THEN 'Rechazado' WHEN a.estado = 99 THEN 'Finalizado' END as estado, a.ruta_secuencia, a.fecha, IFNULL(a.hasta, 'N/A') AS hasta, IFNULL(e.nombre, 'N/A') AS nproceso, d.imagen, 'S' AS mostrarImagen, IFNULL(d.referencia, 'N/A') AS referencia, IFNULL(d.nombre, 'N/A') AS producto FROM sigma.lotes a LEFT JOIN sigma.cat_partes d ON a.parte = d.id LEFT JOIN sigma.cat_procesos e ON a.proceso = e.id LEFT JOIN sigma.cargas f ON a.carga = f.id WHERE " + adicional + " ORDER BY a.inspecciones DESC, 5, a.fecha, a.numero;";
-      this.sentenciaR = "SELECT 'Inventario actual en WIP (lotes)', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Numero del lote (O/P)', 'Numero de parte (referencia)', 'Numero de parte (Descripcion)', 'Fecha de creacion del lote', 'Fecha de termino', 'Fecha estimada de termino', 'Prioridad', 'Proceso', 'Equipo/Maquina', 'Secuencia', 'Estado', 'Total inspecciones', 'Ultima Inspeccion: Causa', 'Ultima Inspeccion: Fecha', 'Ultima Inspeccion: Usuario', 'Total rechazos', 'Ultimo Rechazo: Causa', 'Ultimo Rechazo: Fecha', 'Ultimo Rechazo: Usuario', 'Numero de carga', 'Alarmas generadas', 'Alarmado por tiempo excedido de stock', 'Alarmado por tiempo excedido de proceso' UNION ALL SELECT a.id, a.numero, IFNULL(d.referencia, 'N/A'), IFNULL(d.nombre, 'N/A'), a.inicia, a.finaliza, a.estimada, IFNULL((SELECT MIN(orden) FROM sigma.prioridades WHERE parte = a.parte AND proceso = a.proceso AND fecha >= NOW() AND estatus = 'A'), ' N/A') AS prioridad, IFNULL(e.nombre, 'N/A'), IFNULL(b.nombre, 'N/A'), a.ruta_secuencia, CASE WHEN a.estado = 0 THEN 'En Espera' WHEN a.estado = 20 THEN 'En Stock' WHEN a.estado = 50 THEN 'En Proceso' WHEN a.estado = 80 THEN 'En Inspeccion' WHEN a.estado = 90 THEN 'Rechazado' WHEN a.estado = 99 THEN 'Finalizado' END as estado, a.inspecciones, IFNULL(f.nombre, 'N/A'), a.inspeccion, IFNULL(h.nombre, 'N/A'), a.rechazos, IFNULL(g.nombre, 'N/A'), a.rechazo, IFNULL(i.nombre, 'N/A'), j.carga, a.alarmas, IF(a.alarma_tse = 'S', 'SI', 'NO'), IF(a.alarma_tpe = 'S', 'SI', 'NO') FROM sigma.lotes a LEFT JOIN sigma.det_procesos b ON a.equipo = b.id LEFT JOIN sigma.det_rutas c ON a.ruta_detalle = c.id LEFT JOIN sigma.cat_partes d ON a.parte = d.id LEFT JOIN sigma.cat_procesos e ON a.proceso = e.id LEFT JOIN sigma.cat_situaciones f ON a.inspeccion_id = f.id LEFT JOIN sigma.cat_situaciones g ON a.rechazo_id = g.id LEFT JOIN sigma.cat_usuarios h ON a.inspeccionado_por = h.id LEFT JOIN sigma.cat_usuarios i ON a.rechazado_por = i.id LEFT JOIN sigma.cargas j ON a.carga = j.id WHERE " + adicional + " ";
+      this.sentenciaR = "SELECT 'id', 'Numero del lote (O/P)', 'Numero de parte (referencia)', 'Numero de parte (Descripcion)', 'Fecha de creacion del lote', 'Fecha de termino', 'Fecha estimada de termino', 'Prioridad', 'Proceso', 'Equipo/Maquina', 'Secuencia', 'Estado', 'Total inspecciones', 'Ultima Inspeccion: Causa', 'Ultima Inspeccion: Fecha', 'Ultima Inspeccion: Usuario', 'Total rechazos', 'Ultimo Rechazo: Causa', 'Ultimo Rechazo: Fecha', 'Ultimo Rechazo: Usuario', 'Numero de carga', 'Alarmas generadas', 'Alarmado por tiempo excedido de stock', 'Alarmado por tiempo excedido de proceso' UNION ALL SELECT a.id, a.numero, IFNULL(d.referencia, 'N/A'), IFNULL(d.nombre, 'N/A'), a.inicia, a.finaliza, a.estimada, IFNULL((SELECT MIN(orden) FROM sigma.prioridades WHERE parte = a.parte AND proceso = a.proceso AND fecha >= NOW() AND estatus = 'A'), ' N/A') AS prioridad, IFNULL(e.nombre, 'N/A'), IFNULL(b.nombre, 'N/A'), a.ruta_secuencia, CASE WHEN a.estado = 0 THEN 'En Espera' WHEN a.estado = 20 THEN 'En Stock' WHEN a.estado = 50 THEN 'En Proceso' WHEN a.estado = 80 THEN 'En Inspeccion' WHEN a.estado = 90 THEN 'Rechazado' WHEN a.estado = 99 THEN 'Finalizado' END as estado, a.inspecciones, IFNULL(f.nombre, 'N/A'), a.inspeccion, IFNULL(h.nombre, 'N/A'), a.rechazos, IFNULL(g.nombre, 'N/A'), a.rechazo, IFNULL(i.nombre, 'N/A'), j.carga, a.alarmas, IF(a.alarma_tse = 'S', 'SI', 'NO'), IF(a.alarma_tpe = 'S', 'SI', 'NO') FROM sigma.lotes a LEFT JOIN sigma.det_procesos b ON a.equipo = b.id LEFT JOIN sigma.det_rutas c ON a.ruta_detalle = c.id LEFT JOIN sigma.cat_partes d ON a.parte = d.id LEFT JOIN sigma.cat_procesos e ON a.proceso = e.id LEFT JOIN sigma.cat_situaciones f ON a.inspeccion_id = f.id LEFT JOIN sigma.cat_situaciones g ON a.rechazo_id = g.id LEFT JOIN sigma.cat_usuarios h ON a.inspeccionado_por = h.id LEFT JOIN sigma.cat_usuarios i ON a.rechazado_por = i.id LEFT JOIN sigma.cargas j ON a.carga = j.id WHERE " + adicional + " ";
       this.titulo_fecha = "Fecha de rechazo";
       this.iconoGeneral = "iconshock-iphone-business-product-combo";
       this.nuevoRegistro = "";
@@ -445,9 +453,10 @@ export class FlujoComponent implements AfterViewInit, OnInit {
     }
     else if (this.maestroActual == 4 && this.vision > 0 && this.vistaDetalle==0)
     {
+      this.nombreReg = "";
       mensajeNoHay="No se hallaron lotes";
       sentencia = "SELECT a.id, a.nombre, a.referencia, a.capacidad_stock, IFNULL((SELECT SUM(capacidad) FROM det_procesos WHERE proceso = a.id AND estatus = 'A'), 0) AS cap_proceso, a.imagen, 'S' AS mostrarImagen, (SELECT COUNT(*) FROM sigma.lotes WHERE estado <= 50 AND estatus = 'A' AND estado <= 50 AND proceso = a.id) AS totall, (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 0 AND estatus = 'A' AND proceso = a.id) AS espera, (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 20 AND estatus = 'A' AND proceso = a.id) AS stock, IF(a.capacidad_stock = 0, 0, FLOOR((SELECT stock) / a.capacidad_stock * 100)) AS pctstock, (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 50 AND estatus = 'A' AND proceso = a.id) AS proceso, IF((SELECT cap_proceso) = 0, 0, FLOOR((SELECT proceso) / (SELECT cap_proceso) * 100)) AS pctproceso, (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 80 AND estatus = 'A' AND proceso = a.id) AS calidad FROM sigma.cat_procesos a " + (this.soloStock ? "HAVING totall > 0" : "") + " ORDER BY a.nombre";//7 DESC" ;
-      this.sentenciaR = "SELECT 'Inventario actual en WIP (por operacion/proceso)', '', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Proceso', 'Referencia', 'Capacidad de stock', 'Capacidad de proceso', 'Total lotes', 'Lotes en espera', 'Lotes en stock', 'PCT uso de Stock', 'Lotes en proceso', 'PCT uso de procesamiento', 'Lotes en calidad' UNION ALL SELECT a.id, a.nombre, a.referencia, a.capacidad_stock, IFNULL((SELECT SUM(capacidad) FROM det_procesos WHERE proceso = a.id AND estatus = 'A'), 0) AS cap_proceso, (SELECT COUNT(*) FROM sigma.lotes WHERE estado <= 50 AND estatus = 'A' AND proceso = a.id) AS totall, (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 0 AND estatus = 'A' AND proceso = a.id), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 20 AND estatus = 'A' AND proceso = a.id) AS stock, IF(a.capacidad_stock = 0, 0, FLOOR((SELECT stock) / a.capacidad_stock * 100)), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 50 AND estatus = 'A' AND proceso = a.id) AS proceso, IF((SELECT cap_proceso) = 0, 0, FLOOR((SELECT proceso) / (SELECT cap_proceso) * 100)), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 80 AND estatus = 'A' AND proceso = a.id) FROM sigma.cat_procesos a " + (this.soloStock ? "HAVING totall > 0" : "") + " ";
+      this.sentenciaR = "SELECT 'id', 'Proceso', 'Referencia', 'Capacidad de stock', 'Capacidad de proceso', 'Total lotes', 'Lotes en espera', 'Lotes en stock', 'PCT uso de Stock', 'Lotes en proceso', 'PCT uso de procesamiento', 'Lotes en calidad' UNION ALL SELECT a.id, a.nombre, a.referencia, a.capacidad_stock, IFNULL((SELECT SUM(capacidad) FROM det_procesos WHERE proceso = a.id AND estatus = 'A'), 0) AS cap_proceso, (SELECT COUNT(*) FROM sigma.lotes WHERE estado <= 50 AND estatus = 'A' AND proceso = a.id) AS totall, (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 0 AND estatus = 'A' AND proceso = a.id), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 20 AND estatus = 'A' AND proceso = a.id) AS stock, IF(a.capacidad_stock = 0, 0, FLOOR((SELECT stock) / a.capacidad_stock * 100)), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 50 AND estatus = 'A' AND proceso = a.id) AS proceso, IF((SELECT cap_proceso) = 0, 0, FLOOR((SELECT proceso) / (SELECT cap_proceso) * 100)), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 80 AND estatus = 'A' AND proceso = a.id) FROM sigma.cat_procesos a " + (this.soloStock ? "HAVING totall > 0" : "") + " ";
       if (this.vision==1)
       {
         this.literalSingular = "proceso";
@@ -458,7 +467,7 @@ export class FlujoComponent implements AfterViewInit, OnInit {
       else if (this.vision==2)
       {
         sentencia = "SELECT a.id, a.nombre, a.capacidad, a.proceso, IFNULL(b.nombre, 'N/A') AS nproceso, 'S' as mostrarImagen, a.referencia, (SELECT COUNT(*) FROM sigma.lotes WHERE estatus = 'A' AND estado = 50 AND equipo = a.id) AS totall, IF(a.capacidad = 0, 0, FLOOR((SELECT totall) / a.capacidad * 100)) AS pctproceso FROM sigma.det_procesos a LEFT JOIN sigma.cat_procesos b ON a.proceso = b.id " + (this.soloStock ? "HAVING totall > 0" : "") + " ORDER BY a.nombre";//6 DESC;";
-        this.sentenciaR = "SELECT 'Inventario actual en WIP (por equipo en proceso)', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Equipo', 'Proceso asociado (ID)', 'Proceso asociado (Descripcion)', 'Referencia', 'Capacidad del equipo', 'Lotes en proceso', 'PCT de uso'  UNION ALL SELECT a.id, a.nombre, a.proceso, IFNULL(b.nombre, 'N/A'), a.referencia, a.capacidad, (SELECT COUNT(*) FROM sigma.lotes WHERE estatus = 'A' AND estado = 50 AND equipo = a.id) AS totall, IF(a.capacidad = 0, 0, FLOOR((SELECT totall) / a.capacidad * 100)) FROM sigma.det_procesos a LEFT JOIN sigma.cat_procesos b ON a.proceso = b.id " + (this.soloStock ? "HAVING totall > 0" : "") + " ";
+        this.sentenciaR = "SELECT 'id', 'Equipo', 'Proceso asociado (ID)', 'Proceso asociado (Descripcion)', 'Referencia', 'Capacidad del equipo', 'Lotes en proceso', 'PCT de uso'  UNION ALL SELECT a.id, a.nombre, a.proceso, IFNULL(b.nombre, 'N/A'), a.referencia, a.capacidad, (SELECT COUNT(*) FROM sigma.lotes WHERE estatus = 'A' AND estado = 50 AND equipo = a.id) AS totall, IF(a.capacidad = 0, 0, FLOOR((SELECT totall) / a.capacidad * 100)) FROM sigma.det_procesos a LEFT JOIN sigma.cat_procesos b ON a.proceso = b.id " + (this.soloStock ? "HAVING totall > 0" : "") + " ";
         this.iconoGeneral = "iconshock-materialblack-networking-lan-cable";
         this.literalSingular = "equipo";
         this.literalPlural = "equipos";
@@ -467,7 +476,7 @@ export class FlujoComponent implements AfterViewInit, OnInit {
       else if (this.vision==3)
       {
         sentencia = "SELECT a.id, a.nombre, a.referencia, a.imagen, 'S' AS mostrarImagen, (SELECT COUNT(*) FROM sigma.lotes WHERE estado <= 50 AND estatus = 'A' AND parte = a.id) AS totall, (SELECT COUNT(*) FROM sigma.lotes WHERE carga <> 0 AND estado <= 50 AND estatus = 'A' AND parte = a.id) AS asignados, (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 0 AND estatus = 'A' AND parte = a.id) AS espera, (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 20 AND estatus = 'A' AND parte = a.id) AS stock, (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 50 AND estatus = 'A' AND parte = a.id) AS proceso, (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 80 AND estatus = 'A' AND parte = a.id) AS calidad FROM sigma.cat_partes a " + (this.soloStock ? "HAVING totall > 0" : "") + " ORDER BY a.nombre";//6 DESC;";
-        this.sentenciaR = "SELECT 'Inventario actual en WIP (por numero de parte)', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Numero de parte', 'Referencia', 'Total lotes', 'Lotes asignados en cargas (programados)', 'Lotes en espera', 'Lotes en stock', 'Lotes en proceso', 'Lotes en calidad' UNION ALL SELECT a.id, a.nombre, a.referencia, (SELECT COUNT(*) FROM sigma.lotes WHERE estado <= 50 AND estatus = 'A' AND parte = a.id) AS totall, (SELECT COUNT(*) FROM sigma.lotes WHERE carga <> 0 AND estado <= 50 AND estatus = 'A' AND parte = a.id), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 0 AND estatus = 'A' AND parte = a.id), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 20 AND estatus = 'A' AND parte = a.id), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 50 AND estatus = 'A' AND parte = a.id), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 80 AND estatus = 'A' AND parte = a.id) FROM sigma.cat_partes a " + (this.soloStock ? "HAVING totall > 0" : "") + " ";
+        this.sentenciaR = "SELECT 'id', 'Numero de parte', 'Referencia', 'Total lotes', 'Lotes asignados en cargas (programados)', 'Lotes en espera', 'Lotes en stock', 'Lotes en proceso', 'Lotes en calidad' UNION ALL SELECT a.id, a.nombre, a.referencia, (SELECT COUNT(*) FROM sigma.lotes WHERE estado <= 50 AND estatus = 'A' AND parte = a.id) AS totall, (SELECT COUNT(*) FROM sigma.lotes WHERE carga <> 0 AND estado <= 50 AND estatus = 'A' AND parte = a.id), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 0 AND estatus = 'A' AND parte = a.id), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 20 AND estatus = 'A' AND parte = a.id), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 50 AND estatus = 'A' AND parte = a.id), (SELECT COUNT(*) FROM sigma.lotes WHERE estado = 80 AND estatus = 'A' AND parte = a.id) FROM sigma.cat_partes a " + (this.soloStock ? "HAVING totall > 0" : "") + " ";
         this.iconoGeneral = "iconshock-iphone-business-product-combo";
         this.literalSingular = "número de parte";
         this.literalPlural = "números de parte";
@@ -475,8 +484,8 @@ export class FlujoComponent implements AfterViewInit, OnInit {
       }
       else if (this.vision==4)
       {
-        sentencia = "SELECT a.estado as id, CASE WHEN a.estado = 0 THEN 'En Espera' WHEN a.estado = 20 THEN 'En Stock' WHEN a.estado = 50 THEN 'En Proceso' WHEN a.estado = 80 THEN 'En Inspección' WHEN a.estado = 90 THEN 'Rechazado' WHEN a.estado = 99 THEN 'Finalizado' END as nombre, COUNT(*) as totall, 'S' AS mostrarImagen FROM sigma.lotes a GROUP BY a.estado, 2 " + (this.soloStock ? "HAVING totall > 0" : "") + " ORDER BY 1;";
-        this.sentenciaR = "SELECT 'Inventario actual en WIP (por estado de lote)', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '' UNION ALL SELECT 'id', 'Estado', 'Lotes' UNION ALL SELECT a.estado as id, CASE WHEN a.estado = 0 THEN 'En Espera' WHEN a.estado = 20 THEN 'En Stock' WHEN a.estado = 50 THEN 'En Proceso' WHEN a.estado = 80 THEN 'En Inspección' WHEN a.estado = 90 THEN 'Rechazado' WHEN a.estado = 99 THEN 'Finalizado' END as nombre, COUNT(*) AS totall FROM sigma.lotes a GROUP BY a.estado, 2 " + (this.soloStock ? "HAVING totall > 0" : "") + " ";
+        sentencia = "SELECT a.estado as id, CASE WHEN a.estado = 0 THEN 'En Espera' WHEN a.estado = 20 THEN 'En Stock' WHEN a.estado = 50 THEN 'En Proceso' WHEN a.estado = 80 THEN 'En Inspección' WHEN a.estado = 90 THEN 'Rechazado' WHEN a.estado = 99 THEN 'Finalizado' END as nombre, COUNT(*) as totall, 'S' AS mostrarImagen FROM sigma.lotes a WHERE a.estatus = 'A' GROUP BY a.estado, 2 " + (this.soloStock ? "HAVING totall > 0" : "") + " ORDER BY 1;";
+        this.sentenciaR = "SELECT 'id', 'Estado', 'Lotes' UNION ALL SELECT a.estado as id, CASE WHEN a.estado = 0 THEN 'En Espera' WHEN a.estado = 20 THEN 'En Stock' WHEN a.estado = 50 THEN 'En Proceso' WHEN a.estado = 80 THEN 'En Inspección' WHEN a.estado = 90 THEN 'Rechazado' WHEN a.estado = 99 THEN 'Finalizado' END as nombre, COUNT(*) AS totall FROM sigma.lotes WHERE a.estatus = 'A' a GROUP BY a.estado, 2 " + (this.soloStock ? "HAVING totall > 0" : "") + " ";
         this.iconoGeneral = "iconshock-materialblack-communications-sign-in";
         this.literalSingular = "estado de lote";
         this.literalPlural = "estados de lote";
@@ -552,7 +561,7 @@ export class FlujoComponent implements AfterViewInit, OnInit {
     let campos = {accion: 100, sentencia: sentencia};  
     this.servicio.consultasBD(campos).subscribe( resp =>
     {
-        this.servicio.mensajeInferior.emit("Edición de " + this.literalSingular);    
+        this.servicio.mensajeInferior.emit("Edición/Revisión de " + this.literalSingular);    
         this.detalleRegistro = resp[0];
         this.registroActual = resp[0].id;
         this.detalleRegistro.hora = this.servicio.fecha(2, this.detalleRegistro.fecha, "HH:mm")
@@ -788,7 +797,12 @@ export class FlujoComponent implements AfterViewInit, OnInit {
     {
       cadAdicional = cadAdicional + " para la '" + this.nombreRuta + "'";
     }
+    if (this.nombreReg)
+    {
+      cadAdicional = cadAdicional + " para '" + this.nombreReg + "'";
+    }
     mensaje = mensaje + " en la vista" + cadAdicional;
+    
     this.servicio.mensajeInferior.emit(mensaje);    
   }
 
@@ -820,6 +834,7 @@ export class FlujoComponent implements AfterViewInit, OnInit {
 
   editar(i: number)
   {
+    
     let id = this.registros[i].id; 
     if (this.maestroActual >= 2 && this.maestroActual < 4)
     {
@@ -835,6 +850,7 @@ export class FlujoComponent implements AfterViewInit, OnInit {
     {
       this.vistaDetalle = 1;
       this.idNivel1 = id; 
+      this.nombreReg = this.registros[i].nombre;
       this.verRegistro = 21;
       this.llenarRegistros();
     }
@@ -844,6 +860,7 @@ export class FlujoComponent implements AfterViewInit, OnInit {
       this.idNivel1 = id; 
       this.idNivel2 = this.registros[i].proceso;
       this.verRegistro = 21;
+      this.nombreReg = this.registros[i].nombre;
       this.llenarRegistros();
     }
     else if (this.maestroActual == 4 && this.vision==3)
@@ -851,6 +868,7 @@ export class FlujoComponent implements AfterViewInit, OnInit {
       this.vistaDetalle = 1;
       this.idNivel1 = id; 
       this.idNivel2 = this.registros[i].proceso;
+      this.nombreReg = this.registros[i].nombre;
       this.verRegistro = 21;
       this.llenarRegistros();
     }
@@ -858,6 +876,7 @@ export class FlujoComponent implements AfterViewInit, OnInit {
     {
       this.vistaDetalle = 1;
       this.idNivel1 = id; 
+      this.nombreReg = this.registros[i].nombre;
       this.verRegistro = 21;
       this.llenarRegistros();
     }
@@ -1043,13 +1062,10 @@ export class FlujoComponent implements AfterViewInit, OnInit {
     {
       catalogo = "lotes_por_estado"
     }
-    let campos = {accion: 150, sentencia: this.sentenciaR, archivo: 'lotes_usuario_' + this.servicio.rUsuario().id};  
+    let campos = {accion: 100, sentencia: this.sentenciaR};  
     this.servicio.consultasBD(campos).subscribe( resp =>
     {
-      this.http.get(this.URL_FOLDER + 'lotes_usuario_' + this.servicio.rUsuario().id + '.csv', {responseType: 'arraybuffer'})
-      .subscribe((res) => {
-          this.writeContents(res, catalogo + '.csv', 'text/csv'); 
-      });
+      this.servicio.generarReporte(resp, catalogo, catalogo + ".csv")
     })
   }
 
@@ -1405,7 +1421,7 @@ export class FlujoComponent implements AfterViewInit, OnInit {
       this.servicio.mensajeSuperior.emit("Gestión de Programación")
     }
     this.copiandoDesde = 0;
-    this.servicio.mensajeInferior.emit("Edición de " + this.literalSingular);    
+    this.servicio.mensajeInferior.emit("Edición/Revisión de " + this.literalSingular);    
     if (!this.botonera[0])
     {
       if (this.editando && !this.cancelarEdicion)
@@ -2540,5 +2556,21 @@ export class FlujoComponent implements AfterViewInit, OnInit {
       this.verRegistro = 22;
       this.recuperar();
     }
-    
+
+    regresar()
+    {
+      //Vista general por grupo
+      if (this.verRegistro != 2)
+      {
+      this.procesarPantalla(this.vision + 1);  
+      this.validarTabla();
+      }
+      else
+      {
+        this.verRegistro = 21;
+        this.llenarRegistros();
+      
+      }
+    }
+
 }

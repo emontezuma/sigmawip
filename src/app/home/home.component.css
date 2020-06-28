@@ -593,6 +593,14 @@
     color: rgb(51, 51, 51) !important;
 }
 
+::ng-deep .mat-focused .mat-form-field-label {
+    color: #027D7C !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label:not(.mat-empty):not(.mat-form-field-empty) {
+    color: #027D7C !important;
+  }
+
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
     background-color: rgb(51, 51, 51) !important;
 }

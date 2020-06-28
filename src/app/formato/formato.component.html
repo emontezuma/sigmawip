@@ -45,7 +45,17 @@
                 </mat-form-field>                            
             </div>
             <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
-                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">5. Especificar los valores a graficar</div>    
+                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">5. Eje de las Zs (si aplica)</div>    
+                <mat-form-field class="texto">
+                    <input matInput #txtNombre [(ngModel)]="detalleRegistro.texto_z" maxlength="100" autocomplete="off" name="texto_z" required #texto_z="ngModel">
+                    <button mat-button *ngIf="detalleRegistro.texto_z" matSuffix mat-icon-button aria-label="Clear" (click)="detalleRegistro.texto_z = ''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-hint class="pista" align="end">{{ texto_z.value?.length || 0 }} de 100</mat-hint>
+                </mat-form-field>                            
+            </div>
+            <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
+                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">6. Especificar los valores a graficar</div>    
                 <mat-form-field class="texto">
                     <mat-select multiple #lstProcesos [(ngModel)]="seleccionProcesos" name="seleccionProcesos" [disabled]="detalleRegistro.admin=='S'">
                         <mat-option value="1">Todos</mat-option>
@@ -56,7 +66,7 @@
             </div>
 
             <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}">
-                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">6. Visualizar la leyenda</div>    
+                <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">7. Visualizar la leyenda</div>    
                 <mat-form-field class="texto">
                     <mat-select [(ngModel)]="detalleRegistro.mostrar_tabla" name="mostrar_tabla">
                         <mat-option value="S">Si</mat-option>

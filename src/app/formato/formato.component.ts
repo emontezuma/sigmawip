@@ -104,14 +104,28 @@ export class FormatoComponent implements OnInit {
       {
         cadValores = cadValores + "1;"
       }
+      else
+      {
+        cadValores = cadValores + ";"
+      }
       if (ok)
       {
         cadValores = cadValores + "2;"
       }
+      else
+      {
+        cadValores = cadValores + ";"
+      }
+      
       if (demorados)
       {
         cadValores = cadValores + "3;"
       }
+      else
+      {
+        cadValores = cadValores + ";"
+      }
+      cadValores = cadValores + this.detalleRegistro.texto_z;
       let sentencia = "UPDATE sigma.pu_graficos SET titulo = '" + this.detalleRegistro.titulo + "', sub_titulo = '" + this.detalleRegistro.sub_titulo + "', mostrar_tabla = '" + this.detalleRegistro.mostrar_tabla + "', texto_x = '" + this.detalleRegistro.texto_x + "', texto_y = '" + this.detalleRegistro.texto_y + "', texto_z = '" +  cadValores + "' WHERE grafico = " + this.datos.sesion + " AND usuario = " + this.servicio.rUsuario().id;
       if (!this.hayGrafica)
       {
@@ -141,11 +155,11 @@ export class FormatoComponent implements OnInit {
       if (resp.length > 0)
       {
         this.hayGrafica = resp[0].usuario == 1;
-        this.detalleRegistro = resp[0];
-        if (this.detalleRegistro.texto_z)
+        
+        if (resp[0].texto_z)
         {
           this.seleccionProcesos=[];
-          let mensajes = this.detalleRegistro.texto_z.split(";");
+          let mensajes = resp[0].texto_z.split(";");
           if (mensajes[0] == 1 || mensajes[1] == 1 || mensajes[2] == 1)
           {
             this.seleccionProcesos[0]="1";
@@ -159,6 +173,9 @@ export class FormatoComponent implements OnInit {
             this.seleccionProcesos[2]="3";
           }
         }
+        this.detalleRegistro = resp[0];
+        this.detalleRegistro.texto_z = resp[0].texto_z.split(";")[3];
+        
       }
     });
   }

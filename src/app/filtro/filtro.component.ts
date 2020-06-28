@@ -151,7 +151,7 @@ export class FiltroComponent implements OnInit {
         }
         if (this.detalleRegistro.selOperaciones==2 && this.listaProcesos.selectedOptions.selected.length==0)
         {
-          this.detalleRegistro.selPartes=1;
+          this.detalleRegistro.selOperaciones=1;
         }
         this.datos.periodo = this.detalleRegistro.periodo;
         this.datos.desde = this.detalleRegistro.desde;
@@ -394,5 +394,7 @@ export class FiltroComponent implements OnInit {
       }
     })
   }
+
+ 
 
 }

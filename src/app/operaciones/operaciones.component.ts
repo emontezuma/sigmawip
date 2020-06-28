@@ -417,8 +417,6 @@ export class OperacionesComponent implements OnInit {
           ||
           datos.fecha.toLowerCase().indexOf(cadena.toLowerCase()) !== -1
           ||
-          datos.hasta.toLowerCase().indexOf(cadena.toLowerCase()) !== -1
-          ||
           datos.parte.toLowerCase().indexOf(cadena.toLowerCase()) !== -1
           ||
           datos.estado.toLowerCase().indexOf(cadena.toLowerCase()) !== -1
@@ -1440,7 +1438,7 @@ export class OperacionesComponent implements OnInit {
               campos = {accion: 100, sentencia: sentencia};  
               this.servicio.consultasBD(campos).subscribe( resp =>
               {
-                if (resp.length > 0)
+                  if (resp.length > 0)
                 {
                   if (resp[0].estado == 90)
                   {
@@ -1856,7 +1854,6 @@ export class OperacionesComponent implements OnInit {
             }
             let cadNuevoLote = ";INSERT INTO sigma.lotes_historia (lote, parte, ruta, ruta_detalle, ruta_secuencia, proceso, fecha_entrada, ruta_detalle_anterior, ruta_secuencia_antes, proceso_anterior, alarma_so) VALUES (" + this.loteMover + ", " + this.parteMover + ", " + resp[0].ruta + ", " + resp[0].id_det_ruta + ", " + resp[0].secuencia + ", " + resp[0].id + ", NOW(), " + this.ultimaRutaDetalle + ", " + this.ultimaSecuencia + ", " + this.procesoSeleccionado.id + ", '" + alarma + "');";
             let adicional = "en la situación 'En Espera'"
-            
             sentencia = "UPDATE sigma.lotes SET estado = 0, equipo = 0, alarma_tpe_paso = 'S', alarma_tse_paso = 'N', alarma_tse = 'N', fecha = NOW(), ruta_secuencia = " + resp[0].secuencia + ", ruta_detalle = " + resp[0].id_det_ruta + ", proceso = " + resp[0].id + ", hasta = NULL WHERE id = " + this.loteMover + ";UPDATE sigma.lotes_historia SET fecha_salida = NOW(), tiempo_proceso = TIME_TO_SEC(TIMEDIFF(NOW(), fecha_proceso)), tiempo_total = TIME_TO_SEC(TIMEDIFF(NOW(), fecha_entrada)) WHERE lote = " + this.loteMover + " AND ruta_secuencia = " + this.ultimaSecuencia + cadNuevoLote;
             let campos = {accion: 200, sentencia: sentencia};  
             this.servicio.consultasBD(campos).subscribe( dato =>
@@ -1994,7 +1991,11 @@ export class OperacionesComponent implements OnInit {
             adicional = "UPDATE sigma.lotes_historia SET equipo = " + resp[0].id + ", fecha_proceso = NOW(), tiempo_stock = TIME_TO_SEC(TIMEDIFF(NOW(), fecha_stock)) WHERE lote = " + this.loteMover + " AND ruta_secuencia = " + this.ultimaSecuencia + ";"
             adicSituacion = "En Stock";
           }
-          sentencia = "UPDATE sigma.lotes SET hasta = NULL, equipo = " + resp[0].id + ", alarma_tse_paso = 'S', alarma_tpe_paso = 'N', alarma_tpe = 'N', estado = 50, calcular_hasta = '2', alarma_tse = 'N', alarma_tpe = 'N', fecha = NOW() WHERE id = " + this.loteMover + ";" + adicional;
+          //Nuevo para OEE
+          let cadOEE = "UPDATE sigma2.cat_maquinas SET oee_parte_actual = (SELECT parte FROM sigma.lotes WHERE id = " + this.loteMover + ") WHERE id = " + resp[0].id + ";UPDATE sigma2.relacion_maquinas_lecturas SET iniciar_2 = 'S' WHERE equipo = " + resp[0].id + ";";
+          //OEE 
+          
+          sentencia = "UPDATE sigma.lotes SET hasta = NULL, equipo = " + resp[0].id + ", alarma_tse_paso = 'S', alarma_tpe_paso = 'N', alarma_tpe = 'N', estado = 50, calcular_hasta = '2', alarma_tse = 'N', alarma_tpe = 'N', fecha = NOW() WHERE id = " + this.loteMover + ";" + adicional + cadOEE;
           let campos = {accion: 200, sentencia: sentencia};  
           this.servicio.consultasBD(campos).subscribe( dato =>
           {
@@ -2137,7 +2138,7 @@ export class OperacionesComponent implements OnInit {
         let sigSecuencia = resp[0].secuencia;
 
         //sentencia = "SELECT a.id, a.nombre as n1, b.id AS id_det_ruta, b.ruta, b.nombre, b.secuencia FROM sigma.cat_procesos a LEFT JOIN sigma.det_rutas b ON a.id = b.proceso AND b.ruta = " + this.rutaActual + " WHERE a.estatus = 'A' AND a.referencia = '" + cadena + "' AND b.secuencia > " + this.ultimaSecuencia + " ORDER BY b.secuencia LIMIT 1;";
-        sentencia = "SELECT a.id, a.nombre as n1, b.id_detruta AS id_det_ruta, b.ruta, c.nombre, b.secuencia FROM sigma.cat_procesos a LEFT JOIN sigma.ruta_congelada b ON a.id = b.proceso AND b.ruta = " + this.rutaActual + " LEFT JOIN sigma.det_rutas c ON b.id_detruta = c.id WHERE a.estatus = 'A' AND a.referencia = '" + cadena + "' AND b.secuencia > " + this.ultimaSecuencia + " ORDER BY b.secuencia LIMIT 1;";
+        sentencia = "SELECT a.id, a.nombre as n1, b.id_detruta AS id_det_ruta, b.ruta, c.nombre, b.secuencia FROM sigma.cat_procesos a LEFT JOIN sigma.ruta_congelada b ON a.id = b.proceso AND b.ruta = " + this.rutaActual + " LEFT JOIN sigma.det_rutas c ON b.id_detruta = c.id WHERE a.estatus = 'A' AND a.referencia = '" + cadena + "' AND b.secuencia > " + this.ultimaSecuencia + " AND b.lote = " + this.loteMover + " ORDER BY b.secuencia LIMIT 1;";
         campos = {accion: 100, sentencia: sentencia};  
         this.servicio.consultasBD(campos).subscribe( resp =>
         {

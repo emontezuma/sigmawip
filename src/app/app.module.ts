@@ -34,6 +34,7 @@ import { BlankComponent } from './blank/blank.component';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
 import { FiltroComponent } from './filtro/filtro.component';
 import { FormatoComponent } from './formato/formato.component';
+import { InactivarComponent } from './inactivar/inactivar.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/vacio', pathMatch: 'full', data:  { state: 'vacio' } },
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
     ConfiguracionComponent,
     FiltroComponent,
     FormatoComponent,
+    InactivarComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +79,7 @@ const appRoutes: Routes = [
     DxBarGaugeModule,
     CommonModule
   ],
-  entryComponents: [ DialogoComponent, FlujoComponent, SesionComponent, FiltroComponent, FormatoComponent ],
+  entryComponents: [ DialogoComponent, FlujoComponent, SesionComponent, FiltroComponent, FormatoComponent, InactivarComponent ],
   providers: [ {provide: LOCALE_ID, useValue: "es-MX" }, 
   DatePipe, 
   {provide: LocationStrategy, useClass: HashLocationStrategy},

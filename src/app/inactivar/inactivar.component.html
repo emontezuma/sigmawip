@@ -1,0 +1,41 @@
+<div class="contenido" class="mat-typography">
+    <div class="cabecera" [style.backgroundColor]="colorBarraSuperior" [style.color]="colorLetrasTitulo" mat-dialog-title>
+        <i class="iconshock-materialblack-mail-block"></i>
+        <span class="tituloDialogo">Inactivar lote de material</span>
+    </div>
+    <div class="registroCampo" [ngStyle]="{'border': '1px solid' + colorSN}" >        
+        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" [style.marginTop.px]="10">
+        <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">1. Número de lote</div>    
+            <mat-form-field class="texto">
+                <input matInput #txtNombre [(ngModel)]="detalleRegistro.titulo" maxlength="50" autocomplete="off" name="titulo" required #titulo="ngModel" (keydown.enter)="buscarLote()" (input)="iniLote()">
+                <button mat-button *ngIf="detalleRegistro.titulo" matSuffix mat-icon-button aria-label="Clear" (click)="detalleRegistro.titulo = '';loteHallado=false;lote=[];">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-hint class="pista" align="end">{{ titulo.value?.length || 0 }} de 50</mat-hint>
+                <mat-hint *ngIf="!loteHallado && detalleRegistro.titulo.length>0" class="pista" align="start">Lote no encontrado!</mat-hint>
+            </mat-form-field>                            
+        </div>
+        <div class="cajaEstatus" [ngStyle]="{'border': '1px solid' + colorSN}" [style.marginTop.px]="10">
+            <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">Datos del lote</div>    
+            <div class="registroTitulo">Número de parte: {{ referencia }}</div>    
+            <div class="registroTitulo">Descripción: {{ nombre }}</div>    
+            <div class="registroTitulo">Proceso actual: {{ nproceso }}</div>    
+            <div class="registroTitulo">Secuencia actual: {{ ruta_secuencia  }}</div>  
+            <div class="registroTitulo">Estatus: {{ estatusActual  }}</div>    
+        </div>
+        
+    </div>
+
+    <div class="pie" mat-dialog-actions>
+        <button class="indice" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="validar(1)" [disabled]="!loteHallado">
+            <i class="iconshock-materialblack-general-check-mark"></i>
+            <span class="indiceTexto">{{ tituloBoton }}</span>
+        </button>
+        <button class="indice" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="validar(3)">
+            <i class="iconshock-materialblack-general-reload"></i>
+            <span class="indiceTexto">Cancelar</span>
+        </button>
+    </div>
+</div>
+
+

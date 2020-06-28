@@ -40,7 +40,7 @@
             <button class="indiceMedio" [style.color]="(botonera[2] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[2] ? 'inherit' : colorFondoBoton)" mat-button (click)="cancelar()" [matTooltip] = "ayuda05" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[2]">
                 <i class="iconshock-materialblack-general-reload"></i>
             </button>
-            <button class="indiceMedio" [style.color]="(botonera[3] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[3] ? 'inherit' : colorFondoBoton)" mat-button (click)="copiar()" [matTooltip] = "ayuda06" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[3]">
+            <button class="indiceMedio" [style.color]="(botonera[3] ? colorLetrasBotonesDes :    colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[3] ? 'inherit' : colorFondoBoton)" mat-button (click)="copiar()" [matTooltip] = "ayuda06" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2" [disabled]="botonera[3]">
                 <i class="iconshock-materialblack-general-copy"></i>
             </button>
             <button class="indiceMedio" [style.color]="(botonera[4] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[4] ? 'inherit' : colorFondoBoton)" mat-button (click)="validarInactivar(0, 1)" [matTooltip] = "ayuda07" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual!=6" [disabled]="botonera[4]" >

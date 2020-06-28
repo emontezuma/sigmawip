@@ -48,9 +48,10 @@
                         <div class="registroTitulo" [style.backgroundColor]="colorFondoTarjeta">1. Reporte(s) a generar</div>    
                         <mat-form-field class="texto">
                             <mat-select [(ngModel)]="detalleRegistro.reporte" name="reporte">
-                                <mat-option [value]="0">Lotes de producción/trazabilidad</mat-option>
-                                <mat-option [value]="1">Alertas generadas</mat-option>
-                                <mat-option [value]="2">Revisiones de calidad</mat-option>
+                                <mat-option [value]="0">Lotes de producción</mat-option>
+                                <mat-option [value]="1">Trazabilidad de lotes</mat-option>
+                                <mat-option [value]="2">Alertas generadas</mat-option>
+                                <mat-option [value]="3">Revisiones de calidad</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -174,7 +175,7 @@
                         </div>
                     </div>
                     <div class="columnaDoble2" *ngIf="maestroActual == 2 || maestroActual == 3">
-                        <div class="valorEFIGrande" [style.color]="(registro.pct<=100 ? config.alto_color : config.bajo_color)">{{ registro.pctchar }}</div>
+                        <div class="valorEFIGrande" [style.color]="(registro.pct>=100 ? config.alto_color : config.bajo_color)">{{ registro.pctchar }}</div>
                         <div class="registroAdicionalCajasRep2" >
                             <div class="registroAdicional" [style.borderColor]="colorBorde" [ngStyle]="{'border': '1px solid' + colorFondoTarjeta}">
                                 <div class="registroValorRep">{{ registro.total }}</div>    
@@ -233,7 +234,7 @@
                             id="graficoFallas"
                             [dataSource]="registros"
                             palette="soft"
-                            resolveLabelOverlapping="shift">
+                            resolveLabelOverlapping="stack">
                             <dxo-margin
                                 [right]="100">
                             </dxo-margin>
@@ -255,27 +256,27 @@
                                 </dxo-font>
                             </dxo-title>
                             <dxi-series *ngIf="verTodos" axis="buenos" type="bar" valueField="total" name="Total" color="dodgerblue">
-                                <dxo-label [visible]="true" backgroundColor="#43464B">
+                                <dxo-label [visible]="true" backgroundColor="#43464B" overlappingBehavior="hide">
                                     <dxo-font [size]="etiqueta_fuente" color="white" weight="450"></dxo-font>
                                     <dxo-border color="#202020" visible="true" width="1"></dxo-border>
                                 </dxo-label>
                             </dxi-series>
                             <dxi-series *ngIf="verBuenos && maestroActual!=7" axis="buenos" type="bar" valueField="buenos" name="OK" color="limegreen">
-                                <dxo-label [visible]="true" backgroundColor="#43464B">
+                                <dxo-label [visible]="true" backgroundColor="#43464B" overlappingBehavior="hide">
                                     <dxo-font [size]="etiqueta_fuente" color="white" weight="450"></dxo-font>
                                     <dxo-border color="#202020" visible="true" width="1"></dxo-border>
                                 </dxo-label>
                             </dxi-series>
                             <dxi-series *ngIf="verMalos && maestroActual!=7" axis="buenos" type="bar" valueField="malos" name="Demorados" color="orangered">
-                                <dxo-label [visible]="true" backgroundColor="#43464B">
+                                <dxo-label [visible]="true" backgroundColor="#43464B" overlappingBehavior="hide">
                                     <dxo-font [size]="etiqueta_fuente" color="white" weight="450"></dxo-font>
                                     <dxo-border color="#202020" visible="true" width="1"></dxo-border>
                                 </dxo-label>
                             </dxi-series>
                             <dxi-series *ngIf="verMalos && maestroActual==7" axis="malos" type="spline" valueField="malos" name="Productividad" color="limegreen">
-                                <dxo-label [visible]="true" backgroundColor="#43464B">
-                                    <dxo-font [size]="etiqueta_fuente" color="orangered" weight="450"></dxo-font>
-                                    <dxo-border color="#202020" visible="true" width="2"></dxo-border>
+                                <dxo-label [visible]="true" backgroundColor="#909090" overlappingBehavior="hide">
+                                    <dxo-font [size]="etiqueta_fuente" color="black" weight="550"></dxo-font>
+                                    <dxo-border color="#808080" visible="true" width="2"></dxo-border>
                                 </dxo-label>
                             </dxi-series>
                             <dxi-value-axis name="buenos" position="left" valueType="numeric">
@@ -287,7 +288,7 @@
                                 <dxi-constant-line *ngIf="maestroActual==7" [value]="100" extendAxis="true" color="skyblue" [width]="2">
                                     <dxo-label text="Esperado 100%"></dxo-label>
                                 </dxi-constant-line>
-                                <dxo-title [text]="texto_y">
+                                <dxo-title [text]="texto_z">
                                     <dxo-font [size]="etiqueta_fuente" [color]="color_letras" weight="450"></dxo-font>
                                 </dxo-title>
                                 <dxo-label [visible]="true" backgroundColor="#50BDF9">
@@ -299,13 +300,13 @@
                                 argumentField="liga"
                                 type="bar"
                                 [barPadding]="0.1">
-                                <dxo-label
+                                <dxo-label overlappingBehavior="stagger"
                                     [visible]="true"
                                     backgroundColor="rgba(0, 0, 0, 0.7)">
                                     <dxo-font
                                         [size]="etiqueta_fuente"
                                         [color]="color_letras"
-                                        weight="450">
+                                        weight="550">
                                     </dxo-font>
                                     <dxo-border
                                         color="#202020" visible="true" width="1" >
@@ -330,7 +331,7 @@
                                 <dxo-font
                                     [size]="etiqueta_leyenda"
                                     [color]="color_letras"
-                                    weight="350">
+                                    weight="550">
                                 </dxo-font>
                                 <dxo-border
                                     [color]="color_letras" visible="true" width="1" >
@@ -338,34 +339,34 @@
                                 <dxo-margin left="30" right="30"></dxo-margin>
                             </dxo-legend>
                             <dxo-argument-axis >
-                                <dxo-label overlappingBehavior="none">
+                                <dxo-label overlappingBehavior="stagger">
                                     <dxo-font
                                         [size]="etiqueta_leyenda"
                                         [color]="color_letras"
-                                        weight="350">
+                                        weight="550">
                                     </dxo-font>
                                 </dxo-label>
                                 <dxo-title [text]="texto_x">
                                     <dxo-font
                                         [size]="texto_x_fuente"
                                         [color]="color_letras"
-                                        weight="350">
+                                        weight="550">
                                     </dxo-font>
                                 </dxo-title>
                             </dxo-argument-axis>
                             <dxi-value-axis valueType="numeric">
-                                <dxo-label>
+                                <dxo-label overlappingBehavior="stagger">
                                     <dxo-font
                                         [size]="etiqueta_fuente"
                                         [color]="color_letras"
-                                        weight="400">
+                                        weight="550">
                                     </dxo-font>
                                 </dxo-label>
                                 <dxo-title [text]="texto_y">
                                     <dxo-font
-                                        [size]="texto_y_fuente"
+                                        [size]="texto_z_fuente"
                                         [color]="color_letras"
-                                        weight="450">
+                                        weight="550">
                                     </dxo-font>
                                 </dxo-title>
                             </dxi-value-axis>

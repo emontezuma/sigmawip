@@ -9,12 +9,12 @@ import { map, catchError } from 'rxjs/operators'
 })
 export class ServicioService {
 
-  //URL_BASE = "http://localhost:8081/sigma/api/index.php?";
+  URL_BASE = "http://localhost:8081/sigma/apisigma2/index.php?";
   
-  //URL_MMCALL = "http://localhost:8081/locations/integration/simulate/";
+  URL_MMCALL = "http://localhost:8081/locations/integration/simulate/";
 
-  URL_BASE = "/sigma/api/index.php?";
-  URL_MMCALL = "/locations/integration/simulate/"
+  //URL_BASE = "/sigma/api/index.php?";
+  //URL_MMCALL = "/locations/integration/simulate/"
   private anchoSN: number = 300;
   private usuarioActual: any = {id: 1, nombre: "ADMINISTRADOR DEL SISTEMA", referencia: "", rol: 0, politica: 0, admin: "", tecnico: "", vista_resumida_fallas: false, upantalla: 0, operacion: "N", programacion: "N", inventario: "N"};
   private colores: any = {colorLetrasBox: "#000000", colorSN: "#000000", colorFondo: "#000000", colorLetrasPanel: "#000000", colorBarraSuperior: "#000000", colorLetrasTitulo: "#000000"};
@@ -140,7 +140,6 @@ export class ServicioService {
   }
 
   
-
   fecha(tipo: number, miFecha: string, formato: string): string 
   {
     if (tipo == 1) 
@@ -570,5 +569,29 @@ export class ServicioService {
     }
   }
 
+  generarReporte(arreglo, titulo, archivo)
+  {
+    let exportCSV = ""; 
+    exportCSV = titulo + "\r\n";
+    exportCSV = exportCSV + 'Fecha del reporte: ' + this.fecha(1, '', 'dd/MM/yyyy HH:mm:ss') + "\r\n";
+    for (var i = 0; i < arreglo.length; i++)
+    {
+      for (var j in arreglo[i])
+      {
+        exportCSV = exportCSV + '"' + arreglo[i][j] + '",'
+      }
+      exportCSV = exportCSV  + "\r\n"
+    }
+    exportCSV = exportCSV + "Total registros: " + (arreglo.length - 1) + "\r\n"
+    var blob = new Blob([exportCSV], {type: 'text/csv' }),
+    url = window.URL.createObjectURL(blob);
+    let link = document.createElement('a')
+    link.download = archivo;
+    link.href = url
+    link.click()
+    window.URL.revokeObjectURL(url);
+    link.remove();
+  }
+  
     
 }

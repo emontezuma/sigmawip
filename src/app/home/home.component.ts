@@ -63,8 +63,8 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   scrollingSubscription: Subscription;
   vistaCatalogo: Subscription;
-  //URL_FOLDER = "http://localhost:8081/sigma/assets/datos/";  
-  URL_FOLDER = "/sigma/assets/datos/";  
+  URL_FOLDER = "http://localhost:8081/sigma/assets/datos/";  
+  //URL_FOLDER = "/sigma/assets/datos/";  
   constructor
   (
     private servicio: ServicioService,
@@ -327,7 +327,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
   listas: any = [];
   indices: any = [{ nombre: "Procesos", icono: "iconshock-iphone-business-solution"} ]
   cronometro: any;
-  
 
   ngAfterViewInit() {
     let phElement = this.placeholder.element.nativeElement;
@@ -338,7 +337,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   ngOnInit()
   {
-
   }
 
   ngOnDestroy() {
@@ -1146,19 +1144,19 @@ export class HomeComponent implements AfterViewInit, OnInit {
   descargar()
   {
     let catalogo = "procesos_cabecera"
-    let sentenciaR = "SELECT 'Catalogo de procesos', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Nombre del proceso', 'Referencia', 'Capacidad de stock', 'Capacidad de proceso', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.referencia, a.capacidad_stock, IFNULL((SELECT SUM(capacidad) FROM det_procesos WHERE proceso = a.id and estatus = 'A'), 0), IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.cat_procesos a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id"; 
+    let sentenciaR = "SELECT 'id', 'Nombre del proceso', 'Referencia', 'Capacidad de stock', 'Capacidad de proceso', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.referencia, a.capacidad_stock, IFNULL((SELECT SUM(capacidad) FROM det_procesos WHERE proceso = a.id and estatus = 'A'), 0), IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.cat_procesos a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id"; 
     let sentenciaC = "SELECT COUNT(*) AS cuenta FROM sigma.cat_procesos;";
     if (this.maestroActual == 0 && this.nivelActual == 1) //Rutas de producción
     { 
       catalogo = "equipos"
       sentenciaC = "SELECT COUNT(*) AS cuenta FROM sigma.det_procesos;";
-      sentenciaR = "SELECT 'Catalogo de equipos (detalle de procesos)', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Nombre del equipo', 'Capacidad', 'Referencia', 'Acepta programacion', 'Nombre del proceso asociado', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.capacidad, a.referencia, IF(a.programar = 'S', 'SI', 'NO'), IFNULL(d.nombre, 'N/A'), IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.det_procesos a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id LEFT JOIN sigma.cat_procesos d ON a.proceso = d.id"; 
+      sentenciaR = "SELECT 'id', 'Nombre del equipo', 'Capacidad', 'Referencia', 'Acepta programacion', 'Nombre del proceso asociado', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.capacidad, a.referencia, IF(a.programar = 'S', 'SI', 'NO'), IFNULL(d.nombre, 'N/A'), IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.det_procesos a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id LEFT JOIN sigma.cat_procesos d ON a.proceso = d.id"; 
           
     }
     else if (this.maestroActual == 1 && this.nivelActual == 0) //Rutas de producción
     {
       catalogo = "rutas_fabricacion"
-      sentenciaR = "SELECT 'Rutas de fabricacion', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Nombre de la ruta', 'Referencia', 'Primera secuencia activa', 'Ultima secuencia activa', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.referencia, a.inicia, a.finaliza, IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.cat_rutas a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id"; 
+      sentenciaR = "SELECT 'id', 'Nombre de la ruta', 'Referencia', 'Primera secuencia activa', 'Ultima secuencia activa', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.referencia, a.inicia, a.finaliza, IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.cat_rutas a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id"; 
       sentenciaC = "SELECT COUNT(*) AS cuenta FROM sigma.cat_rutas;";
       
     }
@@ -1166,19 +1164,19 @@ export class HomeComponent implements AfterViewInit, OnInit {
     {
       catalogo = "operaciones"
       sentenciaC = "SELECT COUNT(*) AS cuenta FROM sigma.det_rutas;";
-      sentenciaR = "SELECT 'Catalogo de operaciones (detalle de rutas)', '', '', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Nombre de la operacion', 'Secuencia', 'Tiempo de stock (seg)', 'Tiempo de setup (seg)', 'Tiempo de proceso (seg)', 'Nombre la ruta asociada', 'Nombre del proceso asociado', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.secuencia, a.tiempo_stock, a.tiempo_setup, a.tiempo_proceso, IFNULL(e.nombre, 'N/A'), IFNULL(d.nombre, 'N/A'), IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.det_rutas a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id LEFT JOIN sigma.cat_procesos d ON a.proceso = d.id LEFT JOIN sigma.cat_rutas e ON a.ruta = e.id"; 
+      sentenciaR = "SELECT 'id', 'Nombre de la operacion', 'Secuencia', 'Tiempo de stock (seg)', 'Tiempo de setup (seg)', 'Tiempo de proceso (seg)', 'Nombre la ruta asociada', 'Nombre del proceso asociado', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.secuencia, a.tiempo_stock, a.tiempo_setup, a.tiempo_proceso, IFNULL(e.nombre, 'N/A'), IFNULL(d.nombre, 'N/A'), IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.det_rutas a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id LEFT JOIN sigma.cat_procesos d ON a.proceso = d.id LEFT JOIN sigma.cat_rutas e ON a.ruta = e.id"; 
     }
     else if (this.maestroActual == 2 && this.nivelActual == 0) //Rutas de producción
     {
       catalogo = "numeros_de_parte"
       sentenciaC = "SELECT COUNT(*) AS cuenta FROM sigma.cat_partes;";
-      sentenciaR = "SELECT 'Catalogo de Números de parte', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Nombre del numero de parte', 'Referencia', 'Ruta de fabricacion', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.referencia, IFNULL(d.nombre, 'N/A'), IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.cat_partes a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id LEFT JOIN sigma.cat_rutas d ON a.ruta = d.id"; 
+      sentenciaR = "SELECT 'id', 'Nombre del numero de parte', 'Referencia', 'Ruta de fabricacion', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.referencia, IFNULL(d.nombre, 'N/A'), IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.cat_partes a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id LEFT JOIN sigma.cat_rutas d ON a.ruta = d.id"; 
     }
     else if (this.maestroActual == 3 && this.nivelActual == 0) 
     {
       catalogo = "recipientes"
       sentenciaC = "SELECT COUNT(*) AS cuenta FROM sigma.cat_distribucion;";
-      sentenciaR = "SELECT 'Recipientes (alertas)', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Nombre del recipiente', 'Numeros de telefonos', 'Cuentas de correos', 'Servicios de MMCall', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.telefonos, a.correos, a.mmcall, IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.cat_distribucion a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id"; 
+      sentenciaR = "SELECT 'id', 'Nombre del recipiente', 'Numeros de telefonos', 'Cuentas de correos', 'Servicios de MMCall', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.telefonos, a.correos, a.mmcall, IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.cat_distribucion a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id"; 
     }
     else if (this.maestroActual == 4 && this.nivelActual == 0) 
     {
@@ -1187,19 +1185,19 @@ export class HomeComponent implements AfterViewInit, OnInit {
     {
       catalogo = "situaciones_calidad"
       sentenciaC = "SELECT COUNT(*) AS cuenta FROM sigma.cat_situaciones;";
-      sentenciaR = "SELECT 'Situaciones de calidad', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Nombre de la situacion', 'Referencia', 'Tipo de situacion', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.referencia, IF(a.tipo = 0, 'Inspeccion', 'Scrap/MERMA'), IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.cat_situaciones a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id"; 
+      sentenciaR = "SELECT 'id', 'Nombre de la situacion', 'Referencia', 'Tipo de situacion', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.nombre, a.referencia, IF(a.tipo = 0, 'Inspeccion', 'Scrap/MERMA'), IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.cat_situaciones a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id"; 
     }
     else if (this.maestroActual == 6 && this.nivelActual == 0) 
     {
       catalogo = "horarios"
       sentenciaC = "SELECT COUNT(*) AS cuenta FROM sigma.horarios;";
-      sentenciaR = "SELECT 'Horarios', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Tipo', 'Proceso asociado', 'Tipo de fecha', 'Dia especifico', 'Hora inicio', 'Hora fin' UNION ALL SELECT a.id, IF(a.tipo = 'S', 'Laborable', 'NO laborable'), IFNULL(b.nombre, 'Todos los procesos'), CASE WHEN a.dia = 0 THEN 'Todos los domingos' WHEN a.dia = 1 THEN 'Todos los lunes' WHEN a.dia = 2 THEN 'Todos los martes' WHEN a.dia = 3 THEN 'Todos los miércoles' WHEN a.dia = 4 THEN 'Todos los jueves' WHEN a.dia = 5 THEN 'Todos los viernes' WHEN a.dia = 6 THEN 'Todos los sábados' WHEN a.dia = 9 THEN 'Dia especifico' END, IF(a.dia = 9, a.fecha, ''), a.desde, a.hasta FROM sigma.horarios a LEFT JOIN sigma.cat_procesos b ON a.proceso = b.id"; 
+      sentenciaR = "SELECT 'id', 'Tipo', 'Proceso asociado', 'Tipo de fecha', 'Dia especifico', 'Hora inicio', 'Hora fin' UNION ALL SELECT a.id, IF(a.tipo = 'S', 'Laborable', 'NO laborable'), IFNULL(b.nombre, 'Todos los procesos'), CASE WHEN a.dia = 0 THEN 'Todos los domingos' WHEN a.dia = 1 THEN 'Todos los lunes' WHEN a.dia = 2 THEN 'Todos los martes' WHEN a.dia = 3 THEN 'Todos los miércoles' WHEN a.dia = 4 THEN 'Todos los jueves' WHEN a.dia = 5 THEN 'Todos los viernes' WHEN a.dia = 6 THEN 'Todos los sábados' WHEN a.dia = 9 THEN 'Dia especifico' END, IF(a.dia = 9, a.fecha, ''), a.desde, a.hasta FROM sigma.horarios a LEFT JOIN sigma.cat_procesos b ON a.proceso = b.id"; 
     }
     else if (this.maestroActual == 7 && this.nivelActual == 0) 
     {
       catalogo = "usuarios"
       sentenciaC = "SELECT COUNT(*) AS cuenta FROM sigma.cat_usuarios;";
-      sentenciaR = "SELECT 'Usuarios del sistema', '', '', '', '', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'Fecha: " + this.servicio.fecha(1, "", "dd-MMM-yyyy HH:mm:ss") + "', '', '', '', '', '', '', '', '', '', '', '', '', '', '' UNION ALL SELECT 'id', 'Perfil', 'Nombre del usuario', 'Es usuario ADMIN', 'Rol', 'Acceso a todas las operaciones', 'Acceso a calidad', 'Acceso a reversos de lote', 'Acceso a la programacion (solo lectura)', 'Acceso a los inventarios', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.referencia, a.nombre, IF(a.admin = 'S', 'SI', 'NO'), CASE WHEN a.rol = 'A' THEN 'ADMINISTRADOR' WHEN a.rol = 'C' THEN 'SUPERVISOR DE CALIDAD' WHEN a.rol = 'O' THEN 'OPERADOR' WHEN a.rol = 'G' THEN 'GESTOR DE LA APLICACIÓN' END, IF(a.operacion = 'S', 'SI', 'NO'), IF(a.calidad = 'S', 'SI', 'NO'), IF(a.reversos = 'S', 'SI', 'NO'), IF(a.programacion = 'S', 'SI', 'NO'), IF(a.inventario = 'S', 'SI', 'NO'), IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.cat_usuarios a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id"; 
+      sentenciaR = "SELECT 'id', 'Perfil', 'Nombre del usuario', 'Es usuario ADMIN', 'Rol', 'Acceso a todas las operaciones', 'Acceso a calidad', 'Acceso a reversos de lote', 'Acceso a la programacion (solo lectura)', 'Acceso a los inventarios', 'Usuario creador', 'Fecha de creacion', 'Ultimo usuario que modifico', 'Ultima fecha de modificacion', 'Estatus' UNION ALL SELECT a.id, a.referencia, a.nombre, IF(a.admin = 'S', 'SI', 'NO'), CASE WHEN a.rol = 'A' THEN 'ADMINISTRADOR' WHEN a.rol = 'C' THEN 'SUPERVISOR DE CALIDAD' WHEN a.rol = 'O' THEN 'OPERADOR' WHEN a.rol = 'G' THEN 'GESTOR DE LA APLICACIÓN' END, IF(a.operacion = 'S', 'SI', 'NO'), IF(a.calidad = 'S', 'SI', 'NO'), IF(a.reversos = 'S', 'SI', 'NO'), IF(a.programacion = 'S', 'SI', 'NO'), IF(a.inventario = 'S', 'SI', 'NO'), IFNULL(b.nombre, 'N/A'), IFNULL(a.creacion, 'N/A'), IFNULL(c.nombre, 'N/A'), IFNULL(a.modificacion, 'N/A'), IF(a.estatus = 'A', 'activo', 'inactivo') FROM sigma.cat_usuarios a LEFT JOIN sigma.cat_usuarios b ON a.creado = b.id LEFT JOIN sigma.cat_usuarios c ON a.modificado = c.id"; 
     }
     let campos = {accion: 100, sentencia: sentenciaC};  
     this.servicio.consultasBD(campos).subscribe( resp =>
@@ -1213,25 +1211,13 @@ export class HomeComponent implements AfterViewInit, OnInit {
       }
       else
       {
-        let campos = {accion: 150, sentencia: sentenciaR, archivo: 'catalogo_usuario_' + this.servicio.rUsuario().id};  
+        let campos = {accion: 100, sentencia: sentenciaR};  
         this.servicio.consultasBD(campos).subscribe( resp =>
         {
-          this.http.get(this.URL_FOLDER + 'catalogo_usuario_' + this.servicio.rUsuario().id + '.csv', {responseType: 'arraybuffer'})
-          .subscribe((res) => {
-              this.writeContents(res, catalogo + '.csv', 'text/csv'); 
-          });
+          this.servicio.generarReporte(resp, catalogo, catalogo + ".csv")
         })
       }
     })
-  }
-
-  writeContents(content, fileName, contentType) 
-  {
-    const a = document.createElement('a');
-    const file = new Blob([content], {type: contentType});
-    a.href = URL.createObjectURL(file);
-    a.download = fileName;
-    a.click();
   }
 
   filtrar()

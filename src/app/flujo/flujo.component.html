@@ -6,10 +6,14 @@
         </div>
         <div class="catalogos" [style.height.px]="altoPantalla" [style.width.px]="anchoPantalla" *ngIf="pantalla==2">
             <div class="cabecera" [style.backgroundColor]="colorFondoCabecera" [ngStyle]="{'border': '1px solid' + colorSN}">
-                <button class="indice" [ngClass]="{seleccionado: seleccion==i && maestroActual==4}" [style.backgroundColor]="colorFondoBoton" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" *ngFor="let indice of indices; let i = index" mat-button (click)="procesarPantalla(i+1)">
+                 <button class="indice" [ngClass]="{seleccionado: seleccion==i && maestroActual==4}" [style.backgroundColor]="colorFondoBoton" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" *ngFor="let indice of indices; let i = index" mat-button (click)="procesarPantalla(i+1)">
                     <i [ngClass]="indice.icono"></i>
                     <span class="indiceTexto">{{ indice.nombre }}</span>
                 </button>
+                <button class="indiceUltimo" [style.color]="(botonera[6] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[6] ? 'none' : colorFondoBoton)" mat-button (click)="regresar()" [matTooltip] = "ayuda19" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="(maestroActual==4 && vision > 0 && vistaDetalle!=0) || (verRegistro==2)">
+                    <i class="iconshock-materialblack-general-reload"></i>
+                </button>
+                    
                 <button class="indiceDivision" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="nuevoRegistroGral()" *ngIf="botonera1 && maestroActual<2" >
                     <i class="iconshock-materialblack-general-add"></i>
                     <span class="indiceTexto">{{ nuevoRegistro }}</span>
@@ -29,6 +33,7 @@
                 <button class="indiceUltimo" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="buscar()" [matTooltip] = "ayuda02" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera1">
                     <i class="iconshock-materialblack-general-zoom"></i>
                 </button>
+                
                 <div class="buscadorCaja" *ngIf="verBuscar && botonera1" [ngStyle]="{'border': '0.5px solid' + colorBorde}">
                     <mat-form-field class="buscador" [style.color]="colorLetrasBox">
                         <input #txtBuscar matInput class="buscar" type="text" [(ngModel)]="textoBuscar" (keydown.enter)="filtrar()" (keydown.escape)="escapar()">
@@ -58,7 +63,6 @@
                 <button class="indiceUltimo" [style.color]="(botonera[6] ? colorLetrasBotonesDes : colorLetrasBotones)" [style.borderColor]="colorBorde" [style.backgroundColor]="(botonera[6] ? 'none' : colorFondoBoton)" mat-button (click)="salir()" [matTooltip] = "ayuda09" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera9 && maestroActual!=4" [disabled]="botonera[6]">
                     <i class="iconshock-materialblack-general-reload"></i>
                 </button>
-
                 <button class="indiceDivisionCorto" [style.color]="colorLetrasBotones" [style.borderColor]="colorBorde" [style.backgroundColor]="colorFondoBoton" mat-button (click)="descargarDet()" [matTooltip] = "ayuda01" matTooltipClass = "toolTip" matTooltipShowDelay = "100" *ngIf="botonera2 && maestroActual==4">
                     <i class="iconshock-materialblack-communications-inbox"></i>
                 </button>
@@ -544,8 +548,6 @@
                             </div> 
                              
                         </div>
-
-
                         
                         <div class="registroGeneral" *ngIf="maestroActual==4">
                             <div class="registroInfo" [ngStyle]="{'border': '1px solid' + colorSN}">

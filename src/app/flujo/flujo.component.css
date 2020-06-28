@@ -119,7 +119,6 @@
     align-items: stretch;
 }
 
-
 .registroBotones, .registroBotonesCol, .registroBotonesLargo, .registroBotonesLargo2
 {
     border-width: 0.5px;
@@ -449,6 +448,8 @@
     background-color: orangered !important;
     color: rgb(255, 255, 255) !important;
 }
+
+
 
 .salto
 {
